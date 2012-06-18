@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Backbone.js Books - Google Books API and Backbone.js</title>
+  <title>Google Books API and Backbone.js</title>
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/bootstrap-modal.css">
-  <link href="http://fonts.googleapis.com/css?family=Sofia" rel="stylesheet" type="text/css">
+  <!-- <link href="http://fonts.googleapis.com/css?family=Helvetica" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
-  <h1 class="title">Backbone.js Books</h1>
-
-  <div id="credits">
-    Written by <a href="http://davidsulc.com">David Sulc</a>, based on the <a href="http://www.atinux.fr/backbone-books/">original application</a> by <a href="http://www.atinux.fr">Atinux</a>.
+  <h1 class="title">The Awesome Bookstore</h1><br/>
+    <div id="credits">
+    Written by <a href="#">T2K</a>, based on the <a href="http://www.atinux.fr/backbone-books/">original application</a> by <a href="http://www.atinux.fr">Atinux</a>.
   </div>
+
 
   <div id="menu">
     <a href="#" class="js-menu-books">Books</a>
@@ -52,21 +52,21 @@
     <h1><%= title %></h1>
     <%= (subtitle ? '<h2>'+subtitle+'</h2>' : '') %>
     <p><%= (description ? description : 'No description found') %></p>
-    <b>Google link :</b> <a href="http://books.google.fr/books?id=<%= googleId %>" target="_blank">http://books.google.fr/books?id=<%= googleId %></a>
+    <b>Google link :</b> <a href="http://books.google.com/books?id=<%= googleId %>" target="_blank">http://books.google.com/books?id=<%= googleId %></a>
   </script>
 
   <script type="text/template" id="close-template">
-    <p>That's all, folks !</p>
+    <h3>That's all, folks !</h3>
   </script>
 
   <!-- Thirt-Party Libraries (Order matters) -->
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
   <script src="./assets/javascript/vendor/underscore.js"></script>
   <script src="./assets/javascript/vendor/backbone.js"></script>
   <script src="./assets/javascript/vendor/backbone.marionette.js"></script>
   <script src="./assets/javascript/vendor/bootstrap-modal.js"></script>
-  
+
   <!-- Application core (Order matters) -->
   <script type="text/javascript" src="assets/javascript/app.js"></script>
   <script type="text/javascript" src="assets/javascript/app.library_app.js"></script>

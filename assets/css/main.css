@@ -1,6 +1,6 @@
 html, body {
 	background: url(../images/bg.jpg);
-	font-family: 'Sofia', cursive;
+	font-family: 'Helvetica';
 }
 
 #credits {
@@ -61,7 +61,7 @@ html, body {
     outline: none;
     border-radius: 15px;
     padding: 0px 15px;
-    font-family: 'Sofia', cursive;
+    /* font-family: 'Sofia', cursive; */
     font-size: 1em;
     line-height: 27px;
     letter-spacing: 1px;
