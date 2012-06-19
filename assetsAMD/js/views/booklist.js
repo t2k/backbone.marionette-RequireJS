@@ -1,6 +1,7 @@
 // booklist.js
 // dependency array [...] is key to resolving module loading
-define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'backbone', 'marionette'], function (require, App) {
+//define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'backbone', 'marionette', 'views/search'], function (require, App) {
+define(['require', 'app', 'views/search'], function (require, App) {
     'use strict';
     var $ = require('jquery'),
         _ = require('underscore'),
@@ -72,37 +73,6 @@ define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'bac
         }
     });
 
-    var SearchView = Backbone.View.extend({
-        el: "#searchBar",
-
-        initialize: function () {
-            var self = this;
-            var $spinner = self.$('#spinner');
-            App.vent.on("search:start", function () {
-                $spinner.fadeIn();
-            });
-            App.vent.on("search:stop", function () {
-                $spinner.fadeOut();
-            });
-            App.vent.on("search:term", function (term) {
-                self.$('#searchTerm').val(term);
-            });
-        },
-
-        events: {
-            'change #searchTerm': 'search'
-        },
-
-        search: function () {
-            var searchTerm = this.$('#searchTerm').val().trim();
-            if (searchTerm.length > 0) {
-                App.vent.trigger("search:term", searchTerm);
-            }
-            else {
-                App.vent.trigger("search:noSearchTerm");
-            }
-        }
-    });
 
     BookList.showBooks = function (books) {
         var bookListView = new BookListView({
@@ -111,11 +81,6 @@ define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'bac
         require('controllers/libraryapp').layout.books.show(bookListView);
     };
 
-    App.vent.on("layout:rendered", function () {
-        // render a view for the existing HTML in the template, and attach it to the layout (i.e. don't double render)
-        var searchView = new SearchView();
-        require('controllers/libraryapp').layout.search.attachView(searchView);
-    });
 
     return BookList;
 

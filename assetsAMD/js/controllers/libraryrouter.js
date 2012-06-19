@@ -1,5 +1,5 @@
 // LibraryRouter.js
-define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'backbone', 'marionette'], function (require, App, Controller) {
+define(['require', 'app', 'jquery', 'underscore', 'backbone', 'marionette'], function (require, App) {
     'use strict';
 
     var $ = require('jquery'),
@@ -20,14 +20,11 @@ define(['require', 'app', 'controllers/libraryapp', 'jquery', 'underscore', 'bac
 
     App.addInitializer(function () {
         new LibraryRouting.Router({
-            controller: Controller
+            controller: require('controllers/libraryapp')
         });
         App.vent.trigger("routing:started");
     });
 
-    App.vent.on("search:term", function (searchTerm) {
-        Backbone.history.navigate("search/" + searchTerm);
-    });
 
     return LibraryRouting;
 });

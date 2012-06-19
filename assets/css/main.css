@@ -6,7 +6,7 @@ html, body {
 #credits {
   text-align: center;
   color: #fff;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
   }
   #credits a, #credits a:hover, #credits a:visited{
     color: #fff;
@@ -149,7 +149,7 @@ html, body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: url(../images/bg.jpg);
+	/* background: url(../images/bg.jpg); */
 	border-radius: 5px;
 	box-shadow: 0 0 20px rgba(0,0,0,0.7);
 	bottom: 0;

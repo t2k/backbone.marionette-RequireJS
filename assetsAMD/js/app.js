@@ -1,5 +1,5 @@
 // App.js: Ted Killilea June 2012  twitter.com/@t2k_nyc
-define(['require', 'jquery', 'bootstrapModal', 'underscore', 'backbone', 'marionette'], function (require) {
+define(['require', 'bootstrapModal', 'underscore', 'backbone', 'marionette'], function (require) {
     'use strict';
     var $ = require('jquery'),
         _ = require('underscore'),
@@ -36,13 +36,23 @@ define(['require', 'jquery', 'bootstrapModal', 'underscore', 'backbone', 'marion
         modal: ModalRegion
     });
 
+    app.vent.on("layout:rendered", function () {
+        console.log('layout was rendered');
+        //var menu = new MyApp.MenuView();
+        //app.menu.attachView(menu);
+    });
 
     app.vent.on("routing:started", function () {
+        console.log('routing has been started!');
         if (!Backbone.History.started) {
+            console.log('Yes indeed, routing has been started!');
             Backbone.history.start();
         }
     });
 
+    app.vent.on("search:term", function (searchTerm) {
+        Backbone.history.navigate("search/" + searchTerm);
+    });
 
     app.on('start', function () {
         console.log('start!');

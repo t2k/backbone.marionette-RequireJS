@@ -132,6 +132,7 @@ define(['require','app', 'views/booklist', 'jquery', 'underscore', 'backbone', '
     LibraryApp.Books = new Books();
 
     LibraryApp.initializeLayout = function () {
+        console.log('initialized the layout!')
         LibraryApp.layout = new Layout();
 
         LibraryApp.layout.on("show", function () {
@@ -147,6 +148,7 @@ define(['require','app', 'views/booklist', 'jquery', 'underscore', 'backbone', '
     };
 
     LibraryApp.defaultSearch = function () {
+        console.log('defaultSearch was called');
         LibraryApp.search(LibraryApp.Books.previousSearch || 'BackboneJS');
     };
 

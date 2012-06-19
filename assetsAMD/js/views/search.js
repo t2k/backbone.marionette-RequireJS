@@ -1,10 +1,7 @@
 // search.js: Ted Killilea June 2012  @t2k_nyc
-
-define(['jquery','underscore','backbone','marionette','app', 'controllers/libraryapp'],
-
-function ($, _, Backbone, Marionette, MyApp, LibraryApp) {
+// view depends upon app and backbone
+define(['require', 'app', 'backbone'], function (require, MyApp, Backbone) {
     'use strict';
-
 
     var SearchView =  Backbone.View.extend({
         el: "#searchBar",
@@ -43,9 +40,8 @@ function ($, _, Backbone, Marionette, MyApp, LibraryApp) {
         console.log('vent.on  setup searchview...');
         // render a view for the existing HTML in the template, and attach it to the layout (i.e. don't double render)
         var searchView = new SearchView();
-        LibraryApp.layout.search.attachView(searchView);
+        require('controllers/libraryapp').layout.search.attachView(searchView);
     });
-
 
     return SearchView;
 });
