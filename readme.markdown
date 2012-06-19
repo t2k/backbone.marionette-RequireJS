@@ -1,7 +1,9 @@
-# Backbone.Marionette Application Example
+## Backbone.Marionette Application Example
 ======================================
 
-## This is an example application reimplemented to use Backbone.Marionette and serve as a tutorial.
+### This is an example application reimplemented to use Backbone.Marionette and serve as a tutorial.
+
+### My primary goal was to use Marionette with RequireJS (v2.0+) Async Module Definition (AMD) loading.
 
 
 
@@ -14,4 +16,4 @@ I've forked the repo of David Sulc in order to test RequireJS AMD loader with Ba
 In this version I am highlighting how to setup Backbone.Marionette using RequireJS / Asyncronous Module Definition (AMD)
 and external Templates in the Mustache format  {{ }} and underscore _
 
-See the [indexAMD.html](https://github.com/t2k/bb_-atinux-books-requirejs/blob/master/indexAMD.htlm)
+See the [indexAMD.html](https://github.com/t2k/bb.m-atinux-books-RequireJS/blob/master/indexAMD.html) for RequireJS startup
