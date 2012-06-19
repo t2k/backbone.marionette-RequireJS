@@ -3,7 +3,7 @@
 
 ### Check out this sample application if you need a little help using RequireJS and Backbone.Marionette.
 
-### I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming to grips with
+I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming to grips with
 configuration, so I created this repo as a means to try out a few new things.
 
 I added the 'assetsAMD' folder, the 'assets' folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)
