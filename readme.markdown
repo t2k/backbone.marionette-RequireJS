@@ -14,4 +14,4 @@ I've forked the repo of David Sulc in order to test RequireJS AMD loader with Ba
 In this version I am highlighting how to setup Backbone.Marionette using RequireJS / Asyncronous Module Definition (AMD)
 and external Templates in the Mustache format  {{ }} and underscore _
 
-See the [indexAMD.html](https://github.com/t2k/bb_-atinux-books-requirejs/master/indexAMD.htlm)
+See the [indexAMD.html](https://github.com/t2k/bb_-atinux-books-requirejs/blob/master/indexAMD.htlm)
