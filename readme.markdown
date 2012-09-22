@@ -6,6 +6,11 @@
 I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming to grips with
 configuration, so I created this repo as a means to try out a few new things for my own learning purposes.
 
+
+In this repo I highlighting how to setup Backbone.Marionette using RequireJS / Asyncronous Module Definition (AMD)
+and refactored a number of things from the original project to create a more modular MVC with templated views using **underscore**  with **Mustache {{}}** style templating.
+
+
 I've added the **assetsAMD** folder, the **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)
 Backbone.Marionette application which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
 example app and covers important features, such as modal dialogs, loading external templates with RequireJS and configuring Underscore to use Mustache style templates {{ xxx }},
@@ -15,11 +20,7 @@ Hopefully others can use parts of the js/lib as a shortcut for creating your own
 a Marionette app.  I've tried to factor components to a **Model, View, Controller** older structure.  **AppRouters** are a little ambiguous and I've incorporated them into the Controllersfolder.
 
 I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  ie **js\Model.book.js, js\View.book.js vs js\Models\book.js, js\Views\book.js**
-This way when loading files in your IDE you will have unique file names.  Just a thought to consider as your modular apps grow larger
-
-In this repo I highlighting how to setup Backbone.Marionette using RequireJS / Asyncronous Module Definition (AMD)
-and refactored a number of things from the original project to create a more modular MVC with templated views using **underscore**  with **Mustache {{}}** style templating.
-
+This way when loading files in your IDE you will have unique file names in your editor's buffer.  Just a thought to consider as your modular apps grow large.
 
 See the [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html) for RequireJS startup main.js
 
