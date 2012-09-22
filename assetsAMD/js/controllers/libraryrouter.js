@@ -1,30 +1,24 @@
 // LibraryRouter.js
-define(['require', 'app', 'jquery', 'underscore', 'backbone', 'marionette'], function (require, App) {
+// hookup the default "" and search routes for the library
+define(['marionette', 'app', 'controllers/librarycontroller'], function(Marionette, App, controller) {
     'use strict';
-
-    var $ = require('jquery'),
-        _ = require('underscore'),
-        Backbone = require('backbone'),
-        Marionette = require('marionette');
-
 
     var LibraryRouting = {};
 
-    LibraryRouting.Router = Backbone.Marionette.AppRouter.extend({
+    LibraryRouting.Router = Marionette.AppRouter.extend({
         appRoutes: {
             "": "defaultSearch",
             "search/:searchTerm": "search"
         }
     });
-
-
-    App.addInitializer(function () {
+    
+    // add the routes to our marionette applications start queue...
+    App.addInitializer(function() {
+        console.log('addInitializer => libraryrouter');
         new LibraryRouting.Router({
-            controller: require('controllers/libraryapp')
+            controller: controller // controller must implement search and defaultsearch
         });
-        App.vent.trigger("routing:started");
     });
-
 
     return LibraryRouting;
 });

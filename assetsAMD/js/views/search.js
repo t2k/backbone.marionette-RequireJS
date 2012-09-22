@@ -1,21 +1,22 @@
 // search.js: Ted Killilea June 2012  @t2k_nyc
 // view depends upon app and backbone
-define(['require', 'app', 'backbone'], function (require, MyApp, Backbone) {
+// search view
+define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) {
     'use strict';
 
-    var SearchView =  Backbone.View.extend({
+    var SearchView = Marionette.ItemView.extend({
         el: "#searchBar",
 
-        initialize: function () {
+        initialize: function() {
             var self = this;
             var $spinner = self.$('#spinner');
-            MyApp.vent.on("search:start", function () {
+            vent.on("search:start", function() {
                 $spinner.fadeIn();
             });
-            MyApp.vent.on("search:stop", function () {
+            vent.on("search:stop", function() {
                 $spinner.fadeOut();
             });
-            MyApp.vent.on("search:term", function (term) {
+            vent.on("search:term", function(term) {
                 self.$('#searchTerm').val(term);
             });
         },
@@ -24,23 +25,19 @@ define(['require', 'app', 'backbone'], function (require, MyApp, Backbone) {
             'change #searchTerm': 'search'
         },
 
-        search: function () {
+        search: function() {
             var searchTerm = this.$('#searchTerm').val().trim();
             if (searchTerm.length > 0) {
-                MyApp.vent.trigger("search:term", searchTerm);
+                vent.trigger("search:term", searchTerm);
             }
             else {
-                MyApp.vent.trigger("search:noSearchTerm");
+                vent.trigger("search:noSearchTerm");
             }
         }
     });
 
-        // one time init for our applicaiton
-    MyApp.vent.on("layout:rendered", function () {
-        console.log('vent.on  setup searchview...');
-        // render a view for the existing HTML in the template, and attach it to the layout (i.e. don't double render)
-        var searchView = new SearchView();
-        require('controllers/libraryapp').layout.search.attachView(searchView);
+    vent.on("search:term", function(searchTerm) {
+        Backbone.history.navigate("search/" + searchTerm);
     });
 
     return SearchView;

@@ -1,26 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <title>Google Books API and Backbone.js</title>
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/bootstrap-modal.css">
-  <!-- <link href="http://fonts.googleapis.com/css?family=Helvetica" rel="stylesheet" type="text/css"> -->
-</head>
-<body>
-  <h1 class="title">The Awesome Bookstore</h1><br/>
-    <div id="credits">
-    Written by <a href="#">T2K</a>, based on the <a href="http://www.atinux.fr/backbone-books/">original application</a> by <a href="http://www.atinux.fr">Atinux</a>.
-  </div>
-
-
-  <div id="menu">
-    <a href="#" class="js-menu-books">Books</a>
-    <a href="#close" class="js-menu-close">Close</a>
-  </div>
-  <div id="content"></div>
-  <div id="modal"></div>
-
-  <!-- templates -->
+    
+    <head>
+        <title>Google Books API and Backbone.js</title>
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/bootstrap-modal.css">
+        <link href="http://fonts.googleapis.com/css?family=Helvetica" rel="stylesheet"
+        type="text/css">
+    </head>
+    
+    <body>
+        <h1 class="title">The Awesome Bookstore</h1>
+        <br/>
+        <div id="credits">Written by
+            <a href="#">T2K</a>, based on the
+            <a href="http://www.atinux.fr/backbone-books/">original application</a>by
+            <a href="http://www.atinux.fr">Atinux</a>.</div>
+        <div id="menu">
+            <a href="#" class="js-menu-books">Books</a>
+            <a href="#close" class="js-menu-close">Close</a>
+        </div>
+        <div id="content"></div>
+        <div id="modal"></div>
   <script type="text/template" id="library-layout">
     <div id="searchBar">
       Search : <input type="text" name="search" autocomplete="off" id="searchTerm" value="" />
@@ -59,23 +60,22 @@
     <h3>That's all, folks !</h3>
   </script>
 
-  <!-- Thirt-Party Libraries (Order matters) -->
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
-  <script src="./assets/javascript/vendor/underscore.js"></script>
-  <script src="./assets/javascript/vendor/backbone.js"></script>
-  <script src="./assets/javascript/vendor/backbone.marionette.js"></script>
-  <script src="./assets/javascript/vendor/bootstrap-modal.js"></script>
+        <!-- Thirt-Party Libraries (Order matters) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+        <script src="./assets/javascript/vendor/underscore.js"></script>
+        <script src="./assets/javascript/vendor/backbone.js"></script>
+        <script src="./assets/javascript/vendor/backbone.marionette.js"></script>
+        <script src="./assets/javascript/vendor/bootstrap-modal.js"></script>
+        <!-- Application core (Order matters) -->
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
+        <script type="text/javascript" src="assets/javascript/app.library_app.js"></script>
+        <script type="text/javascript" src="assets/javascript/app.library_app.book_list.js"></script>
+        <script type="text/javascript" src="assets/javascript/app.library_app.routing.js"></script>
+        <script type="text/javascript" src="assets/javascript/app.closer.js"></script>
+        <script type="text/javascript">
+            MyApp.start();
+        </script>
+    </body>
 
-  <!-- Application core (Order matters) -->
-  <script type="text/javascript" src="assets/javascript/app.js"></script>
-  <script type="text/javascript" src="assets/javascript/app.library_app.js"></script>
-  <script type="text/javascript" src="assets/javascript/app.library_app.book_list.js"></script>
-  <script type="text/javascript" src="assets/javascript/app.library_app.routing.js"></script>
-  <script type="text/javascript" src="assets/javascript/app.closer.js"></script>
-
-  <script type="text/javascript">
-    MyApp.start();
-  </script>
-</body>
 </html>

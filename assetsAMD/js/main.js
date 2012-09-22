@@ -1,40 +1,42 @@
 // Filename: main.js
-// This is the requireJS bootloader file typically included in the index.html
-requirejs.config({
+// requireJS bootloader file typically included in the index.html
+require.config({
     baseURL: 'assetsAMD/js',
+
     paths: {
         // use google CDN or fallback to local copy of jquery
-        jquery: ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min', 'libs/jQuery/jquery-1.7.2-min'],
-        underscore: 'libs/underscore/underscore',
-        backbone: 'libs/backbone/backbone',
-        marionette: 'libs/backbone/backbone.marionette',
-        bootstrapModal: '../../assets/javascript/vendor/bootstrap-modal',
-        text: 'libs/require/text'
+        jquery: ['https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min', 'libs/jQuery/jquery-1.8.1'],
+        underscore: 'libs/underscore/underscore-1.3.3',
+        underscoreM: 'libs/underscore/underscore-mustache',
+        backbone: 'libs/backbone/backbone-0.9.2',
+        marionette: 'libs/backbone/backbone.marionette-0.9.12',
+        bootstrap: 'libs/bootstrap/bootstrap-modal', //-2.1.1',  // just using .modal for now but loading entire js bootstrap
+        text: 'libs/require/text-2.0.3'
     },
-
 
     // load the 'non AMD' versions of backbone, underscore and Marionette
     shim: {
-        'bootstrapModal': ['jquery'],
+        underscore: {
+            exports: '_'
+        },
+
+        bootstrap: ['jquery'],
+
         // note: these are all NON-AMD versions of backbone/marionette, load with dependencies
-        'backbone': {
-            deps: ['underscore', 'jquery'],
+        backbone: {
+            deps: ['jquery', 'underscoreM'],
             exports: 'Backbone'
         },
-        'marionette': {
+
+        marionette: {
             deps: ['backbone'],
             exports: 'Backbone.Marionette'
         }
+
     }
 });
 
-
-requirejs(['require','app', 'controllers/libraryapp', 'views/booklist', ,'controllers/libraryrouter', 'controllers/secondapp'],
-
-function (require, MyApp) {
+require(['app', 'controllers/librarycontroller', 'controllers/libraryrouter', 'controllers/secondapp'], function(App) {
     'use strict';
-
-        MyApp.start();
-
-
+    App.start();
 });

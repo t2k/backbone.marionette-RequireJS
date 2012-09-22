@@ -1,5 +1,5 @@
 // books.js: Ted Killilea June 2012  @t2k_nyc  model
-define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,$, _, Backbone, MyApp) {
+define(['jquery', 'underscoreM', 'backbone', 'vent'], function($, _, Backbone, vent) {
     'use strict';
 
     // private
@@ -9,15 +9,15 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
     return Backbone.Collection.extend({
         model: Book,
 
-        initialize: function () {
+        initialize: function() {
             var self = this;
             _.bindAll(this, "search", "moreBooks");
 
-            MyApp.vent.on("search:term", function (term) {
+            vent.on("search:term", function(term) {
                 self.search(term);
             });
 
-            MyApp.vent.on("search:more", function () {
+            vent.on("search:more", function() {
                 self.moreBooks();
             });
 
@@ -36,13 +36,13 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
             this.totalItems = null;
         },
 
-        search: function (searchTerm) {
+        search: function(searchTerm) {
             this.page = 0;
 
             var self = this;
-            this.fetchBooks(searchTerm, function (books) {
+            this.fetchBooks(searchTerm, function(books) {
                 if (books.length < 1) {
-                    MyApp.vent.trigger("search:noResults");
+                    vent.trigger("search:noResults");
                 }
                 else {
                     self.reset(books);
@@ -52,25 +52,25 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
             this.previousSearch = searchTerm;
         },
 
-        moreBooks: function () {
+        moreBooks: function() {
             // if we've loaded all the books for this search, there are no more to load !
             if (this.length >= this.totalItems) {
                 return true;
             }
 
             var self = this;
-            this.fetchBooks(this.previousSearch, function (books) {
+            this.fetchBooks(this.previousSearch, function(books) {
                 self.add(books);
             });
         },
 
-        fetchBooks: function (searchTerm, callback) {
+        fetchBooks: function(searchTerm, callback) {
             if (this.loading) return true;
 
             this.loading = true;
 
             var self = this;
-            MyApp.vent.trigger("search:start");
+            vent.trigger("search:start");
 
             var query = encodeURIComponent(searchTerm) + '&maxResults=' + this.maxResults + '&startIndex=' + (this.page * this.maxResults) + '&fields=totalItems,items(id,volumeInfo/title,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/description,volumeInfo/imageLinks)';
 
@@ -78,8 +78,8 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
                 url: 'https://www.googleapis.com/books/v1/volumes',
                 dataType: 'jsonp',
                 data: 'q=' + query,
-                success: function (res) {
-                    MyApp.vent.trigger("search:stop");
+                success: function(res) {
+                    vent.trigger("search:stop");
                     if (res.totalItems === 0) {
                         callback([]);
                         return [];
@@ -88,7 +88,7 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
                         self.page++;
                         self.totalItems = res.totalItems;
                         var searchResults = [];
-                        _.each(res.items, function (item) {
+                        _.each(res.items, function(item) {
                             var thumbnail = null;
                             if (item.volumeInfo && item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail) {
                                 thumbnail = item.volumeInfo.imageLinks.thumbnail;
@@ -106,7 +106,7 @@ define(['require','jquery', 'underscore', 'backbone', 'app'], function (require,
                         return searchResults;
                     }
                     else if (res.error) {
-                        MyApp.vent.trigger("search:error");
+                        vent.trigger("search:error");
                         self.loading = false;
                     }
                 }

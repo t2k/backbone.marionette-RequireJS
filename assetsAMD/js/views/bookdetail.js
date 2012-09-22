@@ -1,11 +1,10 @@
 // bookdetail.js: Ted Killilea June 2012  @t2k_nyc
-define(function (require) {
+// templates/bookdetail.htm
+define(['underscoreM',  'marionette', 'templates' ], function(_, Marionette, templates) {
     'use strict';
-    //
-    var Marionette = require('marionette');
 
     return Marionette.ItemView.extend({
-        template: "#book-detail-template",
+        template: _.template(templates.bookdetail),
         className: "modal bookDetail"
     });
 });

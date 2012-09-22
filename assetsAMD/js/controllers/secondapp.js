@@ -1,36 +1,31 @@
-// closeapp.js
-define(['require', 'app' , /* 'jquery', 'underscore', 'backbone', 'marionette',*/ 'views/secondappview'], function (require, App) {
+// secondapp.js
+define(['backbone', 'marionette', 'views/secondappview', 'app', 'vent'], function(Backbone, Marionette, AppView, App, vent)  {
     'use strict';
 
-    var $ = require('jquery'),
-        _ = require('underscore'),
-        Backbone = require('backbone'),
-        Marionette = require('marionette');
-
-
-    var thisModule = {};
-
-
-    thisModule.Router = Backbone.Marionette.AppRouter.extend({
+    // private module/app router  capture the #seconapp route and call start method of our controller
+    var Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "secondapp": "secondapp"
+            "secondapp": "start"
         }
     });
 
+    var Controller = {};
 
-    thisModule.secondapp = function () {
-        var CloseView = require('views/secondappview'); // modular view;
-        App.content.show(new CloseView());
-        Backbone.history.navigate("secondapp");
+
+    // Start the app by showing the appropriate views    
+    Controller.start = function() {
+        var view = new AppView();
+        vent.trigger('app:show', view);
+        Backbone.history.navigate('secondapp');
     };
 
-    App.addInitializer(function () {
-        new thisModule.Router({
-            controller: thisModule // just needs to implement 'secondapp'
+
+    App.addInitializer(function() {
+        console.log('addInitializer from secondapp.js');
+        new Router({
+            controller: Controller
         });
-        App.vent.trigger("routing:started");
     });
 
-    return thisModule;
-
+    return Controller;
 });

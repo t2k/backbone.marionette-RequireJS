@@ -1,10 +1,10 @@
-// close.js: Ted Killilea June 2012  @t2k_nyc
-define(function(require){
-    'use strict';
-    //var Marionette = ;
+// secondappview.js: Ted Killilea June 2012  @t2k_nyc
 
-    return require('marionette').ItemView.extend({
-        template: "#close-template",
+define(['underscoreM', 'marionette', 'templates'], function(_, Marionette, templates) {
+    'use strict';
+
+    return Marionette.ItemView.extend({
+        template: _.template(templates.secondapp), //"#close-template",
         className: "close"
     });
 });
