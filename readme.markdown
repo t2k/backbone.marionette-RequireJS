@@ -26,4 +26,4 @@ See the [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blo
 
 NEXT STEPS:  using r.js to optimize build.
 
-Shout out to [Cloud9 IDE](https://c9.io)
+Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension **Cloud 9 Button for Github** one click to clone/edit any github repo.  Fantastic!
