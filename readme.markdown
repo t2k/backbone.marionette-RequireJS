@@ -14,7 +14,7 @@ using layouts and regions to load modular sub applications, etc.
 Hopefully others can use parts of the js/lib as a shortcut for creating your own Marionette/AMD boilerplate.  There is no right or wrong way to organize
 a Marionette app.  I've tried to factor components to a **Model, View, Controller** older structure.  **AppRouters** are a little ambiguous and I've incorporated them into the Controllersfolder.
 
-I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  
+I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  ie **js\Model.book.js, js\View.book.js vs js\Models\book.js, js\Views\book.js**
 This way when loading files in your IDE you will have unique file names.  Just a thought to consider as your modular apps grow larger
 
 In this repo I highlighting how to setup Backbone.Marionette using RequireJS / Asyncronous Module Definition (AMD)
