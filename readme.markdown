@@ -18,3 +18,4 @@ and refactored a number of things from the original project to create a more mod
 
 See the [indexAMD.html](https://github.com/t2k/bb.m-atinux-books-RequireJS/blob/master/indexAMD.html) for RequireJS startup main.js
 
+Shout out to [Cloud9 IDE](https://c9.io)
