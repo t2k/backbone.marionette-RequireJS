@@ -9,7 +9,7 @@ require.config({
         underscore: 'libs/underscore/underscore-1.3.3',
         underscoreM: 'libs/underscore/underscore-mustache',
         backbone: 'libs/backbone/backbone-0.9.2',
-        marionette: 'libs/backbone/backbone.marionette-0.9.12',
+        marionette: 'libs/backbone/backbone.marionette-0.10.2',
         bootstrap: 'libs/bootstrap/bootstrap-modal', //-2.1.1',  // just using .modal for now but loading entire js bootstrap
         text: 'libs/require/text-2.0.3'
     },
@@ -36,7 +36,14 @@ require.config({
     }
 });
 
-require(['app', 'controllers/librarycontroller', 'controllers/libraryrouter', 'controllers/secondapp'], function(App) {
+require(['app', 'controllers/librarycontroller', 'controllers/libraryrouter', 'controllers/secondapp'], function(App, libraryController, libraryRouter, secondApp) {
     'use strict';
-    App.start();
+
+    var options = {
+            libraryController: libraryController,
+            libraryRouter: libraryRouter,
+            secondApp: secondApp
+    };
+    
+    App.start(options);
 });

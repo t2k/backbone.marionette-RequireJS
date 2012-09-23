@@ -4,13 +4,14 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
 
     var app = new Marionette.Application();
 
+
     //modalregion: shows a book detail view in bootstrap modal
     var ModalRegion = Marionette.Region.extend({
         el: "#modal",
         constructor: function() {
             var self = this;
             //_.bindAll(this);
-           // Marionette.Region.prototype.constructor.apply(this, arguments);
+            // Marionette.Region.prototype.constructor.apply(this, arguments);
             self.on("view:show", this.showModal, this);
         },
         showModal: function(view) {
@@ -45,9 +46,11 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
     vent.on('app:show', function(appView) {
         app.content.show(appView);
     });
+    
+    
 
-    app.addInitializer(function() {
-       // configure for loading templates stored externally...
+    app.addInitializer(function(options) {
+        // configure for loading templates stored externally...
         Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
             // Marionette expects "templateId" to be the ID of a DOM element.
             // But with RequireJS, templateId is actually the full text of the template.
@@ -63,9 +66,19 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
 
             return template;
         };
+
+
+        // init library routes and controller methods   
+        new options.libraryRouter.Router({
+            controller: options.libraryController // controller implements search and defaultsearch
+        });
         
+        // init secondApp's routes and controller methods
+        new options.secondApp.Router({
+            controller: options.secondApp // wire-up the start method
+        });
     });
 
-    // export the app from this module
+    // export the app
     return app;
 });

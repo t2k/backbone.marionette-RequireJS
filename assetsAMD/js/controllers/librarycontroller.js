@@ -56,6 +56,5 @@ define(['underscoreM', 'marionette', 'vent', 'models/books', 'views/booklist', '
         Controller.search(_books.previousSearch || 'West Higlhand Terrier');
     };
 
-
     return Controller;
 });

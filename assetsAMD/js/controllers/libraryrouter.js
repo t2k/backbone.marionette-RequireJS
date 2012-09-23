@@ -1,6 +1,6 @@
 // LibraryRouter.js
 // hookup the default "" and search routes for the library
-define(['marionette', 'app', 'controllers/librarycontroller'], function(Marionette, App, controller) {
+define(['marionette'], function(Marionette) {
     'use strict';
 
     var LibraryRouting = {};
@@ -10,14 +10,6 @@ define(['marionette', 'app', 'controllers/librarycontroller'], function(Marionet
             "": "defaultSearch",
             "search/:searchTerm": "search"
         }
-    });
-    
-    // add the routes to our marionette applications start queue...
-    App.addInitializer(function() {
-        console.log('addInitializer => libraryrouter');
-        new LibraryRouting.Router({
-            controller: controller // controller must implement search and defaultsearch
-        });
     });
 
     return LibraryRouting;
