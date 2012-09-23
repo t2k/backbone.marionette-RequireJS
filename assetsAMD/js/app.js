@@ -4,20 +4,14 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
 
     var app = new Marionette.Application();
 
-
-    //modal region: shows a book detail view in bootstrap modal
+    //modalregion: shows a book detail view in bootstrap modal
     var ModalRegion = Marionette.Region.extend({
         el: "#modal",
         constructor: function() {
             var self = this;
-            _.bindAll(this);
-            Marionette.Region.prototype.constructor.apply(this, arguments);
+            //_.bindAll(this);
+           // Marionette.Region.prototype.constructor.apply(this, arguments);
             self.on("view:show", this.showModal, this);
-        },
-        getEl: function(selector) {
-            var $el = $(selector);
-            $el.on("hidden", this.close);
-            return $el;
         },
         showModal: function(view) {
             view.on("close", this.hideModal, this);
@@ -35,16 +29,14 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
         modal: ModalRegion
     });
 
-
     // marionette app events...
     app.on("initialize:after", function() {
         console.log('initialize:after');
         Backbone.history.start();
     });
 
-
     // app modal inter app/module communications
-    vent.on('app.show.bookdetail', function(view) {
+    vent.on('app.show.modal', function(view) {
         console.log('app.show.bookdetail =>app');
         app.modal.show(view);
     });
@@ -55,8 +47,7 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
     });
 
     app.addInitializer(function() {
-
-        // configure for loading templates stored externally...
+       // configure for loading templates stored externally...
         Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
             // Marionette expects "templateId" to be the ID of a DOM element.
             // But with RequireJS, templateId is actually the full text of the template.

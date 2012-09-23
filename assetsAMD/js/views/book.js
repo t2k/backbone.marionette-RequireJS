@@ -15,7 +15,7 @@ define(['underscoreM', 'marionette',  'templates', 'views/bookdetail', 'vent'], 
             var detailView = new BookDetailView({
                 model: this.model
             });
-            vent.trigger('app.show.bookdetail', detailView);
+            vent.trigger('app.show.modal', detailView);
         }
     });
 });
