@@ -53,7 +53,7 @@ define(['underscoreM', 'marionette', 'vent', 'models/books', 'views/booklist', '
     // public API
     Controller.defaultSearch = function() {
         console.log('Controller.defaultSearch =>librarycontroller');
-        Controller.search(_books.previousSearch || 'West Higlhand Terrier');
+        Controller.search(_books.previousSearch || 'West Higlhand Terrier');  // <3 my doggie!
     };
 
     return Controller;
