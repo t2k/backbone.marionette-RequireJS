@@ -7,7 +7,7 @@ require.config({
         // use google CDN or fallback to local copy of jquery
         jquery: ['https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min', 'libs/jQuery/jquery-1.8.1'],
         underscore: 'libs/underscore/underscore-1.3.3',
-        underscoreM: 'libs/underscore/underscore-mustache',
+        underscoreM: 'libs/underscore/underscore-mustache',  // underscore templating supporting mustache style {{ ... }}
         backbone: 'libs/backbone/backbone-0.9.2',
         marionette: 'libs/backbone/backbone.marionette-0.10.2',
         bootstrap: 'libs/bootstrap/bootstrap-modal', //-2.1.1',  // just using .modal for now but loading entire js bootstrap
