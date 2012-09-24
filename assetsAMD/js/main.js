@@ -5,7 +5,7 @@ require.config({
 
     paths: {
         // use google CDN or fallback to local copy of jquery
-        jquery: ['https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min', 'libs/jQuery/jquery-1.8.1'],
+        jquery: ['https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min', 'libs/jQuery/jquery-1.8.2'],
         underscore: 'libs/underscore/underscore-1.3.3',
         underscoreM: 'libs/underscore/underscore-mustache',  // underscore templating supporting mustache style {{ ... }}
         backbone: 'libs/backbone/backbone-0.9.2',
@@ -24,7 +24,7 @@ require.config({
 
         // note: these are all NON-AMD versions of backbone/marionette, load with dependencies
         backbone: {
-            deps: ['jquery', 'underscoreM'],
+            deps: ['jquery', 'underscore'],
             exports: 'Backbone'
         },
 
