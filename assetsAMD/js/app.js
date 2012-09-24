@@ -1,5 +1,5 @@
 // App.js: Ted Killilea June 2012  twitter.com/@t2k_nyc
-define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'], function($, _, Backbone, Marionette, vent) {
+define(['backbone', 'marionette', 'vent', 'bootstrap'], function(Backbone, Marionette, vent) {
     'use strict';
 
     var app = new Marionette.Application();
@@ -48,7 +48,7 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
     });
     
     
-
+    // pass in router/controller via options
     app.addInitializer(function(options) {
         // configure for loading templates stored externally...
         Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
@@ -68,12 +68,12 @@ define(['jquery', 'underscoreM', 'backbone', 'marionette', 'vent', 'bootstrap'],
         };
 
 
-        // init library routes and controller methods   
+        // init library router/controller
         new options.libraryRouter.Router({
             controller: options.libraryController // controller implements search and defaultsearch
         });
         
-        // init secondApp's routes and controller methods
+        // init secondApp's router/controller
         new options.secondApp.Router({
             controller: options.secondApp // wire-up the start method
         });

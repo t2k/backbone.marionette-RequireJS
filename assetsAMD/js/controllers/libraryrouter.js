@@ -1,5 +1,4 @@
-// LibraryRouter.js
-// hookup the default "" and search routes for the library
+// LibraryRouter.js  hookup the default "" and search routes for the library
 define(['marionette'], function(Marionette) {
     'use strict';
 

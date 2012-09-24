@@ -1,6 +1,6 @@
 // secondapp.js
-// note for brevity this controller also contains the definition of the router for this app
-define(['backbone', 'marionette', 'views/secondappview', 'vent'], function(Backbone, Marionette, AppView, vent) {
+// note for brevity this controller also contains the definition of the router for this sub-app/module
+define(['marionette', 'views/secondappview', 'vent'], function(Marionette, AppView, vent) {
     'use strict';
 
     var Controller = {};

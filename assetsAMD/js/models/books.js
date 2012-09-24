@@ -1,11 +1,11 @@
-// books.js: Ted Killilea June 2012  @t2k_nyc  model
-define(['jquery', 'underscoreM', 'backbone', 'vent'], function($, _, Backbone, vent) {
+// books.js
+define(['jquery', 'underscore', 'backbone', 'vent'], function($, _, Backbone, vent) {
     'use strict';
 
     // private
     var Book = Backbone.Model.extend();
 
-    // public API for this module
+    // public API for this module return a collection
     return Backbone.Collection.extend({
         model: Book,
 
