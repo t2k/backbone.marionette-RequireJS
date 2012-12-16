@@ -8,16 +8,12 @@ define(['backbone', 'marionette', 'vent', 'bootstrap'], function(Backbone, Mario
     //modalregion: shows a book detail view in bootstrap modal
     var ModalRegion = Marionette.Region.extend({
         el: "#modal",
-        constructor: function() {
-            var self = this;
-            //_.bindAll(this);
-            // Marionette.Region.prototype.constructor.apply(this, arguments);
-            self.on("view:show", this.showModal, this);
+        
+        onShow :  function(view) {
+          view.on("close", this.hideModal,this);
+          this.$el.modal('show');
         },
-        showModal: function(view) {
-            view.on("close", this.hideModal, this);
-            this.$el.modal('show'); // bootstrap modal
-        },
+        
         hideModal: function() {
             this.$el.modal('hide'); // bootstrap modal
         }

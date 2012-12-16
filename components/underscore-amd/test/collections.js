@@ -25,6 +25,10 @@ $(document).ready(function() {
     answer = null;
     _.each([1, 2, 3], function(num, index, arr){ if (_.include(arr, num)) answer = true; });
     ok(answer, 'can reference the original collection from inside the iterator');
+
+    answers = 0;
+    _.each(null, function(){ ++answers; });
+    equal(answers, 0, 'handles a null properly');
   });
 
   test('map', function() {
@@ -50,6 +54,9 @@ $(document).ready(function() {
 
     var ids = _.map(document.images, function(n){ return n.id; });
     ok(ids[0] == 'chart_image', 'can use collection methods on HTMLCollections');
+
+    var ifnull = _.map(null, function(){});
+    ok(_.isArray(ifnull) && ifnull.length === 0, 'handles a null properly');
   });
 
   test('reduce', function() {
@@ -69,6 +76,15 @@ $(document).ready(function() {
     var sum = _.reduce([1, 2, 3], function(sum, num){ return sum + num; });
     equal(sum, 6, 'default initial value');
 
+    var ifnull;
+    try {
+      _.reduce(null, function(){});
+    } catch (ex) {
+      ifnull = ex;
+    }
+    ok(ifnull instanceof TypeError, 'handles a null (without inital value) properly');
+
+    ok(_.reduce(null, function(){}, 138) === 138, 'handles a null (with initial value) properly');
     equal(_.reduce([], function(){}, undefined), undefined, 'undefined can be passed as a special case');
     raises(function() { _.reduce([], function(){}); }, TypeError, 'throws an error for empty arrays with no initial value');
   });
@@ -83,8 +99,18 @@ $(document).ready(function() {
     var list = _.foldr(["foo", "bar", "baz"], function(memo, str){ return memo + str; });
     equal(list, 'bazbarfoo', 'default initial value');
 
+    var ifnull;
+    try {
+      _.reduceRight(null, function(){});
+    } catch (ex) {
+      ifnull = ex;
+    }
+    ok(ifnull instanceof TypeError, 'handles a null (without inital value) properly');
+
     var sum = _.reduceRight({a: 1, b: 2, c: 3}, function(sum, num){ return sum + num; });
     equal(sum, 6, 'default initial value on object');
+
+    ok(_.reduceRight(null, function(){}, 138) === 138, 'handles a null (with initial value) properly');
 
     equal(_.reduceRight([], function(){}, undefined), undefined, 'undefined can be passed as a special case');
     raises(function() { _.reduceRight([], function(){}); }, TypeError, 'throws an error for empty arrays with no initial value');
@@ -145,6 +171,14 @@ $(document).ready(function() {
   test('reject', function() {
     var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
     equal(odds.join(', '), '1, 3, 5', 'rejected each even number');
+
+    var context = "obj";
+
+    var evens = _.reject([1, 2, 3, 4, 5, 6], function(num){
+      equal(context, "obj");
+      return num % 2 != 0;
+    }, context);
+    equal(evens.join(', '), '2, 4, 6', 'rejected each odd number');
   });
 
   test('all', function() {
@@ -234,6 +268,7 @@ $(document).ready(function() {
 
     equal(-Infinity, _.max({}), 'Maximum value of an empty object');
     equal(-Infinity, _.max([]), 'Maximum value of an empty array');
+    equal(_.max({'a': 'a'}), -Infinity, 'Maximum value of a non-numeric collection');
 
     equal(299999, _.max(_.range(1,300000)), "Maximum value of a too-big array");
   });
@@ -246,6 +281,7 @@ $(document).ready(function() {
 
     equal(Infinity, _.min({}), 'Minimum value of an empty object');
     equal(Infinity, _.min([]), 'Minimum value of an empty array');
+    equal(_.min({'a': 'a'}), Infinity, 'Minimum value of a non-numeric collection');
 
     var now = new Date(9999999999);
     var then = new Date(0);
@@ -312,6 +348,11 @@ $(document).ready(function() {
 
     var array = [{}];
     _.groupBy(array, function(value, index, obj){ ok(obj === array); });
+
+    var array = [1, 2, 1, 2, 3];
+    var grouped = _.groupBy(array);
+    equal(grouped['1'].length, 2);
+    equal(grouped['3'].length, 1);
   });
 
   test('countBy', function() {
@@ -336,6 +377,11 @@ $(document).ready(function() {
 
     var array = [{}];
     _.countBy(array, function(value, index, obj){ ok(obj === array); });
+
+    var array = [1, 2, 1, 2, 3];
+    var grouped = _.countBy(array);
+    equal(grouped['1'], 2);
+    equal(grouped['3'], 1);
   });
 
   test('sortedIndex', function() {
@@ -372,6 +418,13 @@ $(document).ready(function() {
 
     var numbers = _.toArray({one : 1, two : 2, three : 3});
     equal(numbers.join(', '), '1, 2, 3', 'object flattened into array');
+
+    // test in IE < 9
+    try {
+      var actual = _.toArray(document.childNodes);
+    } catch(ex) { }
+
+    ok(_.isArray(actual), 'should not throw converting a node list');
   });
 
   test('size', function() {
@@ -385,6 +438,8 @@ $(document).ready(function() {
     equal(func(1, 2, 3, 4), 4, 'can test the size of the arguments object');
 
     equal(_.size('hello'), 5, 'can compute the size of a string');
+
+    equal(_.size(null), 0, 'handles nulls');
   });
 
 });

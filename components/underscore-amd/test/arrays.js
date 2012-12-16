@@ -14,6 +14,8 @@ $(document).ready(function() {
     equal(result.join(','), '1,1', 'works well with _.map');
     result = (function() { return _.take([1,2,3], 2); })();
     equal(result.join(','), '1,2', 'aliased as take');
+
+    equal(_.first(null), undefined, 'handles nulls');
   });
 
   test("rest", function() {
@@ -47,22 +49,22 @@ $(document).ready(function() {
     equal(result, 4, 'works on an arguments object');
     result = _.map([[1,2,3],[1,2,3]], _.last);
     equal(result.join(','), '3,3', 'works well with _.map');
+
+    equal(_.last(null), undefined, 'handles nulls');
   });
 
   test("compact", function() {
     equal(_.compact([0, 1, false, 2, false, 3]).length, 3, 'can trim out all falsy values');
-    var result = (function(){ return _(arguments).compact().length; })(0, 1, false, 2, false, 3);
+    var result = (function(){ return _.compact(arguments).length; })(0, 1, false, 2, false, 3);
     equal(result, 3, 'works on an arguments object');
   });
 
   test("flatten", function() {
-    if (window.JSON) {
-      var list = [1, [2], [3, [[[4]]]]];
-      equal(JSON.stringify(_.flatten(list)), '[1,2,3,4]', 'can flatten nested arrays');
-      equal(JSON.stringify(_.flatten(list, true)), '[1,2,3,[[[4]]]]', 'can shallowly flatten nested arrays');
-      var result = (function(){ return _.flatten(arguments); })(1, [2], [3, [[[4]]]]);
-      equal(JSON.stringify(result), '[1,2,3,4]', 'works on an arguments object');
-    }
+    var list = [1, [2], [3, [[[4]]]]];
+    deepEqual(_.flatten(list), [1,2,3,4], 'can flatten nested arrays');
+    deepEqual(_.flatten(list, true), [1,2,3,[[[4]]]], 'can shallowly flatten nested arrays');
+    var result = (function(){ return _.flatten(arguments); })(1, [2], [3, [[[4]]]]);
+    deepEqual(result, [1,2,3,4], 'works on an arguments object');
   });
 
   test("without", function() {
@@ -86,6 +88,8 @@ $(document).ready(function() {
     var list = [{name:'moe'}, {name:'curly'}, {name:'larry'}, {name:'curly'}];
     var iterator = function(value) { return value.name; };
     equal(_.map(_.uniq(list, false, iterator), iterator).join(', '), 'moe, curly, larry', 'can find the unique values of an array using a custom iterator');
+
+    equal(_.map(_.uniq(list, iterator), iterator).join(', '), 'moe, curly, larry', 'can find the unique values of an array using a custom iterator without specifying whether array is sorted');
 
     var iterator = function(value) { return value +1; };
     var list = [1, 2, 2, 3, 4, 4];
@@ -136,6 +140,8 @@ $(document).ready(function() {
 
     var stooges = {moe: 30, larry: 40, curly: 50};
     ok(_.isEqual(_.object(_.pairs(stooges)), stooges), 'an object converted to pairs and back to an object');
+
+    ok(_.isEqual(_.object(null), {}), 'handles nulls');
   });
 
   test("indexOf", function() {
@@ -144,6 +150,7 @@ $(document).ready(function() {
     equal(_.indexOf(numbers, 2), 1, 'can compute indexOf, even without the native function');
     var result = (function(){ return _.indexOf(arguments, 2); })(1, 2, 3);
     equal(result, 1, 'works on an arguments object');
+    equal(_.indexOf(null, 2), -1, 'handles nulls properly');
 
     var numbers = [10, 20, 30, 40, 50], num = 35;
     var index = _.indexOf(numbers, num, true);
@@ -172,6 +179,7 @@ $(document).ready(function() {
     equal(_.lastIndexOf(numbers, 0), 8, 'lastIndexOf the other element');
     var result = (function(){ return _.lastIndexOf(arguments, 1); })(1, 0, 1, 0, 0, 1, 0, 0, 0);
     equal(result, 5, 'works on an arguments object');
+    equal(_.indexOf(null, 2), -1, 'handles nulls properly');
 
     numbers = [1, 2, 3, 1, 2, 3, 1, 2, 3];
     index = _.lastIndexOf(numbers, 2, 2);

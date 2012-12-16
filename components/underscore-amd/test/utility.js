@@ -37,8 +37,10 @@ $(document).ready(function() {
     ok(_.isEqual(vals, [0,1,2]), "is 0 indexed");
     //
     vals = [];
-    _(3).times(function (i) { vals.push(i); });
+    _(3).times(function(i) { vals.push(i); });
     ok(_.isEqual(vals, [0,1,2]), "works as a wrapper");
+    // collects return values
+    ok(_.isEqual([0, 1, 2], _.times(3, function(i) { return i; })), "collects return values");
   });
 
   test("mixin", function() {
@@ -173,10 +175,11 @@ $(document).ready(function() {
 
   test('_.template provides the generated function source, when a SyntaxError occurs', function() {
     try {
-      _.template('<b><%= if %></b>');
-    } catch (e) {
-      ok(e.source.indexOf('( if )') > 0);
+      _.template('<b><%= if x %></b>');
+    } catch (ex) {
+      var source = ex.source;
     }
+    ok(/__p/.test(source));
   });
 
   test('_.template handles \\u2028 & \\u2029', function() {
