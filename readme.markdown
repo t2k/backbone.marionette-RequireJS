@@ -41,7 +41,7 @@ Bower will be installed locally at your project root
 #### Use Bower To Install Project Dependencies
 This simple project has quite a list of dependencies, but don't go away angry, it's very easy using __BOWER__ to install these open source libraries into this project.
 
-__PROJECT DEPENDENCIES__
+__PROJECT DEPENDENCIES__  
 1. jquery  
 2. bootstrap  
 3. requirejs  
