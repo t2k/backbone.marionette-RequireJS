@@ -78,11 +78,11 @@ $ node ../../components/r.js/dist/r.js -o app.build.js
     
 SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) for details.
     
-The optimizer builds assetsAMD/js/main.optimized.js
+The optimizer 'output' builds the assetsAMD/js/main.optimized.js that gets linked to [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html).
 
-SEE [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html) for details.
 SEE [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for details.
-    
+
+
 ***Good luck on your open source journey!***
         
 
