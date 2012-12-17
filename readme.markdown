@@ -5,9 +5,9 @@ I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggl
 The **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)  I learned alot from David's Marionette app in terms of using most of marionettes features and it dealt with a more interesting real world back end.  
 I learned alot from the namespacing and modular layout but converting the app over to AMD required a different approach in organizing the application.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
 
-I've added my stuff to the **assetsAMD** and **components** folder, reworking the Backbone.Marionette application which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
-example app and covers important features, such as modal dialogs, loading external templates with RequireJS and configuring Underscore to use Mustache style templates {{ xxx }},
-using layouts and regions to load modular sub applications, etc.  I used added [BOWER](http://twitter.github.com/bower/) to the project to manage Open Source Software dependencies.
+I've added my stuff to the **assetsAMD**, **components** and **node_module** folders, reworking the Backbone.Marionette application which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
+example app and covers important features, such as modal dialogs, loading external templates with RequireJS and configuring Underscore to use **Mustache style templates {{ xxx }}**,
+using layouts and regions to load modular sub applications, etc.  I added [BOWER](http://twitter.github.com/bower/) to the project to manage Open Source Software dependencies.
 
 Check out [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
 
