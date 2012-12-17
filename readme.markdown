@@ -26,7 +26,8 @@ From the terminal/BASH $ prompt:
 
 First off, NODE v0.8+ is required for __BOWER__ installation, as I'm writing this, NODE v 6.2.1 is pre istalled in the ***Cloud9 IDE*** but they also pre-install [NVM Node Version Manager](https://github.com/creationix/nvm) so you can update the Cloud9 workspace to NODE v0.8+ as required for __BOWER__
 
-Press [alt-t] to open a terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands.  Pretty amazing, you project essentially has a full featured unix environment available in a browser based IDE.
+Press [alt-t] to open a terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands.  Pretty amazing, the project has full featured unix environment available in a browser based [Cloud9 IDE](https://c9.io)!
+
 To switch to node version 0.8+
 ~~~    
 $ nvm use 0.8
