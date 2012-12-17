@@ -58,16 +58,10 @@ __PROJECT DEPENDENCIES__
 $ bower install --save jquery bootstrap requirejs requirejs-text underscore-amd backbone-amd#0.9.2 backbone.wreqr backbone.eventbinder marionette
 ~~~
 
-__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__  
+__backbone.babysitter and r.js are not registered in bower so, just bower manually install the git version (see bower info)__  
 
 ~~~
 $ bower install --save git://github.com/marionettejs/backbone.babysitter.git
-~~~
-
-__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__  
-__r.js was not a registered package/component in bower so, just bower install the git version __  
-
-~~~
 $ bower install --save git://github.com/jrburke/r.js.git
 ~~~
     
@@ -78,6 +72,8 @@ At a later date the project dependencies can be updated with ***one*** command:
 ~~~   
 $ bower update
 ~~~
+
+You can handle that!
 
 ## The M in AMD-- Benefit and a Curse
 Modular design in javascript is the key to building scaleable and maintainable web applications.  However, each module can create multiple http get requests when our page loads.  Remove the __curse__ with [R.js](git://github.com/jrburke/r.js.git) optimizer. 
