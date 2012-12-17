@@ -5,11 +5,11 @@ I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggl
 The **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)  I learned alot from David's Marionette app in terms of using most of marionettes features and it dealt with a more interesting real world back end.  
 I learned alot from the namespacing and modular layout but converting the app over to AMD required a different approach in organizing the application.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
 
-I've added my stuff to the **assetsAMD** folder, reworking the Backbone.Marionette application which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
+I've added my stuff to the **assetsAMD** and **components** folder, reworking the Backbone.Marionette application which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
 example app and covers important features, such as modal dialogs, loading external templates with RequireJS and configuring Underscore to use Mustache style templates {{ xxx }},
-using layouts and regions to load modular sub applications, etc.
+using layouts and regions to load modular sub applications, etc.  I used added [BOWER](http://twitter.github.com/bower/) to the project to manage Open Source Software dependencies.
 
-Check out [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
+Check out [indexAMD.Deval.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Deval.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
 
 Take a look at the **assetsAMD/js/libs** folder and **assetsAMD/main.js** to see how to setup this  Marionette/AMD application.  There is no right or wrong way to organize
 a Marionette app.  I've tried to factor components to a **Model, View, Controller** folder structure.  **AppRouters** are a little ambiguous and I've incorporated them into the Controllersfolder.
@@ -19,7 +19,7 @@ This way when loading files in your IDE you will have unique file names in your 
 
 ### Using [BOWER](http://twitter.github.com/bower/) to maintain project dependencies.
 My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used [BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.
-Grok [NODEJS](https://nodejs.org) also.  Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
+Grok [NODEJS](http://nodejs.org) also.  Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
 
 #### Bower Installation
 From the terminal/BASH $ prompt:
