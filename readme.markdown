@@ -17,60 +17,79 @@ a Marionette app.  I've tried to factor components to a **Model, View, Controlle
 I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  ie **js\Model.book.js, js\View.book.js vs js\Models\book.js, js\Views\book.js**
 This way when loading files in your IDE you will have unique file names in your editor's buffer.  Just a thought to consider as your modular apps grow large.  It's a matter of preference and alot depends upon the indivual developers and the 
 
-## Using RequireJS build Optimizer r.js
-
-Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate or dramatically reduce server requests upon you first page load.
-
-### Using [BOWER](http://twitter.github.com/bower/) to maintain project dependencies
+### Using [BOWER](http://twitter.github.com/bower/) to maintain project dependencies.
+My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used [BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.
+Grok [NODEJS](https://nodejs.org) also.  Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
 
 #### Bower Installation
+From the terminal/BASH $ prompt:
 
-NODE v0.8+ is required for __BOWER__ installation
+First off, NODE v0.8+ is required for __BOWER__ installation, as I'm writing this, NODE v 6.2.1 is pre istalled in the ***Cloud9 IDE*** but they also pre-install [NVM Node Version Manager](https://github.com/creationix/nvm) so you can update the Cloud9 workspace to NODE v0.8+ as required for __BOWER__
 
-Cloud9 IDE workspace has a built in Linux terminal with most [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window.  Pretty amazing, you project essentially has a full featured unix environment available in a browser based IDE.
-
-#### Bower Inatallation
-From the terminal/bash shell at your project root  [alt-t]
-To ensure you are using node version 0.8
-
+Press [alt-t] to open a terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands.  Pretty amazing, you project essentially has a full featured unix environment available in a browser based IDE.
+To switch to node version 0.8+
 ~~~    
 $ nvm use 0.8
+~~~
+***Install BOWER***
+~~~
 $ npm install bower
 ~~~
 
 Bower will be installed locally at your project root
 
-#### Use Bower To Install Components
-From the bash prompt $  [alt-t]
+#### Use Bower To Install Project Dependencies
+This simple project has quite a list of dependencies, but don't go away angry, it's very easy using __BOWER__ to install these open source libraries into this project.
+
+__PROJECT DEPENDENCIES__
+1. jquery
+2. bootstrap
+3. requirejs
+4. requirejs-text
+5. r.js
+2. underscore-amd
+3. backbone-amd#0.9.2
+4. backbone.wreqr
+5. backbone.eventbinder
+6. backbone.babysitter
+6. marionette
 
 ~~~    
-$ bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
+$ bower install --save jquery bootstrap requirejs requirejs-text underscore-amd backbone-amd#0.9.2 backbone.wreqr backbone.eventbinder marionette
 ~~~   
 
-__backbone.babysitter was not registered in bower yet__
-
+__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__
 ~~~
 $ bower install --save git://github.com/marionettejs/backbone.babysitter.git
 ~~~    
-__r.js was not registered in bower__
-    
+
+__r.js was not a registered package/component in bower so, just bower install the git version __
 ~~~
 $ bower install --save git://github.com/jrburke/r.js.git
 ~~~
     
-The bower install --save option creates [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) in your project directory.
+The __bower install --save__ option creates [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) in the project directory.
 
-At a later date the project dependencies can be updated with one command:
+At a later date the project dependencies can be updated with ***one*** command:
    
 ~~~   
 $ bower update
 ~~~
 
-#### optimize javascript loading with r.js 
-[alt-t] from the bash prompt $
+## The M in AMD
+Modular design in javascript is the key to building scaleable and maintainable web applications, however without the benefit of an optimizer/build tool such as [r.js](git://github.com/jrburke/r.js.git) the page load times quickly gets out of control as each __Module__ gets loaded individually by its own http get request.
+
+
+
+### Using  [R.js](git://github.com/jrburke/r.js.git) build Optimizer
+Using [r.js](git://github.com/jrburke/r.js.git) optimizer to compress/minimize/uglify your main.js file.  Eliminate or dramatically reduce server requests upon you first page load.
+
+#### optimize javascript loading with R.js 
+Here's how I did it for this project in __Cloud9IDE__ 
 
 __Build the optimized verions of main.js__
 
+From BASH prompt $ in the project root [alt-t]
 ~~~
 $ cd assetsAMD/build
 $ node ../../components/r.js/dist/r.js -o app.build.js
@@ -81,7 +100,6 @@ SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/mas
 The optimizer 'output' builds the assetsAMD/js/main.optimized.js that gets linked to [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html).
 
 SEE [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for details.
-
 
 ***Good luck on your open source journey!***
         
