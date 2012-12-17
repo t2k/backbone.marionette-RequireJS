@@ -58,13 +58,14 @@ __PROJECT DEPENDENCIES__
 $ bower install --save jquery bootstrap requirejs requirejs-text underscore-amd backbone-amd#0.9.2 backbone.wreqr backbone.eventbinder marionette
 ~~~
 
-__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__
+__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__  
 
 ~~~
 $ bower install --save git://github.com/marionettejs/backbone.babysitter.git
 ~~~
 
-__r.js was not a registered package/component in bower so, just bower install the git version __
+__r.js was not a registered package/component in bower so, just bower install the git version __  
+
 ~~~
 $ bower install --save git://github.com/jrburke/r.js.git
 ~~~
