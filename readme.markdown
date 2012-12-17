@@ -42,17 +42,17 @@ Bower will be installed locally at your project root
 This simple project has quite a list of dependencies, but don't go away angry, it's very easy using __BOWER__ to install these open source libraries into this project.
 
 __PROJECT DEPENDENCIES__
-1. jquery
-2. bootstrap
-3. requirejs
-4. requirejs-text
-5. r.js
-2. underscore-amd
-3. backbone-amd#0.9.2
-4. backbone.wreqr
-5. backbone.eventbinder
-6. backbone.babysitter
-6. marionette
+1. jquery  
+2. bootstrap  
+3. requirejs  
+4. requirejs-text  
+5. r.js  
+2. underscore-amd  
+3. backbone-amd#0.9.2  
+4. backbone.wreqr  
+5. backbone.eventbinder  
+6. backbone.babysitter  
+6. marionette  
 
 ~~~    
 $ bower install --save jquery bootstrap requirejs requirejs-text underscore-amd backbone-amd#0.9.2 backbone.wreqr backbone.eventbinder marionette
@@ -87,7 +87,7 @@ Here's how I did it for this project in __Cloud9IDE__
 
 __Build the optimized verions of main.js__
 
-Pass the [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) file as a command line argument to [R.js](git://github.com/jrburke/r.js.git) 
+Pass the [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) file as a command line argument to [R.js](https://github.com/jrburke/r.js.git) 
 ~~~
 $ cd assetsAMD/build
 $ node ../../components/r.js/dist/r.js -o app.build.js
