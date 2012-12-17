@@ -30,56 +30,60 @@ NODE v0.8+ is required for __BOWER__ installation
 Cloud9 IDE workspace has a built in Linux terminal with most [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window.  Pretty amazing, you project essentially has a full featured unix environment available in a browser based IDE.
 
 #### Bower Inatallation
-    From the terminal/bash shell at your project root  [alt-t]
-    To ensure you are using node version 0.8
+From the terminal/bash shell at your project root  [alt-t]
+To ensure you are using node version 0.8
+
 ~~~    
 $ nvm use 0.8
-    
 $ npm install bower
 ~~~
-        Bower will be installed locally at your project root
+
+Bower will be installed locally at your project root
 
 #### Use Bower To Install Components
-    From the bash prompt $
+From the bash prompt $  [alt-t]
+
 ~~~    
 $ bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
 ~~~   
-    __backbone.babysitter was not registered in bower yet__
+
+__backbone.babysitter was not registered in bower yet__
 
 ~~~
 $ bower install --save git://github.com/marionettejs/backbone.babysitter.git
 ~~~    
-    __r.js was not registered in bower__
+__r.js was not registered in bower__
     
 ~~~
 $ bower install --save git://github.com/jrburke/r.js.git
 ~~~
     
-    The bower install --save option creates:
-    
-[component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) 
+The bower install --save option creates [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) in your project directory.
 
-    At a later date the project dependencies can be updated with one command
+At a later date the project dependencies can be updated with one command:
    
 ~~~   
 $ bower update
 ~~~
 
 #### optimize javascript loading with r.js 
-    [alt-t] from the bash prompt $
-    cd assetsAMD/build
+[alt-t] from the bash prompt $
+
+__Build the optimized verions of main.js__
+
 ~~~
+$ cd assetsAMD/build
 $ node ../../components/r.js/dist/r.js -o app.build.js
 ~~~
     
 SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) for details.
     
-    The optimizer builds assetsAMD/js/main.optimized.js
+The optimizer builds assetsAMD/js/main.optimized.js
 
 SEE [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html) for details.
 SEE [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for details.
     
-    Good luck on your open source journey!
+***Good luck on your open source journey!***
         
 
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph) one click to clone/edit any github repo.  Fantastic!
