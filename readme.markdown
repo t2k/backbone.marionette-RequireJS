@@ -1,4 +1,4 @@
-## Sample Backbone.Marionette modular application using RequireJS/AMD 
+# Sample Backbone.Marionette modular application using RequireJS/AMD 
 
 I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming to grips with configuration, so I created this repo as a means to try out a few new things for my own learning purposes.
 
@@ -17,9 +17,39 @@ a Marionette app.  I've tried to factor components to a **Model, View, Controlle
 I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  ie **js\Model.book.js, js\View.book.js vs js\Models\book.js, js\Views\book.js**
 This way when loading files in your IDE you will have unique file names in your editor's buffer.  Just a thought to consider as your modular apps grow large.  It's a matter of preference and alot depends upon the indivual developers and the 
 
-# Using RequireJS build Optimizer r.js
-[!!]  Speed page load by using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate all the server requests to one.
+## Using RequireJS build Optimizer r.js
+[!!]  Speed page load
 
-Use 
+Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate or dramatically reduce server requests upon you first page load.
+
+### [BOWER](http://twitter.github.com/bower/) Installation
+[!!] NODE v 8+ installation
+Cloud9 IDE workspace [alt-t] has a built in Linux terminal with all [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  You have the full unix environment available to your project workspace.
+    #### Bower Inatall
+    [alt-t]
+    From the terminal/bash shell at your project root
+    $ nvm use 0.8
+    (node version manager is available, we must use version 8 of node to install bower)
+    $ npm install bower
+    
+    Bower will be installed locally at your project root
+
+#### Use Bower To Install Components
+    From the bash prompt $
+    bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
+    
+    [!!] backbone.babysitter was not registered in bower yet
+    bower install --save git://github.com/marionettejs/backbone.babysitter.git
+    [!!] r.js was not registered in bower
+    bower install --save git://github.com/jrburke/r.js.git
+    
+    
+
+| Item      | Value | Savings |
+| --------- | -----:|:-------:|
+| Computer  | $1600 |   40%   |
+| Phone     |   $12 |   30%   |
+| Pipe      |    $1 |    0%   |
+    
 
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph) one click to clone/edit any github repo.  Fantastic!
