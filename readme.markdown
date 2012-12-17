@@ -17,6 +17,9 @@ a Marionette app.  I've tried to factor components to a **Model, View, Controlle
 I have to say, it might be better to place all JS into one folder and prepend the MVC attrib to the file name.  ie **js\Model.book.js, js\View.book.js vs js\Models\book.js, js\Views\book.js**
 This way when loading files in your IDE you will have unique file names in your editor's buffer.  Just a thought to consider as your modular apps grow large.  It's a matter of preference and alot depends upon the indivual developers and the 
 
-NEXT STEPS:  using r.js to optimize build and unit testing.  Both new to me...
+# Using RequireJS build Optimizer r.js
+[!!]  Speed page load by using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate all the server requests to one.
+
+Use 
 
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph) one click to clone/edit any github repo.  Fantastic!
