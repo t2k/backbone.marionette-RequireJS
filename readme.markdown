@@ -18,12 +18,14 @@ I have to say, it might be better to place all JS into one folder and prepend th
 This way when loading files in your IDE you will have unique file names in your editor's buffer.  Just a thought to consider as your modular apps grow large.  It's a matter of preference and alot depends upon the indivual developers and the 
 
 ## Using RequireJS build Optimizer r.js
-[!!]  Speed page load
 
 Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate or dramatically reduce server requests upon you first page load.
 
-### [BOWER](http://twitter.github.com/bower/) Installation
-[!!] NODE v 8+ installation
+### Using [BOWER](http://twitter.github.com/bower/) to maintain project dependencies
+
+#### Bower Installation
+
+NODE v 8+ installation
 Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window. You have a full unix environment available to use at your project workspace.
 
 #### Bower Inatallation
@@ -47,6 +49,7 @@ Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http:/
     bower install --save git://github.com/jrburke/r.js.git
     
     bower install --save creates 
+    
     
 [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) 
 
