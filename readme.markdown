@@ -26,7 +26,7 @@ Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate o
 [!!] NODE v 8+ installation
 Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window. You have a full unix environment available to use at your project workspace.
 
-    #### Bower Inatallation
+#### Bower Inatallation
     From the terminal/bash shell at your project root     [alt-t]
     To ensure node version 0.8 is in use 
     $ nvm use 0.8
