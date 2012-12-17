@@ -1,1 +1,0 @@
-{"ts":1346096739150,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"<img src=\"{{ (thumbnail ? thumbnail : 'http://placehold.it/100x150') }}\" alt=\"\" class=\"book\" />"]],"start1":0,"start2":0,"length1":0,"length2":95}]],"length":95}

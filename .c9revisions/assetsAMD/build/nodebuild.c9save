@@ -1,3 +1,0 @@
-{"ts":1355693548188,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
-{"contributors":[],"silentsave":false,"ts":1355693569186,"patch":[[{"diffs":[[1,"# call this command file from bash $ \r\n# $ nodebuild\r\n#echo \"Building optimized javascript library for ZIRP\"\r\n#echo \"using r.js optimizer\"\r\nnode ../components/r.js/dist/r.js -o app.build.js\r\n#echo \"finished\"\r\n#echo \"output in ZIRP/js/main.optimized.js\"\r\n"]],"start1":0,"start2":0,"length1":0,"length2":254}]],"length":254,"saved":false}
-{"contributors":[],"silentsave":false,"ts":1355696785429,"patch":[[{"diffs":[[0,"\"\r\nnode "],[1,"../"],[0,"../compo"]],"start1":137,"start2":137,"length1":16,"length2":19}]],"length":257,"saved":false}

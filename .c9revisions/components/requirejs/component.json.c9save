@@ -1,1 +1,0 @@
-{"ts":1354076429002,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"{\n  \"name\": \"requirejs\",\n  \"version\": \"2.1.2\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git://github.com/jrburke/requirejs\"\n  }\n}"]],"start1":0,"start2":0,"length1":0,"length2":137}]],"length":137}
