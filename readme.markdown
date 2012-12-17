@@ -32,37 +32,45 @@ Cloud9 IDE workspace has a built in Linux terminal with most [bash shell](http:/
 #### Bower Inatallation
     From the terminal/bash shell at your project root  [alt-t]
     To ensure you are using node version 0.8
+~~~    
+$ nvm use 0.8
     
-//  $ nvm use 0.8
-        
-//  $ npm install bower
+$ npm install bower
+~~~
         Bower will be installed locally at your project root
 
 #### Use Bower To Install Components
     From the bash prompt $
-    
-//  $ bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
-    
+~~~    
+$ bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
+~~~   
     __backbone.babysitter was not registered in bower yet__
-    
-//  $bower install --save git://github.com/marionettejs/backbone.babysitter.git
-    
+
+~~~
+$ bower install --save git://github.com/marionettejs/backbone.babysitter.git
+~~~    
     __r.js was not registered in bower__
     
-//  $ bower install --save git://github.com/jrburke/r.js.git
+~~~
+$ bower install --save git://github.com/jrburke/r.js.git
+~~~
     
     The bower install --save option creates:
     
 [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) 
 
     At a later date the project dependencies can be updated with one command
-    
-//  $ bower update
-    
+   
+~~~   
+$ bower update
+~~~
+
 #### optimize javascript loading with r.js 
     [alt-t] from the bash prompt $
     cd assetsAMD/build
-//  $ node ../../components/r.js/dist/r.js -o app.build.js
+~~~
+$ node ../../components/r.js/dist/r.js -o app.build.js
+~~~
     
 SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) for details.
     
