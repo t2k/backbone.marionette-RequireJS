@@ -27,7 +27,7 @@ Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate o
 Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window. You have a full unix environment available to use at your project workspace.
 
 #### Bower Inatallation
-    From the terminal/bash shell at your project root     [alt-t]
+    From the terminal/bash shell at your project root  [alt-t]
     To ensure node version 0.8 is in use 
     $ nvm use 0.8
         
@@ -38,11 +38,11 @@ Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http:/
     From the bash prompt $
     bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
     
-    **backbone.babysitter was not registered in bower yet**
+    __backbone.babysitter was not registered in bower yet__
     
     bower install --save git://github.com/marionettejs/backbone.babysitter.git
     
-    **r.js was not registered in bower**
+    __r.js was not registered in bower__
     
     bower install --save git://github.com/jrburke/r.js.git
     
@@ -53,7 +53,6 @@ Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http:/
     At a later date you can update the project dependencies using the following command from you project root
     $ bower update
     
-
 #### optimize javascript loading with r.js 
     [alt-t] from the bash prompt $
     cd assetsAMD/build
