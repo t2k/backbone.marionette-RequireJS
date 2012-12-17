@@ -64,6 +64,7 @@ __backbone.babysitter was not a registered package/component in bower so, just b
 $ bower install --save git://github.com/marionettejs/backbone.babysitter.git
 ~~~
 
+__backbone.babysitter was not a registered package/component in bower so, just bower install the git version__  
 __r.js was not a registered package/component in bower so, just bower install the git version __  
 
 ~~~
