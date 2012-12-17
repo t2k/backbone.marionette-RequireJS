@@ -9,7 +9,7 @@ I've added my stuff to the **assetsAMD** and **components** folder, reworking th
 example app and covers important features, such as modal dialogs, loading external templates with RequireJS and configuring Underscore to use Mustache style templates {{ xxx }},
 using layouts and regions to load modular sub applications, etc.  I used added [BOWER](http://twitter.github.com/bower/) to the project to manage Open Source Software dependencies.
 
-Check out [indexAMD.Deval.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Deval.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
+Check out [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
 
 Take a look at the **assetsAMD/js/libs** folder and **assetsAMD/main.js** to see how to setup this  Marionette/AMD application.  There is no right or wrong way to organize
 a Marionette app.  I've tried to factor components to a **Model, View, Controller** folder structure.  **AppRouters** are a little ambiguous and I've incorporated them into the Controllersfolder.
