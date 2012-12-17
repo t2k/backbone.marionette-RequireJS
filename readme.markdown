@@ -24,32 +24,45 @@ Using r.js optimizer to compress/minimize/uglify your main.js file.  Eliminate o
 
 ### [BOWER](http://twitter.github.com/bower/) Installation
 [!!] NODE v 8+ installation
-Cloud9 IDE workspace [alt-t] has a built in Linux terminal with all [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  You have the full unix environment available to your project workspace.
-    #### Bower Inatall
-    [alt-t]
-    From the terminal/bash shell at your project root
+Your Cloud9 IDE workspace has a built in Linux terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands available.  Press [alt-t] to create a new terminal window. You have a full unix environment available to use at your project workspace.
+
+    #### Bower Inatallation
+    From the terminal/bash shell at your project root     [alt-t]
     $ nvm use 0.8
     (node version manager is available, we must use version 8 of node to install bower)
-    $ npm install bower
     
-    Bower will be installed locally at your project root
+    $ npm install bower
+        Bower will be installed locally at your project root
 
 #### Use Bower To Install Components
     From the bash prompt $
     bower install --save  marionette underscore-amd backbone-amd marionette jquery bootstrap backbone.eventbinder backbone.wreqr
     
-    [!!] backbone.babysitter was not registered in bower yet
+    **backbone.babysitter was not registered in bower yet**
+    
     bower install --save git://github.com/marionettejs/backbone.babysitter.git
-    [!!] r.js was not registered in bower
+    
+    **r.js was not registered in bower**
+    
     bower install --save git://github.com/jrburke/r.js.git
     
+    bower install --save creates  [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) 
+    to update the project dependencies:
+        $ bower update
     
 
-| Item      | Value | Savings |
-| --------- | -----:|:-------:|
-| Computer  | $1600 |   40%   |
-| Phone     |   $12 |   30%   |
-| Pipe      |    $1 |    0%   |
+#### optimize javascript loading with r.js 
+    [alt-t] from the bash prompt $
+    cd assetsAMD/build
+    $ node ../../components/r.js/dist/r.js -o app.build.js
     
+    SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/build/app.build.js) for details.
+    
+    The optimizer builds assetsAMD/js/main.optimized.js
+    
+    see [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html) for details.
+    
+    Good luck!
+        
 
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph) one click to clone/edit any github repo.  Fantastic!
