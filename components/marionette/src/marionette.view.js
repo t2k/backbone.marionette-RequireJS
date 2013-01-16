@@ -11,11 +11,8 @@ Marionette.View = Backbone.View.extend({
     var args = Array.prototype.slice.apply(arguments);
     Backbone.View.prototype.constructor.apply(this, args);
 
-    Marionette.bindEntityEvents(this, this.model, Marionette.getOption(this, "modelEvents"));
-    Marionette.bindEntityEvents(this, this.collection, Marionette.getOption(this, "collectionEvents"));
-
     Marionette.MonitorDOMRefresh(this);
-    this.bindTo(this, "show", this.onShowCalled, this);
+    this.listenTo(this, "show", this.onShowCalled, this);
   },
 
   // import the "triggerMethod" to trigger events with corresponding
@@ -59,10 +56,22 @@ Marionette.View = Backbone.View.extend({
     // action and stop propagation of DOM events
     _.each(triggers, function(value, key){
 
+      // build the event handler function for the DOM event
       triggerEvents[key] = function(e){
+
+        // stop the event in it's tracks
         if (e && e.preventDefault){ e.preventDefault(); }
         if (e && e.stopPropagation){ e.stopPropagation(); }
-        that.trigger(value);
+
+        // buil the args for the event
+        var args = {
+          view: this,
+          model: this.model,
+          collection: this.collection
+        };
+
+        // trigger the event
+        that.trigger(value, args);
       };
 
     });
@@ -70,9 +79,16 @@ Marionette.View = Backbone.View.extend({
     return triggerEvents;
   },
 
-  // Overriding Backbone.View's delegateEvents specifically
-  // to handle the `triggers` configuration
+  // Overriding Backbone.View's delegateEvents to handle 
+  // the `triggers`, `modelEvents`, and `collectionEvents` configuration
   delegateEvents: function(events){
+    this._delegateDOMEvents(events);
+    Marionette.bindEntityEvents(this, this.model, Marionette.getOption(this, "modelEvents"));
+    Marionette.bindEntityEvents(this, this.collection, Marionette.getOption(this, "collectionEvents"));
+  },
+
+  // internal method to delegate DOM events and triggers
+  _delegateDOMEvents: function(events){
     events = events || this.events;
     if (_.isFunction(events)){ events = events.call(this); }
 
@@ -81,6 +97,16 @@ Marionette.View = Backbone.View.extend({
     _.extend(combinedEvents, events, triggers);
 
     Backbone.View.prototype.delegateEvents.call(this, combinedEvents);
+  },
+
+  // Overriding Backbone.View's undelegateEvents to handle unbinding
+  // the `triggers`, `modelEvents`, and `collectionEvents` config
+  undelegateEvents: function(){
+    var args = Array.prototype.slice.call(arguments);
+    Backbone.View.prototype.undelegateEvents.apply(this, args);
+
+    Marionette.unbindEntityEvents(this, this.model, Marionette.getOption(this, "modelEvents"));
+    Marionette.unbindEntityEvents(this, this.collection, Marionette.getOption(this, "collectionEvents"));
   },
 
   // Internal method, handles the `show` event.
@@ -104,10 +130,9 @@ Marionette.View = Backbone.View.extend({
     // prevent infinite loops within "close" event handlers
     // that are trying to close other views
     this.isClosed = true;
+    this.triggerMethod("close");
 
     this.remove();
-    this.triggerMethod("close");
-    this.unbindAll();
   },
 
   // This method binds the elements specified in the "ui" hash inside the view's code with
@@ -120,7 +145,7 @@ Marionette.View = Backbone.View.extend({
     if (!this.uiBindings) {
       // We want to store the ui hash in uiBindings, since afterwards the values in the ui hash
       // will be overridden with jQuery selectors.
-      this.uiBindings = this.ui;
+      this.uiBindings = _.result(this, "ui");
     }
 
     // refreshing the associated selectors since they should point to the newly rendered elements.

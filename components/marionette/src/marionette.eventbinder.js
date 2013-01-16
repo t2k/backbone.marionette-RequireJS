@@ -1,27 +1,31 @@
-// EventBinder
-// -----------
-// Import the event binder from it's new home
-// https://github.com/marionettejs/backbone.eventbinder
-Marionette.EventBinder = Backbone.EventBinder.extend();
+// addEventBinder
+// --------------
+//
+// Mixes in Backbone.Events to the target object, if it is not present
+// already. Also adjusts the listenTo method to accept a 4th parameter
+// for the callback context.
 
-// Add the EventBinder methods to the view directly,
-// but keep them bound to the EventBinder instance so they work properly.
-// This allows the event binder's implementation to vary independently
-// of it being attached to the view... for example the internal structure
-// used to store the events can change without worry about it interfering
-// with Marionette's views.
-Marionette.addEventBinder = function(target){
-  var eventBinder = new Marionette.EventBinder();
-  target.eventBinder = eventBinder;
+(function(Backbone, Marionette, _){
 
-  target.bindTo = function(source, event, callback, context){
-    // check the context of the bindTo and set it to the object
-    // that is having the eventBinder attached to it, if no context
-    // has been specified in the .bindTo call
-    context = context || target;
-    eventBinder.bindTo(source, event, callback, context);
+  // grab a reference to the original listenTo
+  var listenTo = Backbone.Events.listenTo;
+
+  // Fix the listenTo method on the target object, allowing the 4th
+  // context parameter to be specified
+  Marionette.addEventBinder = function(target){
+    // If the target is not already extending Backbone.Events,
+    // then extend that on to it first
+    if (!target.on && !target.off && !target.listenTo && !target.stopListening){
+      _.extend(target, Backbone.Events);
+    }
+
+    // Override the built-in listenTo method to make sure we 
+    // account for context
+    target.listenTo = function(evtSource, events, callback, context){
+      context = context || this;
+      return listenTo.call(this, evtSource, events, _.bind(callback, context));
+    };
   };
 
-  target.unbindFrom = _.bind(eventBinder.unbindFrom, eventBinder);
-  target.unbindAll = _.bind(eventBinder.unbindAll, eventBinder);
-};
+})(Backbone, Marionette, _);
+

@@ -12,11 +12,9 @@ describe("module start", function(){
 
         var App = new Marionette.Application();
 
-        App.module("Parent", {
-          startWithParent: true,
-          define: function(Parent){
-            Parent.addInitializer(moduleStart);
-          }
+        App.module("Parent", function(Parent){
+          this.startWithParent = true;
+          Parent.addInitializer(moduleStart);
         });
 
         App.module("Parent.Child", function(Child){
@@ -44,18 +42,14 @@ describe("module start", function(){
 
         var App = new Marionette.Application();
 
-        App.module("Parent", {
-          startWithParent: true,
-          define: function(mod){
-            mod.addInitializer(moduleStart);
-          }
+        App.module("Parent", function(mod){
+          this.startWithParent = true;
+          mod.addInitializer(moduleStart);
         });
 
-        App.module("Parent.Child", {
-          startWithParent: false,
-          define: function(Child){
-            Child.addInitializer(subModuleStart);
-          }
+        App.module("Parent.Child", function(Child){
+          this.startWithParent = false;
+          Child.addInitializer(subModuleStart);
         });
 
         App.start();
@@ -68,6 +62,59 @@ describe("module start", function(){
       it("should NOT start with the sub-module with the parent", function(){
         expect(subModuleStart).not.toHaveBeenCalled();
       });
+    });
+
+  });
+
+  describe("when defining a parent and child module together, adding an initializer to the parent, and starting the app", function(){
+    var init;
+
+    beforeEach(function(){
+      init = jasmine.createSpy("initializer");
+
+      var App = new Marionette.Application();
+      App.module("Parent.Child");
+      App.module("Parent").addInitializer(init);
+
+      App.start();
+    });
+
+    it("should start the parent module", function(){
+      expect(init).toHaveBeenCalled();
+    });
+
+  });
+
+  describe("when defining a parent and child module together, and starting the app", function(){
+    var App;
+
+    beforeEach(function(){
+      App = new Marionette.Application();
+      App.module("Parent.Child");
+
+      App.start();
+    });
+
+    it("should start the parent module", function(){
+      expect(App.Parent._isInitialized).toBe(true);
+    });
+
+  });
+
+  describe("when defining a parent and child module, the parent is set not to start with the app, and starting the parent", function(){
+    var App;
+
+    beforeEach(function(){
+      App = new Marionette.Application();
+
+      App.module("Parent", {startWithParent: false});
+      App.module("Parent.Child");
+
+      App.module("Parent").start();
+    });
+
+    it("should start the child module", function(){
+      expect(App.Parent.Child._isInitialized).toBe(true);
     });
 
   });

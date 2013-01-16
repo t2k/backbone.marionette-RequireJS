@@ -1,3 +1,50 @@
+### v1.0.0-rc3 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc2...v1.0.0-rc3)
+
+* **IMPORTANT:** Be sure to read [the upgrade guide](https://github.com/marionettejs/backbone.marionette/blob/master/upgradeGuide.md) for upgrading from v1.0.0-rc2 to v1.0.0-rc3
+
+* Backbone v0.9.9
+  * **BREAKING:** Backbone v0.9.2 is no longer supported
+  * Backbone v0.9.9 is now supported
+
+* Marionette.Async
+  * **BREAKING:** Marionette.Async is no longer supported
+
+* Backbone.EventBinder / Marionette.EventBinder
+  * **BREAKING:** Marionette.EventBinder / Backbone.EventBinder have been removed entirely.
+  * Backbone.Events supercedes the older objects
+  * Backbone.Wreqr.EventAggregator also supercedes Marionette.EventBinder
+
+* EventBinder -> EventAggregator
+  * **BREAKING:** Backbone.Werqr.EventAggregator largely replaces Backbone.EventBinder
+  * **BREAKING:** `bindTo` has been replaced with `listenTo`
+  * **BREAKING:** `unbindAll` has been replaced with `stopLitening`
+  * **BREAKING:** `unbindFrom` has been removed and will not be replaced
+
+* Marionette.addEventBinder
+  * **BREAKING:** This function will mix in Backbone.Events to the target object if it does not exist
+  * **BREAKING:** This function will alter the `listenTo` method of the target to accept a `context` parameter as the 4th parameter of the method
+  
+* All Views, Controller, etc
+  * **BREAKING:** Backbone.EventBinder is no longer mixed in
+  * **BREAKING:** See 'EventBinder -> EventAggregator' changes regarding method names to use for binding / unbinding events
+
+* CollectionView
+  * Added `removeChildView` to remove a specific view instance
+  * Fixed event handler leak for child views that have been removed
+  * Changed the implementation for triggering the "show" event / "onShow" method call, to avoid memory leaks
+  * Fixed the `index` parameter for adding a model to the collection, and getting the view in to the right place
+
+* All Views
+  * **BREAKING:** The `initialEvents` method has been removed. Use the `initialize` method, the `collectionEvents` or `modelEvents` configuration instead.
+  * Allow `modelEvents` and `collectionEvents` to be a function that returns a hash
+  * Allow `ui` configuration to be a function that returns a hash
+  * `modelEvents` and `collectionEvents` are now delegated / undelegated with Backbone.View's `.delegateEvents` and `.undelegateEvents` method calls
+  * View `triggers` now include an `args` object with `args.view`, `args.model` and `args.collection`
+
+* Modules
+  * Added alternate syntax for specifying `startWithParent` option
+  * Fixed a bug where a module would not be started without an explicit definition for that module (#388 & #400)
+
 ### v1.0.0-rc2 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc1...v1.0.0-rc2)
 
 * CollectionView / CompositeView

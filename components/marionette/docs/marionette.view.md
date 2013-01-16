@@ -28,14 +28,14 @@ behaviors that are shared across all views.
 ## Binding To View Events
 
 Marionette.View extends `Marionette.BindTo`. It is recommended that you use
-the `bindTo` method to bind model, collection, or other events from Backbone
+the `listenTo` method to bind model, collection, or other events from Backbone
 and Marionette objects.
 
 ```js
 MyView = Backbone.Marionette.ItemView.extend({
   initialize: function(){
-    this.bindTo(this.model, "change:foo", this.modelChanged);
-    this.bindTo(this.collection, "add", this.modelAdded);
+    this.listenTo(this.model, "change:foo", this.modelChanged);
+    this.listenTo(this.collection, "add", this.modelAdded);
   },
 
   modelChanged: function(model, value){
@@ -48,7 +48,7 @@ MyView = Backbone.Marionette.ItemView.extend({
 
 The context (`this`) will automatically be set to the view. You can
 optionally set the context by passing in the context object as the
-4th parameter of `bindTo`.
+4th parameter of `listenTo`.
 
 ## View close
 
@@ -56,7 +56,7 @@ View implements a `close` method, which is called by the region
 managers automatically. As part of the implementation, the following
 are performed:
 
-* unbind all `bindTo` events
+* unbind all `listenTo` events
 * unbind all custom view events
 * unbind all DOM events
 * remove `this.el` from the DOM
@@ -141,7 +141,7 @@ MyView = Backbone.Marionette.ItemView.extend({
 view = new MyView();
 view.render();
 
-view.on("something:do:it", function(){
+view.on("something:do:it", function(args){
   alert("I DID IT!");
 });
 
@@ -168,6 +168,41 @@ Backbone.Marionette.CompositeView.extend({
 Triggers work with all View types that extend from the base
 Marionette.View.
 
+### Trigger Handler Arguments
+
+A `trigger` event handler will receive a single argument that
+includes the following:
+
+* view
+* model
+* collection
+
+These properties of the args object come from the view that triggered
+the event.
+
+```js
+MyView = Backbone.Marionette.ItemView.extend({
+  // ...
+
+  triggers: {
+    "click .do-something": "some:event"
+  }
+});
+
+view = new MyView();
+
+view.on("some:event", function(args){
+  args.view; // => the view instance that triggered the event
+  args.model; // => the view.model, if one was set on the view
+  args.collection; // => the view.collection, if one was set on the view
+});
+```
+
+Having access to these allows more flexibility in handling events from
+multiple views. For example, a tab control or expand/collapse widget such
+as a panel bar could trigger the same event from many different views
+and be handled with a single function.
+
 ## View.modelEvents and View.collectionEvents
 
 Similar to the `events` hash, views can specify a configuration
@@ -179,11 +214,11 @@ method on the view.
 Backbone.Marionette.CompositeView.extend({
 
   modelEvents: {
-    "change:name": "nameChanged" // equivalent to view.bindTo(view.model, "change:name", view.nameChanged, view)
+    "change:name": "nameChanged" // equivalent to view.listenTo(view.model, "change:name", view.nameChanged, view)
   },
 
   collectionEvents: {
-    "add": "itemAdded" // equivalent to view.bindTo(view.collection, "add", collection.itemAdded, view)
+    "add": "itemAdded" // equivalent to view.listenTo(view.collection, "add", collection.itemAdded, view)
   },
 
   // ... event handler methods
@@ -193,10 +228,15 @@ Backbone.Marionette.CompositeView.extend({
 })
 ```
 
-These will use the memory safe `bindTo`, and will set the context
+These will use the memory safe `listenTo`, and will set the context
 (the value of `this`) in the handler to be the view. Events are
 bound at the time of instantiation instanciation, and an exception will be thrown
 if the handlers on the view do not exist.
+
+The `modelEvents` and `collectionEvents` will be bound and
+unbound with the Backbone.View `delegateEvents` and `undelegateEvents`
+method calls. This allows the view to be re-used and have
+the model and collection events re-bound.
 
 ### Multiple Callbacks
 
@@ -230,6 +270,23 @@ Backbone.Marionette.CompositeView.extend({
     "change:name": function(){
       // handle the name changed event here
     }
+  }
+
+});
+```
+
+This works for both `modelEvents` and `collectionEvents`.
+
+### Event Configuration As Function
+
+A function can be used to declare the event configuration, as long as
+that function returns a hash that fits the above configuration options.
+
+```js
+Backbone.Marionette.CompositeView.extend({
+
+  modelEvents: function(){
+    return { "change:name": "someFunc" };
   }
 
 });

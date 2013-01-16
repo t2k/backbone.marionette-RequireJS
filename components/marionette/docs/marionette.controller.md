@@ -37,7 +37,7 @@ var c = new MyController({
 });
 
 // use the built in EventBinder
-c.bindTo(c, "stuff:done", function(stuff){
+c.listenTo(c, "stuff:done", function(stuff){
   console.log(stuff);
 });
 
@@ -52,7 +52,7 @@ unbinding all of the events that are directly attached to the controller
 instance, as well as those that are bound using the EventBinder from
 the controller.
 
-The `close` method will trigger a "close" event and corresdponding
+The `close` method will trigger a "close" event and corresponding
 `onClose` method call:
 
 ```js
@@ -70,7 +70,7 @@ var contr = new MyController();
 
 // add some event handlers
 contr.on("close", function(){ ... });
-contr.bindTo(something, "bar", function(){...});
+contr.listenTo(something, "bar", function(){...});
 
 // close the controller: unbind all of the
 // event handlers, trigger the "close" event and 
