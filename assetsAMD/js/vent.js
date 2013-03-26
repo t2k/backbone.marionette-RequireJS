@@ -1,5 +1,5 @@
 // vent.js   inter app event processing
-define(['marionette'], function(Marionette) {
+define(['backbone.wreqr'], function(Wreqr) {
     "use strict";
-    return new Marionette.EventAggregator();
+    return new Wreqr.EventAggregator();
 });

@@ -6,7 +6,6 @@ Marionette.View = Backbone.View.extend({
 
   constructor: function(){
     _.bindAll(this, "render");
-    Marionette.addEventBinder(this);
 
     var args = Array.prototype.slice.apply(arguments);
     Backbone.View.prototype.constructor.apply(this, args);
@@ -46,7 +45,6 @@ Marionette.View = Backbone.View.extend({
   configureTriggers: function(){
     if (!this.triggers) { return; }
 
-    var that = this;
     var triggerEvents = {};
 
     // Allow `triggers` to be configured as a function
@@ -63,7 +61,7 @@ Marionette.View = Backbone.View.extend({
         if (e && e.preventDefault){ e.preventDefault(); }
         if (e && e.stopPropagation){ e.stopPropagation(); }
 
-        // buil the args for the event
+        // build the args for the event
         var args = {
           view: this,
           model: this.model,
@@ -71,10 +69,10 @@ Marionette.View = Backbone.View.extend({
         };
 
         // trigger the event
-        that.trigger(value, args);
+        this.triggerMethod(value, args);
       };
 
-    });
+    }, this);
 
     return triggerEvents;
   },
@@ -126,6 +124,9 @@ Marionette.View = Backbone.View.extend({
       return;
     }
 
+    // unbind UI elements
+    this.unbindUIElements();
+
     // mark as closed before doing the actual close, to
     // prevent infinite loops within "close" event handlers
     // that are trying to close other views
@@ -140,19 +141,36 @@ Marionette.View = Backbone.View.extend({
   bindUIElements: function(){
     if (!this.ui) { return; }
 
-    var that = this;
-
-    if (!this.uiBindings) {
-      // We want to store the ui hash in uiBindings, since afterwards the values in the ui hash
-      // will be overridden with jQuery selectors.
-      this.uiBindings = _.result(this, "ui");
+    // store the ui hash in _uiBindings so they can be reset later
+    // and so re-rendering the view will be able to find the bindings
+    if (!this._uiBindings){
+      this._uiBindings = this.ui;
     }
 
-    // refreshing the associated selectors since they should point to the newly rendered elements.
+    // get the bindings result, as a function or otherwise
+    var bindings = _.result(this, "_uiBindings");
+
+    // empty the ui so we don't have anything to start with
     this.ui = {};
-    _.each(_.keys(this.uiBindings), function(key) {
-      var selector = that.uiBindings[key];
-      that.ui[key] = that.$(selector);
-    });
+
+    // bind each of the selectors
+    _.each(_.keys(bindings), function(key) {
+      var selector = bindings[key];
+      this.ui[key] = this.$(selector);
+    }, this);
+  },
+
+  // This method unbinds the elements specified in the "ui" hash
+  unbindUIElements: function(){
+    if (!this.ui){ return; }
+
+    // delete all of the existing ui bindings
+    _.each(this.ui, function($el, name){
+      delete this.ui[name];
+    }, this);
+
+    // reset the ui element to the original bindings configuration
+    this.ui = this._uiBindings;
+    delete this._uiBindings;
   }
 });

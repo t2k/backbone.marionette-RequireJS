@@ -10,10 +10,9 @@
 define(['./esprima'], function (esprima) {
     'use strict';
 
-    var ostring = Object.prototype.toString,
-        //This string is saved off because JSLint complains
-        //about obj.arguments use, as 'reserved word'
-        argPropName = 'arguments';
+    //This string is saved off because JSLint complains
+    //about obj.arguments use, as 'reserved word'
+    var argPropName = 'arguments';
 
     //From an esprima example for traversing its ast.
     function traverse(object, visitor) {
@@ -303,24 +302,25 @@ define(['./esprima'], function (esprima) {
      * Finds any config that is passed to requirejs. That includes calls to
      * require/requirejs.config(), as well as require({}, ...) and
      * requirejs({}, ...)
-     * @param {String} fileName
      * @param {String} fileContents
      *
-     * @returns {Object} a config object. Will be null if no config.
+     * @returns {Object} a config details object with the following properties:
+     * - config: {Object} the config object found. Can be undefined if no
+     * config found.
+     * - range: {Array} the start index and end index in the contents where
+     * the config was found. Can be undefined if no config found.
      * Can throw an error if the config in the file cannot be evaluated in
      * a build context to valid JavaScript.
      */
-    parse.findConfig = function (fileName, fileContents) {
+    parse.findConfig = function (fileContents) {
         /*jslint evil: true */
-        var jsConfig,
-            foundConfig = null,
+        var jsConfig, foundRange, foundConfig,
             astRoot = esprima.parse(fileContents, {
                 range: true
             });
 
         traverse(astRoot, function (node) {
             var arg,
-                c = node && node.callee,
                 requireType = parse.hasRequire(node);
 
             if (requireType && (requireType === 'require' ||
@@ -332,12 +332,14 @@ define(['./esprima'], function (esprima) {
 
                 if (arg && arg.type === 'ObjectExpression') {
                     jsConfig = parse.nodeToString(fileContents, arg);
+                    foundRange = arg.range;
                     return false;
                 }
             } else {
                 arg = parse.getRequireObjectLiteral(node);
                 if (arg) {
                     jsConfig = parse.nodeToString(fileContents, arg);
+                    foundRange = arg.range;
                     return false;
                 }
             }
@@ -347,7 +349,10 @@ define(['./esprima'], function (esprima) {
             foundConfig = eval('(' + jsConfig + ')');
         }
 
-        return foundConfig;
+        return {
+            config: foundConfig,
+            range: foundRange
+        };
     };
 
     /** Returns the node for the object literal assigned to require/requirejs,
@@ -359,6 +364,41 @@ define(['./esprima'], function (esprima) {
                 node.init && node.init.type === 'ObjectExpression') {
             return node.init;
         }
+    };
+
+    /**
+     * Renames require/requirejs/define calls to be ns + '.' + require/requirejs/define
+     * Does *not* do .config calls though. See pragma.namespace for the complete
+     * set of namespace transforms. This function is used because require calls
+     * inside a define() call should not be renamed, so a simple regexp is not
+     * good enough.
+     * @param  {String} fileContents the contents to transform.
+     * @param  {String} ns the namespace, *not* including trailing dot.
+     * @return {String} the fileContents with the namespace applied
+     */
+    parse.renameNamespace = function (fileContents, ns) {
+        var ranges = [],
+            astRoot = esprima.parse(fileContents, {
+                range: true
+            });
+
+        parse.recurse(astRoot, function (callName, config, name, deps, node) {
+            ranges.push(node.range);
+            //Do not recurse into define functions, they should be using
+            //local defines.
+            return callName !== 'define';
+        }, {});
+
+        //Go backwards through the found ranges, adding in the namespace name
+        //in front.
+        ranges.reverse();
+        ranges.forEach(function (range) {
+            fileContents = fileContents.substring(0, range[0]) +
+                           ns + '.' +
+                           fileContents.substring(range[0]);
+        });
+
+        return fileContents;
     };
 
     /**
@@ -387,7 +427,7 @@ define(['./esprima'], function (esprima) {
      * Finds only CJS dependencies, ones that are the form
      * require('stringLiteral')
      */
-    parse.findCjsDependencies = function (fileName, fileContents, options) {
+    parse.findCjsDependencies = function (fileName, fileContents) {
         var dependencies = [];
 
         traverse(esprima.parse(fileContents), function (node) {
@@ -454,10 +494,30 @@ define(['./esprima'], function (esprima) {
     };
 
     /**
+     * If there is a named define in the file, returns the name. Does not
+     * scan for mulitple names, just the first one.
+     */
+    parse.getNamedDefine = function (fileContents) {
+        var name;
+        traverse(esprima.parse(fileContents), function (node) {
+            if (node && node.type === 'CallExpression' && node.callee &&
+            node.callee.type === 'Identifier' &&
+            node.callee.name === 'define' &&
+            node[argPropName] && node[argPropName][0] &&
+            node[argPropName][0].type === 'Literal') {
+                name = node[argPropName][0].value;
+                return false;
+            }
+        });
+
+        return name;
+    };
+
+    /**
      * Determines if define(), require({}|[]) or requirejs was called in the
      * file. Also finds out if define() is declared and if define.amd is called.
      */
-    parse.usesAmdOrRequireJs = function (fileName, fileContents, options) {
+    parse.usesAmdOrRequireJs = function (fileName, fileContents) {
         var uses;
 
         traverse(esprima.parse(fileContents), function (node) {
@@ -497,7 +557,7 @@ define(['./esprima'], function (esprima) {
      * __dirname, __filename are used. So, not strictly traditional CommonJS,
      * also checks for Node variants.
      */
-    parse.usesCommonJs = function (fileName, fileContents, options) {
+    parse.usesCommonJs = function (fileName, fileContents) {
         var uses = null,
             assignsExports = false;
 
@@ -550,8 +610,6 @@ define(['./esprima'], function (esprima) {
 
 
     parse.findRequireDepNames = function (node, deps) {
-        var moduleName, i, n, call, args;
-
         traverse(node, function (node) {
             var arg;
 
@@ -599,7 +657,7 @@ define(['./esprima'], function (esprima) {
                 return;
             }
 
-            return onMatch("require", null, null, deps);
+            return onMatch("require", null, null, deps, node);
         } else if (parse.hasDefine(node) && args && args.length) {
             name = args[0];
             deps = args[1];
@@ -649,7 +707,7 @@ define(['./esprima'], function (esprima) {
                 name = name.value;
             }
 
-            return onMatch("define", null, name, deps);
+            return onMatch("define", null, name, deps, node);
         }
     };
 

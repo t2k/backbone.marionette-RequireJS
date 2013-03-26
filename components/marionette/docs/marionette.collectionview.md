@@ -36,7 +36,7 @@ then append the results of the item view's `el` to the collection view's
 ## CollectionView's `itemView`
 
 Specify an `itemView` in your collection view definition. This must be
-a Backbone view object definition (not instance). It can be any 
+a Backbone view object definition, not an instance. It can be any 
 `Backbone.View` or be derived from `Marionette.ItemView`.
 
 ```js
@@ -101,14 +101,15 @@ You can also specify the `itemViewOptions` as a function, if you need to
 calculate the values to return at runtime. The model will be passed into
 the function should you need access to it when calculating
 `itemViewOptions`. The function must return an object, and the attributes 
-of the object will be copied to the itemView instance' options.
+of the object will be copied to the `itemView` instance's options.
 
 ```js
 CollectionView = Backbone.Marionette.CollectionView({
-  itemViewOptions: function(model) {
+  itemViewOptions: function(model, index) {
     // do some calculations based on the model
     return {
-      foo: "bar"
+      foo: "bar",
+      itemIndex: index
     }   
   }  
 });
@@ -320,6 +321,20 @@ method are triggered after rendering the view and adding it to the
 view's DOM element.
 
 ```js
+var MyCV = Marionette.CollectionView.extend({
+  // ...
+
+  onBeforeItemAdded: function(){
+    // ...
+  },
+
+  onAfterItemAdded: function(){
+    // ...
+  }
+});
+
+var cv = new MyCV({...});
+
 cv.on("before:item:added", function(viewInstance){
   // ...
 });
@@ -345,7 +360,7 @@ cv.on("item:removed", function(viewInstance){
 
 When an item view within a collection view triggers an
 event, that event will bubble up through the parent 
-collection view, with "itemview:" prepended to the event
+collection view with "itemview:" prepended to the event
 name. 
 
 That is, if a child view triggers "do:something", the 
@@ -451,14 +466,15 @@ move the HTML contents from the item view instance in to the collection
 view's `el`. 
 
 You can override this by specifying an `appendHtml` method in your 
-view definition. This method takes two parameters and has no return
+view definition. This method takes three parameters and has no return
 value.
 
 ```js
 Backbone.Marionette.CollectionView.extend({
 
+	// The default implementation:
   appendHtml: function(collectionView, itemView, index){
-    collectionView.$el.prepend(itemView.el);
+    collectionView.$el.append(itemView.el);
   }
 
 });
@@ -527,3 +543,4 @@ Backbone.Marionette.CollectionView.extend({
   }
 });
 ```
+

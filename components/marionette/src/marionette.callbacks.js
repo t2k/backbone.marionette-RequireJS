@@ -5,7 +5,7 @@
 // and executing them at a later point in time, using jQuery's
 // `Deferred` object.
 Marionette.Callbacks = function(){
-  this._deferred = $.Deferred();
+  this._deferred = Marionette.$.Deferred();
   this._callbacks = [];
 };
 
@@ -33,13 +33,13 @@ _.extend(Marionette.Callbacks.prototype, {
   // Resets the list of callbacks to be run, allowing the same list
   // to be run multiple times - whenever the `run` method is called.
   reset: function(){
-    var that = this;
     var callbacks = this._callbacks;
-    this._deferred = $.Deferred();
+    this._deferred = Marionette.$.Deferred();
     this._callbacks = [];
+    
     _.each(callbacks, function(cb){
-      that.add(cb.cb, cb.ctx);
-    });
+      this.add(cb.cb, cb.ctx);
+    }, this);
   }
 });
 

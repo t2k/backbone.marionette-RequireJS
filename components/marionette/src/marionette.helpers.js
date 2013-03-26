@@ -2,7 +2,16 @@
 // -------
 
 // For slicing `arguments` in functions
-var slice = Array.prototype.slice;
+var protoSlice = Array.prototype.slice;
+function slice(args) {
+  return protoSlice.call(args);
+}
+
+function throwError(message, name) {
+  var error = new Error(message);
+  error.name = name || 'Error';
+  throw error;
+}
 
 // Marionette.extend
 // -----------------
@@ -19,7 +28,7 @@ Marionette.getOption = function(target, optionName){
   if (!target || !optionName){ return; }
   var value;
 
-  if (target.options && target.options[optionName]){
+  if (target.options && (optionName in target.options) && (target.options[optionName] !== undefined)){
     value = target.options[optionName];
   } else {
     value = target[optionName];

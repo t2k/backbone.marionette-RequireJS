@@ -5,22 +5,32 @@
 //
 // `this.triggerMethod("foo:bar") will trigger the "foo:bar" event and
 // call the "onFooBar" method.
-Marionette.triggerMethod = function(){
-  var args = Array.prototype.slice.apply(arguments);
-  var eventName = args[0];
-  var segments = eventName.split(":");
-  var segment, capLetter, methodName = "on";
+Marionette.triggerMethod = (function(){
+  
+  // split the event name on the :
+  var splitter = /(^|:)(\w)/gi;
 
-  for (var i = 0; i < segments.length; i++){
-    segment = segments[i];
-    capLetter = segment.charAt(0).toUpperCase();
-    methodName += capLetter + segment.slice(1);
+  // take the event section ("section1:section2:section3")
+  // and turn it in to uppercase name
+  function getEventName(match, prefix, eventName) { 
+    return eventName.toUpperCase();
   }
 
-  this.trigger.apply(this, args);
+  // actual triggerMethod name
+  var triggerMethod = function(event) {
+    // get the method name from the event name
+    var methodName = 'on' + event.replace(splitter, getEventName);
+    var method = this[methodName];
 
-  if (_.isFunction(this[methodName])){
-    args.shift();
-    return this[methodName].apply(this, args);
-  }
-};
+    // trigger the event
+    this.trigger.apply(this, arguments);
+
+    // call the onMethodName if it exists
+    if (_.isFunction(method)) {
+      // pass all arguments, except the event name
+      return method.apply(this, _.tail(arguments));
+    }
+  };
+
+  return triggerMethod;
+})();

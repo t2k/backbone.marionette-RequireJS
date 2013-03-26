@@ -695,6 +695,25 @@ define(['build', 'env!env/file'], function (build, file) {
     );
     doh.run();
 
+    //Make sure a nested function declaration for a define function is not
+    //renamed: https://github.com/jrburke/r.js/issues/388
+    doh.register("nameInsertionNested",
+        [
+            function nameInsertionNested(t) {
+                file.deleteFile("lib/nameInsertion/nested/built.js");
+
+                build(["lib/nameInsertion/nested/build.js"]);
+
+                t.is(nol(c("lib/nameInsertion/nested/expected.js")),
+                     nol(c("lib/nameInsertion/nested/built.js")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
     doh.register("moduleThenPlugin",
         [
             function moduleThenPlugin(t) {
@@ -981,6 +1000,47 @@ define(['build', 'env!env/file'], function (build, file) {
     );
     doh.run();
 
+    //Tests https://github.com/jrburke/r.js/issues/350 CSS optimizer makes
+    //url() relative to cssIn option
+    doh.register("cssPrefix",
+        [
+            function cssPrefix(t) {
+                file.deleteFile("lib/cssPrefix/output/main-built.css");
+
+                build(["lib/cssPrefix/build.js"]);
+
+                t.is(nol(c("lib/cssPrefix/output/expected.css")),
+                     nol(c("lib/cssPrefix/output/main-built.css")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
+    //Tests https://github.com/jrburke/r.js/issues/356 cssPrefix normalization
+    //done even in directory builds
+    doh.register("cssPrefixDirNormalization",
+        [
+            function cssPrefixDirNormalization(t) {
+                file.deleteFile("lib/cssPrefix/356/www-built");
+
+                build(["lib/cssPrefix/356/build.js"]);
+
+                t.is(nol(c("lib/cssPrefix/356/expected/main.css")),
+                     nol(c("lib/cssPrefix/356/www-built/main.css")));
+
+                t.is(nol(c("lib/cssPrefix/356/expected/sub.css")),
+                     nol(c("lib/cssPrefix/356/www-built/sub.css")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
     //Tests https://github.com/jrburke/r.js/issues/296 removeCombined should
     //remove files that have been inlined.
     doh.register("cssRemoveCombined",
@@ -1098,6 +1158,24 @@ define(['build', 'env!env/file'], function (build, file) {
                 t.is(nol(c("lib/shimBasic/expected.js")).replace(/\s+/g, '').replace(/A\.name\;/g, 'A.name'),
                      nol(c(outFile)).replace(/\s+/g, '').replace(/A\.name\;/g, 'A.name')
                      .replace(/['"]Modified["']/, "'Modified'"));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
+
+    doh.register("shimFakeDefine",
+        [
+            function shimFakeDefine(t) {
+                file.deleteFile("lib/shimFakeDefine/main-built.js");
+
+                build(["lib/shimFakeDefine/build.js"]);
+
+                t.is(nol(c("lib/shimFakeDefine/expected.js")),
+                     nol(c("lib/shimFakeDefine/main-built.js")));
 
                 require._buildReset();
             }
@@ -1274,6 +1352,28 @@ define(['build', 'env!env/file'], function (build, file) {
     );
     doh.run();
 
+    // Tests https://github.com/jrburke/r.js/pull/322 multiple modules with shared excludes
+    doh.register("modulesExclude",
+        [
+            function modulesExclude(t) {
+                file.deleteFile("lib/modulesExclude/built");
+
+                build(["lib/modulesExclude/build.js"]);
+
+                t.is(nol(c("lib/modulesExclude/expected/a.js")),
+                     nol(c("lib/modulesExclude/built/a.js")));
+                t.is(nol(c("lib/modulesExclude/expected/b.js")),
+                     nol(c("lib/modulesExclude/built/b.js")));
+                t.is(nol(c("lib/modulesExclude/expected/z.js")),
+                     nol(c("lib/modulesExclude/built/z.js")));
+
+                require._buildReset();
+            }
+        ]
+    );
+    doh.run();
+
+
     //Tests https://github.com/jrburke/r.js/issues/116 stub modules
     doh.register("stubModules",
         [
@@ -1381,6 +1481,45 @@ define(['build', 'env!env/file'], function (build, file) {
 
                 t.is(nol(c("lib/packages/expected.js")),
                      nol(c("lib/packages/main-built.js")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
+    //Confirm package adapter module is skipped if the main package
+    //module names itself.
+    //https://github.com/jrburke/r.js/issues/328
+    doh.register("packagesNamed",
+        [
+            function packagesNamed(t) {
+                file.deleteFile("lib/packages/named/main-built.js");
+
+                build(["lib/packages/named/build.js"]);
+
+                t.is(nol(c("lib/packages/named/expected.js")),
+                     nol(c("lib/packages/named/main-built.js")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
+    //Peaceful coexistence of package config with shim in a built context.
+    //https://github.com/jrburke/r.js/issues/331
+    doh.register("configPackageShim",
+        [
+            function configPackageShim(t) {
+                file.deleteFile("lib/configPackageShim/built");
+
+                build(["lib/configPackageShim/build.js"]);
+
+                t.is(nol(c("lib/configPackageShim/expected.js")),
+                     nol(c("lib/configPackageShim/built/main.js")));
 
                 require._buildReset();
             }
@@ -1661,4 +1800,39 @@ define(['build', 'env!env/file'], function (build, file) {
     );
     doh.run();
 
+    doh.register("rawText",
+        [
+            function rawText(t) {
+                file.deleteFile("lib/rawText/built.js");
+
+                build(["lib/rawText/build.js"]);
+
+                t.is(nol(c("lib/rawText/expected.js")),
+                     nol(c("lib/rawText/built.js")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
+
+    //Make sure multiple named modules do not mess up toTransport
+    //https://github.com/jrburke/r.js/issues/366
+    doh.register("iife",
+        [
+            function iife(t) {
+                file.deleteFile("lib/iife/main-built.js");
+
+                build(["lib/iife/build.js"]);
+
+                t.is(nol(c("lib/iife/expected.js")),
+                     nol(c("lib/iife/main-built.js")));
+
+                require._buildReset();
+            }
+
+        ]
+    );
+    doh.run();
 });

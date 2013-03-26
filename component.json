@@ -1,12 +1,12 @@
 {
   "name": "203365",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
-    "jquery": "~1.9.0",
+    "jquery": "~1.9.1",
     "requirejs": "~2.1.2",
-    "marionette": "~1.0.0-rc2",
-    "backbone-amd": "0.9.2",
-    "underscore-amd": "~1.4.3",
+    "marionette": "~1.0.0",
+    "backbone-amd": "~0.9.10",
+    "underscore-amd": "~1.4.4",
     "bootstrap": "~2.2.2",
     "r.js": "git://github.com/jrburke/r.js.git#~2.1.2",
     "backbone.wreqr": "~0.1.0",

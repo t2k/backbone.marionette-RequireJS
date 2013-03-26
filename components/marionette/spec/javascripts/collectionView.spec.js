@@ -131,90 +131,6 @@ describe("collection view", function(){
     });
   });
 
-  describe("when rendering and an 'itemViewOptions' is provided", function(){
-    var CollectionView = Backbone.Marionette.CollectionView.extend({
-      itemView: ItemView,
-      itemViewOptions: {
-        foo: "bar"
-      }
-    });
-
-    var collection = new Backbone.Collection([{foo: "bar"}]);
-    var collectionView, view;
-
-    beforeEach(function(){
-      collectionView = new CollectionView({
-        collection: collection
-      });
-
-      collectionView.render();
-      view = collectionView.children.findByIndex(0);
-    });
-
-    it("should pass the options to every view instance", function(){
-      expect(view.options.hasOwnProperty("foo")).toBe(true);
-    });
-  });
-
-  describe("when rendering and an 'itemViewOptions' is provided as a function", function(){
-    var CollectionView = Backbone.Marionette.CollectionView.extend({
-      itemView: ItemView,
-      itemViewOptions: function(model){
-        return {
-          foo: "bar"
-        };
-      }
-    });
-
-    var collection = new Backbone.Collection([{foo: "bar"},{foo: "baz"}]);
-    var collectionView, view;
-
-
-    beforeEach(function(){
-      collectionView = new CollectionView({
-        collection: collection
-      });
-      spyOn(collectionView, 'itemViewOptions').andCallThrough();
-
-      collectionView.render();
-      view = collectionView.children.findByIndex(0);
-    });
-
-    it("should pass the options to every view instance", function(){
-      expect(view.options.hasOwnProperty("foo")).toBe(true);
-    });
-    
-    it("should pass the model when calling 'itemViewOptions'", function() {
-      expect(collectionView.itemViewOptions).toHaveBeenCalledWith(collection.at(0)); 
-      expect(collectionView.itemViewOptions).toHaveBeenCalledWith(collection.at(1)); 
-    });
-  });
-
-  describe("when rendering and an 'itemViewOptions' is provided at construction time", function(){
-    var CollectionView = Backbone.Marionette.CollectionView.extend({
-      itemView: ItemView
-    });
-
-    var collection = new Backbone.Collection([{foo: "bar"}]);
-    var collectionView, view;
-
-    beforeEach(function(){
-      collectionView = new CollectionView({
-        collection: collection,
-        itemViewOptions: {
-          foo: "bar"
-        }
-      });
-
-      collectionView.render();
-      view = _.values(collectionView.children._views)[0];
-    });
-
-    it("should pass the options to every view instance", function(){
-      expect(view.options.hasOwnProperty("foo")).toBe(true);
-    });
-  });
-
   describe("when rendering a collection view without a collection", function(){
     var collectionView;
 
@@ -489,6 +405,29 @@ describe("collection view", function(){
     });
   });
 
+  describe("when closing an itemView that does not have a 'close' method", function(){
+    var collectionView, itemView;
+
+    beforeEach(function(){
+      collectionView = new Marionette.CollectionView({
+        itemView: Backbone.View,
+        collection: new Backbone.Collection([{id: 1}])
+      });
+
+      collectionView.render();
+
+      itemView = collectionView.children.findByIndex(0);
+      spyOn(itemView, "remove").andCallThrough();
+
+      collectionView.closeChildren();
+    });
+
+    it("should call the 'remove' method", function(){
+      expect(itemView.remove).toHaveBeenCalled();
+    });
+
+  });
+
   describe("when override appendHtml", function(){
     var PrependHtmlView = Backbone.Marionette.CollectionView.extend({
       itemView: ItemView,
@@ -706,7 +645,7 @@ describe("collection view", function(){
       onDomRefresh: function(){ },
       onRender: function(){},
       render: function() {
-          this.trigger("render");
+        this.trigger("render");
       }
     });
 

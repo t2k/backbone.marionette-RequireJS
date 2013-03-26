@@ -59,6 +59,31 @@ layout.menu.show(new MenuView());
 layout.content.show(new MainContentView());
 ```
 
+### Specifying Regions As A Function
+
+Regions can be specified on a Layout using a function that returns
+an object with the region definitions. The returned object follow the
+same rules for defining a region, as outlined above.
+
+```js
+Marionette.Layout.extend({
+  // ...
+
+  regions: function(options){
+    return {
+      fooRegion: "#foo-element"
+    };
+  },
+
+  // ...
+});
+```
+
+Note that the function recieves the view's `options` arguments that 
+were passed in to the view's constructor. `this.options` is not yet
+available when the regions are first initialized, so the options
+must be accessed through this parameter.
+
 ## Region Availability
 
 Any defined regions within a layout will be available to the
@@ -176,3 +201,52 @@ AppLayout = Backbone.Marionette.Layout.extend({
 });
 ```
 
+## Adding And Removing Regions
+
+Regions can be added and removed as needed, in a
+Layout instance. Use the following methods:
+
+* `addRegion`
+* `addRegions`
+* `removeRegion`
+
+addRegion:
+
+```js
+var layout = new MyLayout();
+
+// ...
+
+layout.addRegion("foo", "#foo");
+layout.foo.show(new someView());
+```
+
+addRegions: 
+
+```js
+var layout = new MyLayout();
+
+// ...
+
+layout.addRegions({
+  foo: "#foo",
+  bar: "#bar"
+});
+```
+
+removeRegions:
+
+```js
+var layout = new MyLayout();
+
+// ...
+
+layout.removeRegion("foo");
+```
+
+Any region can be removed, whether it was defined
+in the `regions` attribute of the region definition,
+or added later.
+
+For more information on using these methods, see
+the `regionManager` documentation.

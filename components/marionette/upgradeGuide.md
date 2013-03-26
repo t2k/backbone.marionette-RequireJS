@@ -1,3 +1,93 @@
+## Upgrade to v1.0.0
+
+In addition to the following notes, please see previous upgrade guide entries and the 
+[changelog](https://github.com/marionettejs/backbone.marionette/blob/master/changelog.md).
+
+### Backbone 1.0 and Underscore 1.4.4
+
+Marionette v1.0 is built and test with Backbone v1.0 and Underscore v1.4.4. You should be
+able to use Backbone v0.9.9 or v0.9.10 with Marionette 1.0, but there is no
+guarantee that everything will work as expected. Older versions of
+Backbone are not supported at all.
+
+### Wreqr v0.2.0
+
+This update renames the `addHandler` methods to `setHandler` to help
+set the expectation that there is a single handler for any given
+command or request/response handler. When updating to Wreqr v0.2.0,
+you will need to change all calls to `addHandler` to `setHandler`. For
+more information on other changes in Wreqr, see the
+[Wreqr changelog](https://github.com/marionettejs/backbone.wreqr/blob/master/CHANGELOG.md).
+
+### Grunt v0.4
+
+Grunt v0.4 has a significantly different architecture than previous versions. If
+you are building Marionette and/or running the specs from your local computer, you
+will need to update to the latest version of Grunt v0.4 to do so. 
+
+See the
+[getting started guide for Grunt](http://gruntjs.com/getting-started).
+
+Once you have done that, you should be able to run Grunt to get things rolling.
+
+### Marionette.createObject
+
+This method has been removed. It was never used by Marionette directly,
+and you should replace it's use with a proper polyfill such as Modernizr.
+
+## Upgrade to v1.0.0-rc4
+
+RC4 is mostly bug fixes and zombie killing. There are a few
+things that you need to pay attention to, though. Check the
+[changelog](https://github.com/marionettejs/backbone.marionette/blob/master/changelog.md)
+for a more complete list.
+
+### Marionette.addEventBinder Function Has Been Removed
+
+The method `Marionette.addEventBinder` has been removed
+entirely. If you were using this method call in your code,
+you will need to delete that line of code.
+
+The replacement for this is simply Backbone.Events, which
+has the necessary `.listenTo` and `.stopListening` methods,
+as noted in previous upgrade guide entries. 
+
+The `addEventBinder` had provided a 4th `context` parameter
+to the `.listenTo` and `.stopListening` methods, in anticipation
+of Backbone adding these in a future release. After further
+discussion and research, though, I realized that this parameter
+is not needed. Further, Backbone is not going to be adding this
+parameter any time soon. There has not been a clear need for
+it. 
+
+### Marionette.EventAggregator Object Has Been Removed
+
+The `Marionette.EventAggregator` object did nothing more than
+import `Backbone.Wreqr.EventAggregator` in to the Marionette
+namespace. This has been removed as it added no value. Replace 
+all uses of `Marionette.EventAggregator` with 
+`Backbone.Wreqr.EventAggregator`.
+
+## Upgrade v1.0.0-rc3 to Backbone v0.9.10 and jQuery v1.9.0
+
+This is a simple update:
+
+* Update Backbone to v0.9.10
+* Update jQuery to v1.9.0
+
+Note that there are no changes in Marionette for this minor. 
+You should not have to change any Marionette specific code 
+to update your app. You may have to change code that core 
+Backbone runs, or that jQuery runs, though. This includes 
+any core Backbone features that are included in Marionette, 
+such as the use of the `view.make` function which is no 
+longer included in Backbone.View. 
+
+For more information on what you may need to change, see
+the change logs for 
+[Backbone v0.9.10](http://backbonejs.org/#changelog)
+and the upgrade guide for [jQuery v1.9.0](http://jquery.com/upgrade-guide/1.9/)
+
 ## Upgrade from v1.0.0-rc2 to v1.0.0-rc3
 
 There are several breaking changes that occurred between v1.0.0-rc2 and

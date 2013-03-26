@@ -1,9 +1,9 @@
 // App.js: Ted Killilea June 2012  twitter.com/@t2k_nyc
-define(['backbone', 'marionette', 'vent', 'bootstrap'], function(Backbone, Marionette, vent) {
+define(['backbone', 'underscoreM', 'marionette', 'vent', 'bootstrap'], function(Backbone, _, Marionette, vent) {
     'use strict';
 
     var app = new Marionette.Application();
-
+    
 
     //modalregion: shows a book detail view in bootstrap modal
     var ModalRegion = Marionette.Region.extend({

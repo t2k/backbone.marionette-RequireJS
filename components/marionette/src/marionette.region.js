@@ -7,8 +7,6 @@
 Marionette.Region = function(options){
   this.options = options || {};
 
-  Marionette.addEventBinder(this);
-
   this.el = Marionette.getOption(this, "el");
 
   if (!this.el){
@@ -80,12 +78,28 @@ _.extend(Marionette.Region, {
     }
     
     // build the region instance
-
-    var regionManager = new RegionType({
+    var region = new RegionType({
       el: selector
     });
 
-    return regionManager;
+    // override the `getEl` function if we have a parentEl
+    // this must be overridden to ensure the selector is found
+    // on the first use of the region. if we try to assign the
+    // region's `el` to `parentEl.find(selector)` in the object
+    // literal to build the region, the element will not be
+    // guaranteed to be in the DOM already, and will cause problems
+    if (regionConfig.parentEl){
+
+      region.getEl = function(selector) {
+        var parentEl = regionConfig.parentEl;
+        if (_.isFunction(parentEl)){
+          parentEl = parentEl();
+        }
+        return parentEl.find(selector);
+      };
+    }
+
+    return region;
   }
 
 });
@@ -103,10 +117,14 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
   show: function(view){
 
     this.ensureEl();
-    this.close();
 
-    view.render();
-    this.open(view);
+    if (view !== this.currentView) {
+      this.close();
+      view.render();
+      this.open(view);
+    } else {
+      view.render();
+    }
 
     Marionette.triggerMethod.call(view, "show");
     Marionette.triggerMethod.call(this, "show", view);
@@ -123,7 +141,7 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
   // Override this method to change how the region finds the
   // DOM element that it manages. Return a jQuery selector object.
   getEl: function(selector){
-    return $(selector);
+    return Marionette.$(selector);
   },
 
   // Override this method to change how the new view is
@@ -138,7 +156,10 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
     var view = this.currentView;
     if (!view || view.isClosed){ return; }
 
+    // call 'close' or 'remove', depending on which is found
     if (view.close) { view.close(); }
+    else if (view.remove) { view.remove(); }
+
     Marionette.triggerMethod.call(this, "close");
 
     delete this.currentView;

@@ -23,9 +23,15 @@
     } else if ((typeof navigator !== 'undefined' && typeof document !== 'undefined') ||
             (typeof importScripts !== 'undefined' && typeof self !== 'undefined')) {
         env = 'browser';
+    } else if (typeof Components !== 'undefined' && Components.classes && Components.interfaces) {
+        env = 'xpconnect';
     }
 
     define({
+        get: function () {
+            return env;
+        },
+
         load: function (name, req, load, config) {
             //Allow override in the config.
             if (config.env) {

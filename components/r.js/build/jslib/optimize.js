@@ -14,10 +14,9 @@ function (lang,   logger,   envOptimize,        file,           parse,
     'use strict';
 
     var optimize,
-        cssImportRegExp = /\@import\s+(url\()?\s*([^);]+)\s*(\))?([\w, ]*)(;)?/g,
+        cssImportRegExp = /\@import\s+(url\()?\s*([^);]+)\s*(\))?([\w, ]*)(;)?/ig,
         cssCommentImportRegExp = /\/\*[^\*]*@import[^\*]*\*\//g,
-        cssUrlRegExp = /\url\(\s*([^\)]+)\s*\)?/g,
-        endSemicolonRegExp = /;\s*$/;
+        cssUrlRegExp = /\url\(\s*([^\)]+)\s*\)?/g;
 
     /**
      * If an URL from a CSS url value contains start/end quotes, remove them.
@@ -43,9 +42,10 @@ function (lang,   logger,   envOptimize,        file,           parse,
      * @param {String} fileName the file name
      * @param {String} fileContents the file contents
      * @param {String} cssImportIgnore comma delimited string of files to ignore
+     * @param {String} cssPrefix string to be prefixed before relative URLs
      * @param {Object} included an object used to track the files already imported
      */
-    function flattenCss(fileName, fileContents, cssImportIgnore, included) {
+    function flattenCss(fileName, fileContents, cssImportIgnore, cssPrefix, included) {
         //Find the last slash in the name.
         fileName = fileName.replace(lang.backSlashRegExp, "/");
         var endIndex = fileName.lastIndexOf("/"),
@@ -96,7 +96,7 @@ function (lang,   logger,   envOptimize,        file,           parse,
                 included[fullImportFileName] = true;
 
                 //Make sure to flatten any nested imports.
-                flat = flattenCss(fullImportFileName, importContents, cssImportIgnore, included);
+                flat = flattenCss(fullImportFileName, importContents, cssImportIgnore, cssPrefix, included);
                 importContents = flat.fileContents;
 
                 if (flat.importList.length) {
@@ -125,8 +125,9 @@ function (lang,   logger,   envOptimize,        file,           parse,
                     //a protocol.
                     colonIndex = fixedUrlMatch.indexOf(":");
                     if (fixedUrlMatch.charAt(0) !== "/" && (colonIndex === -1 || colonIndex > fixedUrlMatch.indexOf("/"))) {
-                        //It is a relative URL, tack on the path prefix
-                        urlMatch = importPath + fixedUrlMatch;
+                        //It is a relative URL, tack on the cssPrefix and path prefix
+                        urlMatch = cssPrefix + importPath + fixedUrlMatch;
+
                     } else {
                         logger.trace(importFileName + "\n  URL not a relative URL, skipping: " + urlMatch);
                     }
@@ -220,25 +221,33 @@ function (lang,   logger,   envOptimize,        file,           parse,
                                     '" not found for this environment');
                 }
 
-                optConfig = config[optimizerName] || {}
+                optConfig = config[optimizerName] || {};
                 if (config.generateSourceMaps) {
                     optConfig.generateSourceMaps = !!config.generateSourceMaps;
                 }
 
-                if (config.preserveLicenseComments) {
-                    //Pull out any license comments for prepending after optimization.
-                    try {
-                        licenseContents = parse.getLicenseComments(fileName, fileContents);
-                    } catch (e) {
-                        logger.error('Cannot parse file: ' + fileName + ' for comments. Skipping it. Error is:\n' + e.toString());
+                try {
+                    if (config.preserveLicenseComments) {
+                        //Pull out any license comments for prepending after optimization.
+                        try {
+                            licenseContents = parse.getLicenseComments(fileName, fileContents);
+                        } catch (e) {
+                            throw new Error('Cannot parse file: ' + fileName + ' for comments. Skipping it. Error is:\n' + e.toString());
+                        }
+                    }
+
+                    fileContents = licenseContents + optFunc(fileName,
+                                                             fileContents,
+                                                             outFileName,
+                                                             keepLines,
+                                                             optConfig);
+                } catch (e) {
+                    if (config.throwWhen && config.throwWhen.optimize) {
+                        throw e;
+                    } else {
+                        logger.error(e);
                     }
                 }
-
-                fileContents = licenseContents + optFunc(fileName,
-                                                         fileContents,
-                                                         outFileName,
-                                                         keepLines,
-                                                         optConfig);
             }
 
             return fileContents;
@@ -256,7 +265,7 @@ function (lang,   logger,   envOptimize,        file,           parse,
 
             //Read in the file. Make sure we have a JS string.
             var originalFileContents = file.readFile(fileName),
-                flat = flattenCss(fileName, originalFileContents, config.cssImportIgnore, {}),
+                flat = flattenCss(fileName, originalFileContents, config.cssImportIgnore, config.cssPrefix, {}),
                 //Do not use the flattened CSS if there was one that was skipped.
                 fileContents = flat.skippedList.length ? originalFileContents : flat.fileContents,
                 startIndex, endIndex, buildText, comment;
@@ -391,7 +400,7 @@ function (lang,   logger,   envOptimize,        file,           parse,
                     if (errMatch) {
                         errMessage = errMessage.substring(0, errMatch.index);
                     }
-                    logger.error('Cannot uglify file: ' + fileName + '. Skipping it. Error is:\n' + errMessage);
+                    throw new Error('Cannot uglify file: ' + fileName + '. Skipping it. Error is:\n' + errMessage);
                 }
                 return fileContents;
             },
@@ -423,7 +432,7 @@ function (lang,   logger,   envOptimize,        file,           parse,
                         fileContents = result.code;
                     }
                 } catch (e) {
-                    logger.error('Cannot uglify2 file: ' + fileName + '. Skipping it. Error is:\n' + e.toString());
+                    throw new Error('Cannot uglify2 file: ' + fileName + '. Skipping it. Error is:\n' + e.toString());
                 }
                 return fileContents;
             }

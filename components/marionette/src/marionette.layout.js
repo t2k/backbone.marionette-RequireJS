@@ -10,14 +10,15 @@
 Marionette.Layout = Marionette.ItemView.extend({
   regionType: Marionette.Region,
   
-  // Ensure the regions are avialable when the `initialize` method
+  // Ensure the regions are available when the `initialize` method
   // is called.
-  constructor: function () {
-    this._firstRender = true;
-    this.initializeRegions();
+  constructor: function (options) {
+    options = options || {};
 
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.ItemView.apply(this, args);
+    this._firstRender = true;
+    this._initializeRegions(options);
+    
+    Marionette.ItemView.call(this, options);
   },
 
   // Layout's render will use the existing region objects the
@@ -30,11 +31,14 @@ Marionette.Layout = Marionette.ItemView.extend({
       // if this is the first render, don't do anything to
       // reset the regions
       this._firstRender = false;
+    } else if (this.isClosed){
+      // a previously closed layout means we need to 
+      // completely re-initialize the regions
+      this._initializeRegions();
     } else {
       // If this is not the first render call, then we need to 
       // re-initializing the `el` for each region
-      this.closeRegions();
-      this.reInitializeRegions();
+      this._reInitializeRegions();
     }
 
     var args = Array.prototype.slice.apply(arguments);
@@ -46,70 +50,77 @@ Marionette.Layout = Marionette.ItemView.extend({
   // Handle closing regions, and then close the view itself.
   close: function () {
     if (this.isClosed){ return; }
-
-    this.closeRegions();
-    this.destroyRegions();
-
+    this.regionManager.close();
     var args = Array.prototype.slice.apply(arguments);
     Marionette.ItemView.prototype.close.apply(this, args);
   },
 
-  // Initialize the regions that have been defined in a
-  // `regions` attribute on this layout. The key of the
-  // hash becomes an attribute on the layout object directly.
-  // For example: `regions: { menu: ".menu-container" }`
-  // will product a `layout.menu` object which is a region
-  // that controls the `.menu-container` DOM element.
-  initializeRegions: function () {
-    if (!this.regionManagers){
-      this.regionManagers = {};
-    }
-
-    var that = this;
-    var regions = this.regions || {};
-    _.each(regions, function (region, name) {
-
-      var regionManager = Marionette.Region.buildRegion(region, that.regionType);
-      regionManager.getEl = function(selector){
-        return that.$(selector);
-      };
-
-      that.regionManagers[name] = regionManager;
-      that[name] = regionManager;
-    });
-
+  // Add a single region, by name, to the layout
+  addRegion: function(name, definition){
+    var regions = {};
+    regions[name] = definition;
+    return this.addRegions(regions)[name];
   },
 
-  // Re-initialize all of the regions by updating the `el` that
-  // they point to
-  reInitializeRegions: function(){
-    if (this.regionManagers && _.size(this.regionManagers)===0){
-      this.initializeRegions();
+  // Add multiple regions as a {name: definition, name2: def2} object literal
+  addRegions: function(regions){
+    this.regions = _.extend(this.regions || {}, regions);
+    return this._buildRegions(regions);
+  },
+
+  // Remove a single region from the Layout, by name
+  removeRegion: function(name){
+    return this.regionManager.removeRegion(name);
+  },
+
+  // internal method to build regions
+  _buildRegions: function(regions){
+    var that = this;
+
+    var defaults = {
+      parentEl: function(){ return that.$el; }
+    };
+
+    return this.regionManager.addRegions(regions, defaults);
+  },
+
+  // Internal method to initialize the regions that have been defined in a
+  // `regions` attribute on this layout. 
+  _initializeRegions: function (options) {
+    var regions;
+    this._initRegionManager();
+
+    if (_.isFunction(this.regions)) {
+      regions = this.regions(options);
     } else {
-      _.each(this.regionManagers, function(region){
-        region.reset();
-      });
+      regions = this.regions || {};
     }
+
+    this.addRegions(regions);
   },
 
-  // Close all of the regions that have been opened by
-  // this layout. This method is called when the layout
-  // itself is closed.
-  closeRegions: function () {
-    var that = this;
-    _.each(this.regionManagers, function (manager, name) {
-      manager.close();
+  // Internal method to re-initialize all of the regions by updating the `el` that
+  // they point to
+  _reInitializeRegions: function(){
+    this.regionManager.closeRegions();
+    this.regionManager.each(function(region){
+      region.reset();
     });
   },
 
-  // Destroys all of the regions by removing references
-  // from the Layout
-  destroyRegions: function(){
-    var that = this;
-    _.each(this.regionManagers, function (manager, name) {
-      delete that[name];
+  // Internal method to initialize the region manager
+  // and all regions in it
+  _initRegionManager: function(){
+    this.regionManager = new Marionette.RegionManager();
+
+    this.listenTo(this.regionManager, "region:add", function(name, region){
+      this[name] = region;
+      this.trigger("region:add", name, region);
     });
-    this.regionManagers = {};
+
+    this.listenTo(this.regionManager, "region:remove", function(name, region){
+      delete this[name];
+      this.trigger("region:remove", name, region);
+    });
   }
 });
-

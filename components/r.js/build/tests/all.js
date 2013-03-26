@@ -6,7 +6,7 @@
 
 /**
  * Run the tests in Node with this command:
- * ../../bin/x all.js
+ * node ../../r.js all.js
  */
 
 /*jslint plusplus: false, strict: false */
@@ -34,6 +34,7 @@ require({
     'env!../../tests/doh/_{env}Runner.js',
     'tests/convert',
     'tests/parse',
+    'tests/transform',
     'tests/buildUtils',
 
     //Build tests should be last in case they alter the environment

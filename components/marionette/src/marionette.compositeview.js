@@ -6,8 +6,7 @@
 // an item view as `modelView`, for the top leaf
 Marionette.CompositeView = Marionette.CollectionView.extend({
   constructor: function(options){
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.CollectionView.apply(this, args);
+    Marionette.CollectionView.apply(this, slice(arguments));
 
     this.itemView = this.getItemView();
   },
@@ -19,7 +18,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     if (this.collection){
       this.listenTo(this.collection, "add", this.addChildView, this);
       this.listenTo(this.collection, "remove", this.removeItemView, this);
-      this.listenTo(this.collection, "reset", this.renderCollection, this);
+      this.listenTo(this.collection, "reset", this._renderChildren, this);
     }
   },
 
@@ -31,9 +30,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     var itemView = Marionette.getOption(this, "itemView") || this.constructor;
 
     if (!itemView){
-      var err = new Error("An `itemView` must be specified");
-      err.name = "NoItemViewError";
-      throw err;
+      throwError("An `itemView` must be specified", "NoItemViewError");
     }
 
     return itemView;
@@ -56,31 +53,31 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   // this again will tell the model's view to re-render itself
   // but the collection will not re-render.
   render: function(){
+    this.isRendered = true;
     this.isClosed = false;
-
     this.resetItemViewContainer();
 
+    this.triggerBeforeRender();
     var html = this.renderModel();
     this.$el.html(html);
-
     // the ui bindings is done here and not at the end of render since they 
     // will not be available until after the model is rendered, but should be
     // available before the collection is rendered.
     this.bindUIElements();
-
     this.triggerMethod("composite:model:rendered");
 
-    this.renderCollection();
+    this._renderChildren();
+
     this.triggerMethod("composite:rendered");
+    this.triggerRendered();
     return this;
   },
 
-  // Render the collection for the composite view
-  renderCollection: function(){
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.CollectionView.prototype.render.apply(this, args);
-
-    this.triggerMethod("composite:collection:rendered");
+  _renderChildren: function(){
+    if (this.isRendered){
+      Marionette.CollectionView.prototype._renderChildren.call(this);
+      this.triggerMethod("composite:collection:rendered");
+    }
   },
 
   // Render an individual model, if we have one, as
@@ -117,9 +114,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
       var selector = _.result(containerView, "itemViewContainer");
       container = containerView.$(selector);
       if (container.length <= 0) {
-        var err = new Error("The specified `itemViewContainer` was not found: " + containerView.itemViewContainer);
-        err.name = "ItemViewContainerMissingError";
-        throw err;
+        throwError("The specified `itemViewContainer` was not found: " + containerView.itemViewContainer, "ItemViewContainerMissingError");
       }
 
     } else {

@@ -9,17 +9,46 @@ the RequireJS implementation of AMD.
 
 r.js is a single script that has two major functions:
 
-* Run AMD-based projects in Node and Rhino.
-* Includes the RequireJS Optimizer that combines scripts for optimal browser
-delivery.
+* Run AMD-based projects [in Node](http://requirejs.org/docs/node.html) and Rhino.
+* Includes the [RequireJS Optimizer](http://requirejs.org/docs/optimization.html)
+that combines scripts for optimal browser delivery.
 
-Releases of r.js are kept in the **dist** directory. To build your own from
-the files in this repo, run:
+# Installation
+
+## Node
+
+    npm install -g requirejs
+
+From then on, you can use `r.js` on the command line to run the optimizer.
+
+## Rhino/Browser
+
+Download the latest release from the
+[RequireJS download page](http://requirejs.org/docs/download.html#rjs).
+
+## xpcshell
+
+[xpcshell](https://developer.mozilla.org/en-US/docs/XPConnect/xpcshell) support
+was added in r.js version 2.1.5, so use that r.js version or later.
+
+Download the latest release of r.js from the
+[RequireJS download page](http://requirejs.org/docs/download.html#rjs).
+
+## From this repo
+
+r.js is made up of a series of modules that are built into one file for
+distribution. The **dist** directory contains the built version of the
+code. In the master branch, it should match the current state of the master
+code.
+
+If you are doing local modifications from a clone of this repo, you can run
+the following command to generate an r.js at the root of this repo:
 
     node dist.js
 
-That will generate an r.js file in the same directory as dist.js
+To generate an r.js that also gets copied to **dist** with a time stamp, run:
 
+    ./copydist.js
 
 # Running AMD-based projects
 
@@ -28,7 +57,7 @@ the following:
 
 ## Node
 
-    node path/to/r.js main.js
+    r.js main.js
 
 Requires Node 0.4 or later.
 
@@ -58,13 +87,26 @@ If you want to run it in the debugger, replace
 org.mozilla.javascript.tools.shell.Main with
 **org.mozilla.javascript.tools.debugger.Main**.
 
-All further examples will use the Node notation, but substitute **node r.js** in the commands with the appropriate java command.
+All further examples will use the Node notation, but substitute **r.js** in the commands with the appropriate java command.
+
+## xpcshell
+
+To run the optimizer using a build config file or command line build options:
+
+    path/to/xpcshell path/to/r.js -o buildconfig.js
+
+r.js can also be used as a library in another .js file run via xpcshell.
+
+* [tests/xpcshell/run.js](https://github.com/jrburke/r.js/blob/master/tests/xpcshell/run.js):
+shows how to load AMD modules by using r.js as a library.
+* [tests/xpcshell/build.js](https://github.com/jrburke/r.js/blob/master/tests/xpcshell/build.js):
+shows how to trigger the optimizer from within another .js file.
 
 # Optimizer
 
 The optimizer can be run by passing the **-o** command to r.js:
 
-    node r.js -o path/to/buildconfig.js
+    r.js -o path/to/buildconfig.js
 
 See the [Optimization doc](http://requirejs.org/docs/optimization.html) for more
 information on the optimizer.
@@ -97,13 +139,13 @@ will get errors running the built code.
 
 To get the version of r.js and the version of require.js used by r.js:
 
-    node r.js -v
+    r.js -v
 
 ## Convert CommonJS modules
 
 To convert a directory of CommonJS modules to ones that have define() wrappers:
 
-    node r.js -convert path/to/commonjs/dir output/dir
+    r.js -convert path/to/commonjs/dir output/dir
 
 Most, but not all, CommonJS modules can be converted to define()-wrapped modules
 and still work.
@@ -158,10 +200,13 @@ and Java/Rhino:
     * node dist.js
     * cd tests
     * node ../r.js all.js
-    * java -classpath ../lib/rhino/js.jar:../lib/closure/compiler.jar org.mozilla.javascript.tools.shell.Main ./r.js all.js
+    * java -classpath ../lib/rhino/js.jar:../lib/closure/compiler.jar org.mozilla.javascript.tools.shell.Main ../r.js all.js
     * cd ../build/tests
     * node ../../r.js all.js
     * java -classpath ../../lib/rhino/js.jar:../../lib/closure/compiler.jar org.mozilla.javascript.tools.shell.Main ../../r.js all.js
+
+For running tests, put xpcshell in env/xpcshell/ as a directory, that contains
+all the files needed for it to run, including the xpcshell binary.
 
 # Contributing code changes
 

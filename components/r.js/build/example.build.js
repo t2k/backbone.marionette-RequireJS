@@ -155,8 +155,25 @@
 
     //If using UglifyJS for script optimization, these config options can be
     //used to pass configuration values to UglifyJS.
-    //See https://github.com/mishoo/UglifyJS2 for possible values.
-    uglify2: {},
+    //For possible values see:
+    //http://lisperator.net/uglifyjs/codegen
+    //http://lisperator.net/uglifyjs/compress
+    uglify2: {
+        //Example of a specialized config. If you are fine
+        //with the default options, no need to specify
+        //any of these properties.
+        output: {
+            beautify: true
+        },
+        compress: {
+            sequences: false,
+            global_defs: {
+                DEBUG: false
+            }
+        },
+        warnings: true,
+        mangle: false
+    },
 
     //If using Closure Compiler for script optimization, these config options
     //can be used to configure Closure Compiler. See the documentation for
@@ -466,6 +483,16 @@
     //Default is 0.
     logLevel: 0,
 
+    //Introduced in 2.1.3: Some situations do not throw and stop the optimizer
+    //when an error occurs. However, you may want to have the optimizer stop
+    //on certain kinds of errors and you can configure those situations via
+    //this option
+    throwWhen: {
+        //If there is an error calling the minifier for some JavaScript,
+        //instead of just skipping that file throw an error.
+        optimize: true
+    },
+
     //A function that if defined will be called for every file read in the
     //build that is done to trace JS dependencies. This allows transforms of
     //the content.
@@ -481,6 +508,14 @@
         //Always return a value.
         //This is just a contrived example.
         return contents.replace(/bar/g, 'foo');
+    },
+
+    //Introduced in 2.1.3: Seed raw text contents for the listed module IDs.
+    //These text contents will be used instead of doing a file IO call for
+    //those modules. Useful is some module ID contents are dynamically
+    //based on user input, which is common in web build tools.
+    rawText: {
+        'some/id': 'define(["another/id"], function () {});'
     },
 
     //Introduced in 2.0.2: if set to true, then the optimizer will add a
@@ -506,5 +541,12 @@
     //http://en.wikipedia.org/wiki/Conditional_comment#Conditional_comments_in_JScript
     //2) It is only useful in optimize: 'none' scenarios. The goal is to allow
     //easier built layer debugging, which goes against minification desires.
-    useSourceUrl: true
+    useSourceUrl: true,
+
+    //Defines the loading time for modules. Depending on the complexity of the
+    //dependencies and the size of the involved libraries, increasing the wait
+    //interval may be required. Default is 7 seconds. Setting the value to 0
+    //disables the waiting interval.
+    waitSeconds: 7
+
 })

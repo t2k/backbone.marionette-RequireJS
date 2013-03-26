@@ -1,5 +1,5 @@
 // librarycontroller.js  Ted Killilea 5/31/12  twitter.com/t2k_nyc
-define(['underscore', 'marionette', 'vent', 'models/books', 'views/booklist', 'templates', 'views/search'], function(_, Marionette, vent, BooksModel, Booklist, templates, SearchView) {
+define(['underscoreM', 'marionette', 'vent', 'models/books', 'views/booklist', 'templates', 'views/search'], function(_, Marionette, vent, BooksModel, Booklist, templates, SearchView) {
     'use strict';
     
     // public module API

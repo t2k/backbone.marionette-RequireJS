@@ -4,7 +4,7 @@
 // These methods are used to bind/unbind a backbone "entity" (collection/model) 
 // to methods on a target object. 
 //
-// The first paremter, `target`, must have a `listenTo` method from the
+// The first parameter, `target`, must have a `listenTo` method from the
 // EventBinder object.
 //
 // The second parameter is the entity (Backbone.Model or Backbone.Collection)
@@ -26,7 +26,7 @@
 
       var method = target[methodName];
       if(!method) {
-        throw new Error("Method '"+ methodName +"' was configured as an event handler, but does not exist.");
+        throwError("Method '"+ methodName +"' was configured as an event handler, but does not exist.");
       }
 
       target.listenTo(entity, evt, method, target);

@@ -1,3 +1,104 @@
+### v1.0.1 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0...v1.0.1)
+
+* AMD build: Removed `require('jQuery')` as Marionette now pulled `Backbone.$` as
+    `Marionette.$`.
+
+* Fixed RegionManager to allow region types to be specified again, not just
+  region instances.
+
+* NPM: Removed hard dependency on jQuery from the dependency list. This will
+  be pulled in by other libs, or should be pulled in manually, to get the
+  right version.
+
+### v1.0.0 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc6...v1.0.0)
+
+* RegionManager
+  * Created new `Marionette.RegionManager` object to manage a set of regions
+
+* Region
+  * Region will call the `close` method on a view, or the `remove` method if `close` is not found, when closing a view
+  * When calling the `show` method with the same view instance multiple times, subsequent calls will only re-render the view and not close / re-open it
+
+* Application
+  * Now uses `Marionette.RegionManager` to manage regions
+
+* Layout
+  * Now uses `Marionette.RegionManager` to manage regions
+  * Now supports dynamic add / remove of regions
+  * Can specify `regions` as a function that takes an `options` argument (the view's constructor options)
+
+* CollectionView / CompositeView
+  * When specifying `itemViewOptions` as a function, an item `index` argument will be passed as the second parameter
+  * Will call the `close` or `remove` method when closing a view, with `close` method taking precedence
+
+* CompositeView
+  * Fixed a bug that caused an error when the collection was `reset` (loaded) before the view was rendered
+
+* All Views
+  * Closing a view will properly unbind `ui` elements
+  * Closing and then re-rendering a view will re-bind the `ui` elements
+
+* Functions
+  * Removed the `Marionette.createObject` function - it was never used by Marionette, directly
+
+* jQuery
+  * Replaced direct calls to `$` with new `Marionette.$`, which is assigned to
+    `Backbone.$` for consistency w/ Backbone.
+
+* Backbone.Wreqr
+  * Updated to v0.2.0
+  * Renamed `addHandler` method to `setHandler`
+  * For more information, see the [Wreqr changelog](https://github.com/marionettejs/backbone.wreqr/blob/master/CHANGELOG.md)
+
+* Code Cleanup
+  * Replaced `that = this` with the `context` param of several calls to `_.each` to clean up the code
+  * Removed an unused method from the CompositeView implementation
+
+* Build process
+  * Updated to Grunt v0.4.x
+  * Added code coverage and other analysis reports
+
+### v1.0.0-rc6 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc5...v1.0.0-rc6)
+
+* CompositeView
+  * Corrected the timing of the "before:render" event / `onBeforeRender` callback, so that it will be called before serializing the data for the model / template
+
+### v1.0.0-rc5 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc4...v1.0.0-rc5)
+
+* CollectionView / ItemView
+  * Corrected the timing on the "show" event / `onShow` callback for itemView instances that are added after the CollectionView is in the DOM
+
+### v1.0.0-rc4 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc3...v1.0.0-rc4)
+
+* EventBinder
+  * **BREAKING:** Removed `Marionette.addEventBinder` function.
+
+* EventAggregator
+  * **BREAKING:** Removed `Marionette.EventAggregator` object. Use `Backbone.Wreqr.EventAggregator` instead
+
+* CollectionView / CompositeView
+  * Fixed several issues related to resetting the collection, and producing zombie "empty" views
+  * Fixed a bug that caused multiple emptyView instances when resetting the collection
+  * Forwarded events from child views are now called with `triggerMethod`, meaning they trigger the event and call the corresponding "onEventName" method
+
+* Modules
+  * Finalizers now run with the module as the `this` context
+
+* Marionette.getOption
+  * Fixed support for "falsey" values in an object's `options`
+
+* Build process
+  * Fixed build process to work on case-sensitive file systems (Linux, for example)
+
+### v1.0.0-rc3 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc2...v1.0.0-rc3)
+
+* Updated Backbone v0.9.10
+
+* Updated jQuery to v1.9.0
+  * Fixed a few minor unit test issues w/ jQuery update
+
+* Read [the upgrade guide](https://github.com/marionettejs/backbone.marionette/blob/master/upgradeGuide.md) for upgrading from v1.0.0-rc2 to v1.0.0-rc3
+
 ### v1.0.0-rc3 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.0.0-rc2...v1.0.0-rc3)
 
 * **IMPORTANT:** Be sure to read [the upgrade guide](https://github.com/marionettejs/backbone.marionette/blob/master/upgradeGuide.md) for upgrading from v1.0.0-rc2 to v1.0.0-rc3
@@ -17,7 +118,7 @@
 * EventBinder -> EventAggregator
   * **BREAKING:** Backbone.Werqr.EventAggregator largely replaces Backbone.EventBinder
   * **BREAKING:** `bindTo` has been replaced with `listenTo`
-  * **BREAKING:** `unbindAll` has been replaced with `stopLitening`
+  * **BREAKING:** `unbindAll` has been replaced with `stopListening`
   * **BREAKING:** `unbindFrom` has been removed and will not be replaced
 
 * Marionette.addEventBinder

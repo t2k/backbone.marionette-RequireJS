@@ -12,7 +12,7 @@ require.config({
         'backbone.eventbinder': '../../components/backbone.eventbinder/lib/amd/backbone.eventbinder', // amd version
         'backbone.babysitter': '../../components/backbone.babysitter/lib/amd/backbone.babysitter', // amd version
         marionette: '../../components/marionette/lib/core/amd/backbone.marionette',  // amd version
-        bootstrap: '../../components/bootstrap/docs/assets/js/bootstrap-modal', 
+        bootstrap: '../../components/bootstrap/docs/assets/js/bootstrap-modal',
         text: '../../components/requirejs-text/text'
     },
 

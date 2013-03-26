@@ -9,6 +9,9 @@ doh.registerUrl("simple", "../simple.html");
 //PS3 does not like this test
 doh.registerUrl("baseUrl", "../baseUrl.html");
 
+doh.registerUrl("toUrl", "../toUrl/toUrl.html");
+doh.registerUrl("urlArgsToUrl", "../urlArgsToUrl.html");
+
 doh.registerUrl("config", "../config.html");
 doh.registerUrl("configRequirejs", "../configRequirejs.html");
 doh.registerUrl("dataMain", "../dataMain/dataMain.html");
@@ -108,7 +111,9 @@ doh.registerUrl("pluginsSync", "../plugins/sync.html");
 doh.registerUrl("pluginsOnError", "../plugins/onerror/onerror.html");
 doh.registerUrl("doublePluginCall", "../plugins/double.html");
 doh.registerUrl("pluginsNameOnly", "../plugins/nameOnly.html");
+doh.registerUrl("pluginsDelegated", "../plugins/delegated/delegated.html");
 doh.registerUrl("pluginsFromText", "../plugins/fromText/fromText.html");
+doh.registerUrl("pluginsFromTextEvalError", "../plugins/fromTextEvalError/fromTextEvalError.html");
 doh.registerUrl("pluginsFromTextConfig", "../plugins/fromText/fromTextConfig.html");
 doh.registerUrl("pluginsFromTextNoDefine", "../plugins/fromTextNoDefine/fromTextNoDefine.html");
 doh.registerUrl("pluginsTextDepend", "../plugins/textDepend/textDepend.html");

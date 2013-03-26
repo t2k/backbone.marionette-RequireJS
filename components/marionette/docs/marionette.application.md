@@ -70,8 +70,8 @@ want to wait until your entire application is initialized to start the
 
 The events that are currently triggered, are:
 
-* **"initialize:before" / `onInitializeBefore` **: fired just before the initializers kick off
-* **"initialize:after" / `onInitializeAfter` **: fires just after the initializers have finished
+* **"initialize:before" / `onInitializeBefore`**: fired just before the initializers kick off
+* **"initialize:after" / `onInitializeAfter`**: fires just after the initializers have finished
 * **"start" / `onStart`**: fires after all initializers and after the initializer events
 
 ```js
@@ -110,7 +110,7 @@ MyApp.start(options);
 
 ## app.vent: Event Aggregator
 
-Every application instance comes with an instance of `Marionette.EventAggregator` 
+Every application instance comes with an instance of `Backbone.Wreqr.EventAggregator` 
 called `app.vent`.
 
 ```js
@@ -123,7 +123,7 @@ MyApp.vent.on("foo", function(){
 MyApp.vent.trigger("foo"); // => alert box "bar"
 ```
 
-See the [`Marionette.EventAggregator`](./marionette.eventaggregator.md) documentation for more details.
+See the [`Backbone.Wreqr`](https://github.com/marionettejs/backbone.wreqr) documentation for more details.
 
 ## Regions And The Application Object
 

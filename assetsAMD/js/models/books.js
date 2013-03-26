@@ -1,5 +1,5 @@
 // books.js
-define(['jquery', 'underscore', 'backbone', 'vent'], function($, _, Backbone, vent) {
+define(['jquery', 'underscoreM', 'backbone', 'vent'], function( $, _, Backbone, vent) {
     'use strict';
 
     // private
