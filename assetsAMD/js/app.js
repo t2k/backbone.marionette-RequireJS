@@ -4,14 +4,12 @@ define(['backbone', 'underscoreM', 'marionette', 'vent', 'bootstrap'], function(
 
     var app = new Marionette.Application();
     
-
     //modalregion: shows a book detail view in bootstrap modal
     var ModalRegion = Marionette.Region.extend({
-        el: "#modal",
         
         onShow :  function(view) {
-          view.on("close", this.hideModal,this);
-          this.$el.modal('show');
+          view.on("close", this.hideModal, this);
+          this.$el.modal({show: true, keyboard: true});
         },
         
         hideModal: function() {
@@ -23,7 +21,7 @@ define(['backbone', 'underscoreM', 'marionette', 'vent', 'bootstrap'], function(
     app.addRegions({
         content: "#content",
         menu: "#menu",
-        modal: ModalRegion
+        modal: {selector: '#modal', regionType: ModalRegion}
     });
 
     // marionette app events...
@@ -32,17 +30,6 @@ define(['backbone', 'underscoreM', 'marionette', 'vent', 'bootstrap'], function(
         Backbone.history.start();
     });
 
-    // app modal inter app/module communications
-    vent.on('app.show.modal', function(view) {
-        console.log('app.show.bookdetail =>app');
-        app.modal.show(view);
-    });
-
-    // show an app view: both library and 'secondapp' trigger this
-    vent.on('app:show', function(appView) {
-        app.content.show(appView);
-    });
-    
     
     // pass in router/controller via options
     app.addInitializer(function(options) {
@@ -74,6 +61,19 @@ define(['backbone', 'underscoreM', 'marionette', 'vent', 'bootstrap'], function(
             controller: options.secondApp // wire-up the start method
         });
     });
+    
+    // app modal inter app/module communications
+    vent.on('app.show.modal', function(view) {
+        console.log('app.show.bookdetail =>app');
+        app.modal.show(view);
+    });
+
+    // show an app view: both library and 'secondapp' trigger this
+    vent.on('app:show', function(appView) {
+        app.content.show(appView);
+    });
+    
+    
 
     // export the app
     return app;

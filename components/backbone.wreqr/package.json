@@ -1,8 +1,9 @@
 {
   "name": "Backbone.Wreqr",
   "description": "A Simple Service Bus For Backbone and Backbone.Marionette",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/marionettejs/backbone.wreqr",
+  "main": "lib/amd/backbone.wreqr.js",
   "keywords": [
     "backbone",
     "plugin",
@@ -42,10 +43,21 @@
 
   "github": "https://github.com/marionettejs/backbone.wreqr",
 
+  "dependencies": {
+    "jquery": "~1.8.3",
+    "backbone": "~0.9.10"
+  },
   "devDependencies": {
     "grunt": "*",
-    "grunt-jasmine-runner": "latest",
-    "grunt-rigger": "*"
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-template-jasmine-istanbul": "*",
+    "grunt-preprocess": "*",
+    "grunt-plato": "*"
   },
   "jam":{
     "dependencies": {
