@@ -1,1 +1,8 @@
+# cloud9 ide stuff
 .c9revisions/
+
+#bower components installed via bower
+components/
+
+# get via NPM
+node_modules/
