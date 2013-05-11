@@ -1,0 +1,19 @@
+ <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Book Shopper</h3>
+  </div>
+  <div class="modal-body">
+    <div class="imgBook">
+      <img src="{{ (thumbnail ? thumbnail : 'http://placehold.it/200x260') }}" />
+    </div>
+    <h1>{{ title }}</h1>
+    {{ (subtitle ? '<h2>'+subtitle+'</h2>' : '') }}
+    <p>{{ (description ? description : 'No description found') }}</p>
+    <b>Google link :</b> <a href="http://books.google.com/books?id={{ googleId }}" target="_blank">http://books.google.com/books?id={{ googleId }}</a>
+
+  </div>
+  <div class="modal-footer">
+    <a id=close-dialog href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+  </div>
+</div>

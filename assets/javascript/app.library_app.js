@@ -54,6 +54,7 @@ MyApp.LibraryApp = function(){
 
     moreBooks: function(){
       // if we've loaded all the books for this search, there are no more to load !
+      console.log("length: "+ this.length + " totalItems: "+this.totalItems);
       if(this.length >= this.totalItems){
         return true;
       }
@@ -71,7 +72,7 @@ MyApp.LibraryApp = function(){
       MyApp.vent.trigger("search:start");
 
       var query = encodeURIComponent(searchTerm)+'&maxResults='+this.maxResults+'&startIndex='+(this.page * this.maxResults)+'&fields=totalItems,items(id,volumeInfo/title,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/description,volumeInfo/imageLinks)';
-
+      console.log(query);
       $.ajax({
         url: 'https://www.googleapis.com/books/v1/volumes',
         dataType: 'jsonp',
@@ -85,6 +86,7 @@ MyApp.LibraryApp = function(){
           if(res.items){
             self.page++;
             self.totalItems = res.totalItems;
+            console.log(res);
             var searchResults = [];
             _.each(res.items, function(item){
               var thumbnail = null;
