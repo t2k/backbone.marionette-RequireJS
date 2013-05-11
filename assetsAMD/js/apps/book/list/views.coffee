@@ -1,10 +1,10 @@
-# views supporint the book list application:  FWIW all views inherit from views/_base
-define ['underscore', 'backbone', 'apps/book/list/templates', 'views/_base', 'msgbus' ], (_, Backbone, Templates, AppView, msgbus) ->
+# views supporing the book list application:  FWIW all views inherit from views/_base
+define ['backbone', 'apps/book/list/templates', 'views/_base', 'msgbus' ], (Backbone, Templates, AppView, msgBus) ->
     # bookview
     BookView: class BookView extends AppView.ItemView
         template: _.template(Templates.book)
         events:
-            "click" : -> msgbus.events.trigger "list:book:clicked", @model
+            "click" : -> msgBus.events.trigger "list:book:clicked", @model
 
     BookList: class BookList extends AppView.CompositeView
         template: _.template(Templates.books)
@@ -22,7 +22,7 @@ define ['underscore', 'backbone', 'apps/book/list/templates', 'views/_base', 'ms
             margin = 200
             if ((scrollTop + margin) >= totalHeight)
                 #console.log "BOOKLIST: >>search"
-                msgbus.events.trigger "search:more"
+                msgBus.events.trigger "search:more"
 
 
     Layout: class Layout extends AppView.Layout
@@ -40,39 +40,43 @@ define ['underscore', 'backbone', 'apps/book/list/templates', 'views/_base', 'ms
 
         initialize: ->
             $spinner = @.$("#spinner")
-            msgbus.events.on "search:start", =>
+            msgBus.events.on "search:start", =>
                 $spinner.fadeIn()
-            msgbus.events.on "search:stop", =>
+            msgBus.events.on "search:stop", =>
                 $spinner.fadeOut()
-            msgbus.events.on "search:term", (term) =>
+            msgBus.events.on "search:term", (term) =>
                 @.$("#searchTerm").val(term)
 
         search: ->
             searchTerm = @.$("#searchTerm").val().trim()
             console.log "searchTerm change vent handled from SearchView: #{searchTerm}"
             if searchTerm.length > 0
-                msgbus.events.trigger "search:term", searchTerm
+                msgBus.events.trigger "search:term", searchTerm
             else
-                msgbus.events.trigger "search:noSearchTerm"
+                msgBus.events.trigger "search:noSearchTerm"
 
+    # the modal view
     BookDetailView: class BookDetailView extends AppView.ItemView
         template: _.template(Templates.bookdetail)
         className: "modal bookDetail"
+
+        # not used in this app
         modelEvents:
             "change:name" : -> console.log "name changed"
 
         events:
             "click #close-dialog" : ->
-                console.log "BookDetailView>> close click"
-                @trigger "dialog:close"
+                console.log "book/list/BookDetailView >> close click"
+                @trigger "dialog:close"  #this event is handled by the Mariionette.Region.Dialog extension class >> see config
 
+        # not really used here, ideas from Brian Mann's screencast, passed into the Region.Dialog
 		dialog:
 			title: "Edit Event"
 			className: "dialogClass"
 			buttons: false
 
 		onClose: ->
-			console.log "view closing"
+			console.log "book/list/BookDetailView >> onClose"
 
 		onDialogButtonClicked: ->
 			console.log "dialog method onDialogButtonClicked"

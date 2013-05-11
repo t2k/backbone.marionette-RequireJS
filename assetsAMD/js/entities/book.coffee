@@ -1,5 +1,5 @@
 # books
-define ["jquery", "underscore", "backbone", "msgbus"], ($, _, Backbone, msgbus) ->
+define ["backbone", "msgbus"], (Backbone, msgbus) ->
 
 
     class Book extends Backbone.Model

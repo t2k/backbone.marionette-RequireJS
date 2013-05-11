@@ -15,7 +15,7 @@
     shim: {
       bsModal: ["jquery"]
     }
-  }, require(["app", "apps/book/app", "config/_base"], function(App) {
+  }, require(["app", "apps/book/app", "apps/other/app", "config/_base"], function(App) {
     return App.start();
   }));
 

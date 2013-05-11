@@ -1,5 +1,5 @@
 # app/module
-define ["msgbus", "marionette", "apps/book/list/controller", "entities/book"], (msgBus, Marionette, Controller) ->
+define ["marionette", "apps/book/list/controller", "msgbus", "entities/book"], (Marionette, Controller, msgBus ) ->
 
     msgBus.events.on "search:term", (searchTerm) ->
         Backbone.history.navigate "search/" + searchTerm

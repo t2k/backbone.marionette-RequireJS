@@ -1,7 +1,7 @@
-# App.js: Ted Killilea June 2012  twitter.com/@t2k_nyc
-define ["underscore", "backbone", "marionette", "msgbus", "bsModal"], (_, Backbone,  Marionette, msgBus) ->
+# APP: Ted Killilea May/13  twitter.com/@t2k_nyc
+define ["backbone", "marionette", "msgbus", "bsModal"], (Backbone,  Marionette, msgBus) ->
     app = new Marionette.Application()
-    app.defaultSearchTerm = "West Highland Terrier"
+    #app.defaultSearchTerm = "West Highland Terrier"
 
     # these regions correspond to #ID in the index.html
     app.addRegions
@@ -15,8 +15,8 @@ define ["underscore", "backbone", "marionette", "msgbus", "bsModal"], (_, Backbo
 
     # pass in router/controller via options
     app.addInitializer ->
-        #console.log "initialize: book:route"
         msgBus.commands.execute "books:route"
+        msgBus.commands.execute "other:route"
 
     # app modal inter app/module communications
     msgBus.events.on "app:show:modal", (view) =>

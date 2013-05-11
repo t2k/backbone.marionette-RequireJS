@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['underscore', 'backbone', 'apps/book/list/templates', 'views/_base', 'msgbus'], function(_, Backbone, Templates, AppView, msgbus) {
+  define(['backbone', 'apps/book/list/templates', 'views/_base', 'msgbus'], function(Backbone, Templates, AppView, msgBus) {
     var BookDetailView, BookList, BookView, Layout, SearchView, _ref, _ref1, _ref2, _ref3, _ref4;
 
     return {
@@ -19,7 +19,7 @@
 
         BookView.prototype.events = {
           "click": function() {
-            return msgbus.events.trigger("list:book:clicked", this.model);
+            return msgBus.events.trigger("list:book:clicked", this.model);
           }
         };
 
@@ -53,7 +53,7 @@
           scrollTop = this.$el.scrollTop() + this.$el.height();
           margin = 200;
           if ((scrollTop + margin) >= totalHeight) {
-            return msgbus.events.trigger("search:more");
+            return msgBus.events.trigger("search:more");
           }
         };
 
@@ -97,13 +97,13 @@
             _this = this;
 
           $spinner = this.$("#spinner");
-          msgbus.events.on("search:start", function() {
+          msgBus.events.on("search:start", function() {
             return $spinner.fadeIn();
           });
-          msgbus.events.on("search:stop", function() {
+          msgBus.events.on("search:stop", function() {
             return $spinner.fadeOut();
           });
-          return msgbus.events.on("search:term", function(term) {
+          return msgBus.events.on("search:term", function(term) {
             return _this.$("#searchTerm").val(term);
           });
         };
@@ -114,9 +114,9 @@
           searchTerm = this.$("#searchTerm").val().trim();
           console.log("searchTerm change vent handled from SearchView: " + searchTerm);
           if (searchTerm.length > 0) {
-            return msgbus.events.trigger("search:term", searchTerm);
+            return msgBus.events.trigger("search:term", searchTerm);
           } else {
-            return msgbus.events.trigger("search:noSearchTerm");
+            return msgBus.events.trigger("search:noSearchTerm");
           }
         };
 
@@ -143,7 +143,7 @@
 
         BookDetailView.prototype.events = {
           "click #close-dialog": function() {
-            console.log("BookDetailView>> close click");
+            console.log("book/list/BookDetailView >> close click");
             return this.trigger("dialog:close");
           }
         };
@@ -161,7 +161,7 @@
       buttons: false
     },
     onClose: function() {
-      return console.log("view closing");
+      return console.log("book/list/BookDetailView >> onClose");
     },
     onDialogButtonClicked: function() {
       return console.log("dialog method onDialogButtonClicked");

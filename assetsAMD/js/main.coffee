@@ -16,5 +16,5 @@ require.config
     shim:
         bsModal: ["jquery"]
 
-    require ["app", "apps/book/app", "config/_base"], (App) ->
+    require ["app", "apps/book/app", "apps/other/app", "config/_base"], (App) ->
         App.start()
