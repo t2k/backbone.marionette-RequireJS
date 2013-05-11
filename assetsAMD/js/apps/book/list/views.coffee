@@ -61,8 +61,10 @@ define ['underscore', 'backbone', 'apps/book/list/templates', 'views/_base', 'ms
         modelEvents:
             "change:name" : -> console.log "name changed"
 
-		events:
-			"click #close-dialog" : -> @trigger "dialog:close"
+        events:
+            "click #close-dialog" : ->
+                console.log "BookDetailView>> close click"
+                @trigger "dialog:close"
 
 		dialog:
 			title: "Edit Event"

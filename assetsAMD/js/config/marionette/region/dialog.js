@@ -35,27 +35,14 @@
       };
 
       Dialog.prototype.setupBindings = function(view) {
-        this.listenTo(view, "dialog:close", this.closeDialog);
-        this.listenTo(view, "dialog:resize", this.resizeDialog);
-        return this.listenTo(view, "dialog:title", this.titleizeDialog);
+        return this.listenTo(view, "dialog:close", this.closeDialog);
       };
 
       Dialog.prototype.closeDialog = function() {
+        console.log("Marionette.Region.Dialog>> calling in the cleaner!");
         this.stopListening();
         this.close();
         return this.$el.modal("hide");
-      };
-
-      Dialog.prototype.resizeDialog = function() {
-        return this.$el.modal("option", {
-          position: "center"
-        });
-      };
-
-      Dialog.prototype.titleizeDialog = function(title) {
-        return this.$el.modal("option", {
-          title: title
-        });
       };
 
       return Dialog;

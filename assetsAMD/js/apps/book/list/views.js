@@ -141,6 +141,13 @@
           }
         };
 
+        BookDetailView.prototype.events = {
+          "click #close-dialog": function() {
+            console.log("BookDetailView>> close click");
+            return this.trigger("dialog:close");
+          }
+        };
+
         return BookDetailView;
 
       })(AppView.ItemView)
@@ -148,11 +155,6 @@
   });
 
   ({
-    events: {
-      "click #close-dialog": function() {
-        return this.trigger("dialog:close");
-      }
-    },
     dialog: {
       title: "Edit Event",
       className: "dialogClass",
