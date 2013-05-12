@@ -68,7 +68,7 @@ bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date inform
 ### marionette application start
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
-### Modular Applications - Rails Asset Pipeline _like_
+### Modular Applications - Rails Asset Pipeline-_like_
 
 ### book entities
  A __Backbone.Collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)__
