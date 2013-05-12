@@ -1,6 +1,6 @@
 ### A modular Marionette application using RequireJS/AMD and Coffescript ###
 
-*** See it LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) ***
+**See it LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html)**
 
 I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming from a C# and .NET server side experience so coming to grips with javascript architecture and configuration was a challenge.
 So I created this repo as a means to try out a few new things for my own learning purposes.
