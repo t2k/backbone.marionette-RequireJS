@@ -17,12 +17,9 @@ I learned alot from the namespacing and modular layout but converting the app ov
 Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
 
 ###assetsAMD###
-My source is located under the **assetsAMD** folder.  The **components** and **node_module** folder hold **BOWER** and **NPM** dependencies. Refer to the
-**assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux](http://www.atinux.fr)'s
-[Backbone books](http://www.atinux.fr/backbone-books/) example app and covers important features, such as modal dialogs.
-
-Check out [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for the RequireJS startup using
-[assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
+My source is located under the **assetsAMD** folder.  Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application
+using javascript namespacing, which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
+example app and covers important features, such as modal dialogs.
 
 ### Updates May 2013 ###
 After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture.
@@ -49,7 +46,7 @@ $ coffee -o assetAMD/js/ -cw assetAMD/js/
 Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org)
 and to help convert your existing javascripts to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
 
-###Config###
+###confi
 The __config__ folder holds global application level configuration for __underscore templatesettings__, __marionette templatecache__ and a custom __Marionette.Region.Dialog__
 class that displays a boostrap modal and also takes care of view/event cleanup.  I picked this up from **Brian Mann**  These techniques are a huge improvement over what I had
 been using previously.  Don't think I could have coded this stuff with my own hand crafted javascript.
@@ -59,21 +56,21 @@ been using previously.  Don't think I could have coded this stuff with my own ha
 * [config/marionette/templatecache.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/templatecache.coffee)
 * [config/underscore/templatesettings.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/underscore/templatesettings.coffee)
 
-### index.html ###
+### index.html
 Take a look at [index.AMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html), the Single Page that gets served for
 this single page application.  One of the benefits of RequireJS/AMD is this simplicity.  There is no right or wrong way to organize a Marionette app, but I favor
 the AMD approach for it's ease of loading for a single page application.  Notice there is only one javascript loaded **js/main**.
 
-### main.js ###
+### main.js
 The [js/main.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.coffee) file loaded at the bottom of index.html is the requirejs
 bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date information on RequireJS and the benefits of AMD script loading.
 
-### marionette application start ###
+### marionette application start
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
-### modular applications
+### Modular Applications - Rails Asset Pipeline_-like_
 
-### book entities ###
+### book entities
  A __Backbone.Collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)__
 is used to encapsulate the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).  Checkout the __search__, __fetchBooks__ and
 __moreBooks__ methods and the msgBus.events setup in the initialize method.  The msgBus pub/sub pattern is used to help create a decoupled modular architecture.
