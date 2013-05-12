@@ -1,15 +1,17 @@
-### A modular Marionette application using RequireJS/AMD and Coffescript ###
+## Marionette Bookstore ##
+### Backbone.Marionette application using RequireJS/AMD and Coffescript ###
 
 **See it LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html)**
 
-I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming from a C# and .NET server side experience so coming to grips with javascript architecture and configuration was a challenge.
-So I created this repo as a means to try out a few new things for my own learning purposes.
+I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were just coming from a C# and .NET server side background experience so coming to grips with javascript architecture and configuration was a challenge.
+I created this repo as a means to try out a few new things for my own learning purpose.  I've updated a few things recently with lessons learned.
 
+###assets###
 The **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)  I learned alot from David's Marionette app in terms of using most of marionettes features and it dealt with a more interesting real world back end.
 I learned alot from the namespacing and modular layout but converting the app over to AMD required a different approach in organizing the application.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
 
-**assetsAMD**
-My source is located here.  The **components** and **node_module** folder hold **BOWER** and **NPM** dependencies. Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
+###assetsAMD###
+My source is located under the **assetsAMD** folder.  The **components** and **node_module** folder hold **BOWER** and **NPM** dependencies. Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
 example app and covers important features, such as modal dialogs.
 
 Check out [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for the RequireJS startup using [assetsAMD/main.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.js)
@@ -49,7 +51,20 @@ Take a look at the [index.AMD.Devel.html](https://github.com/t2k/backbone.marion
 There is no right or wrong way to organize a Marionette app, but I favor this approach.  It might seem like overkill, however as an application grows in scope, to dozens or more application/modules, with multiple client side and server side developers and designers then a modular architecture such as this will serve the project well in the long run.
 
 ### marionette application start ###
-See [main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
+* [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
+
+### book list ###
+* __book__
+    * __list__
+        * __templates__
+            *  (.htm templates files)
+    *  [app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/app.coffee)
+
+
+
+
+
+
 
 ### Get to know [BOWER](http://twitter.github.com/bower/) and automatically maintain project dependencies. ###
 My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used [BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.
