@@ -31,16 +31,14 @@ To begin using coffee-script in this project:
 $ coffee -o assetAMD/js/ -cw assetAMD/js/
 ~~~
 
-Now, all changes to any .coffee file are compiled to javascipt automatically. For more info go to the source: [coffeescript.org](http://coffeescript.org)  and to help convert existing Javascripts to Coffee go here [js2coffee.org](https://js2coffee.org)
+Now, all changes to any .coffee file are compiled to javascipt automatically. For more info go to the source: [coffeescript.org](http://coffeescript.org)  and to help convert existing Javascripts to Coffee go here [js2coffee.org](http://js2coffee.org)
 
 ###Config###
 The __config__ folder holds global application level configuration for underscore templatesettings, marionette template cache and a custom Marionette.Region.Dialog class for backbone modals that takes care of view cleanup.  I picked this up from **Brian Mann**  This is a huge improvement over what I had been using previously.
+
 [config/_base.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/_base.coffee)
-
 [config/marionette/region/dialog.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee)
-
 [config/marionette/templatecache.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/templatecache.coffee)
-
 [config/underscore/templatesettings.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/underscore/templatesettings.coffee)
 
 
