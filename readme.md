@@ -46,7 +46,7 @@ $ coffee -o assetAMD/js/ -cw assetAMD/js/
 Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org)
 and to help convert your existing javascripts to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
 
-###confi
+###config
 The __config__ folder holds global application level configuration for __underscore templatesettings__, __marionette templatecache__ and a custom __Marionette.Region.Dialog__
 class that displays a boostrap modal and also takes care of view/event cleanup.  I picked this up from **Brian Mann**  These techniques are a huge improvement over what I had
 been using previously.  Don't think I could have coded this stuff with my own hand crafted javascript.
