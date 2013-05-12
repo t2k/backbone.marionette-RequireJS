@@ -36,10 +36,10 @@ Now, all changes to any .coffee file are compiled to javascipt automatically. Fo
 ###Config###
 The __config__ folder holds global application level configuration for underscore templatesettings, marionette template cache and a custom Marionette.Region.Dialog class for backbone modals that takes care of view cleanup.  I picked this up from **Brian Mann**  This is a huge improvement over what I had been using previously.
 
-[config/_base.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/_base.coffee)
-[config/marionette/region/dialog.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee)
-[config/marionette/templatecache.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/templatecache.coffee)
-[config/underscore/templatesettings.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/underscore/templatesettings.coffee)
+* [config/_base.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/_base.coffee)
+* [config/marionette/region/dialog.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee)
+* [config/marionette/templatecache.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/templatecache.coffee)
+* [config/underscore/templatesettings.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/underscore/templatesettings.coffee)
 
 
 ### index.html ###
@@ -47,12 +47,13 @@ Take a look at the [index.AMD.Devel.html](https://github.com/t2k/backbone.marion
 There is no right or wrong way to organize a Marionette app, but I favor this approach.  It might seem like overkill, however as an application grows in scope, to dozens or more application/modules, with multiple client side and server side developers and designers then a modular architecture such as this will serve the project well in the long run.
 
 ### marionette application start ###
-See [config/marionette/region/dialog.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee)
+See [main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
-
-### Using [BOWER](http://twitter.github.com/bower/) to maintain project dependencies.
+### Get to know [BOWER](http://twitter.github.com/bower/) and automatically maintain project dependencies. ###
 My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used [BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.
 Grok [NODEJS](http://nodejs.org) also.  Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
+### Project Dependencie ###
+* See [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) to see this project's dependencies
 
 #### Bower and CoffeScript Installation
 From the terminal/BASH $ prompt:
