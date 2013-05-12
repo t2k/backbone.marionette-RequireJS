@@ -68,7 +68,7 @@ bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date inform
 ### marionette application start
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
-### Modular Applications - Rails Asset Pipeline_like_
+### Modular Applications - Rails Asset Pipeline _like_
 
 ### book entities
  A __Backbone.Collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)__
@@ -76,8 +76,8 @@ is used to encapsulate the [Google Books API](https://developers.google.com/book
 __moreBooks__ methods and the msgBus.events setup in the initialize method.  The msgBus pub/sub pattern is used to help create a decoupled modular architecture.
 
 ### book list application
-Drill down on the modular source for the apps/book applications, it's listed below.  Notice how the apps/book/app __requires__ the apps/book/list/controller and how
-the CONTROLLER __requires__ the VIEWS and how the VIEWS __requires__ TEMPLATES and these templates are ultimately made of __HTML__ snippets in {{MUSTACHE}} format.
+Drill down on the modular source for the apps/book application listed below.  Notice how the apps/book/app _requires_ the apps/book/list/controller module.
+The CONTROLLER _requires_ the VIEWS module and the VIEWS module _requires_ the TEMPLATES module and the __templates__ are ultimately made of __HTML__ snippets in {{MUSTACHE}} format.
 * __apps__
     * __book__
         * __list__
