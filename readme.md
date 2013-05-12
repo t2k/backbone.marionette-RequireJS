@@ -54,10 +54,13 @@ There is no right or wrong way to organize a Marionette app, but I favor this ap
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
 ### book list ###
-* __book__
-    * __list__
-        * __templates__
-            *  (.htm templates files)
+* __apps__
+    * __book__
+        * __list__
+            * __templates__
+                *  [layout.htm](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/layout.htm)
+                *  [book.htm](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/book.htm)
+                *  [booklist.htm](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/booklist.htm)
     *  [app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/app.coffee)
 
 
