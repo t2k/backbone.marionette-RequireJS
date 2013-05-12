@@ -1,7 +1,7 @@
 ## Marionette Bookstore ##
 ### Backbone.Marionette application using RequireJS/AMD and Coffescript ###
 
-**See the LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application**
+**See this LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application before digging in...**
 
 This is a simple 100% client-side application utilizing a backbone collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)
 to manipulate the [google books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).
