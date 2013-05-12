@@ -31,10 +31,10 @@ necessarily coupled to the application specific namespaceing patterns.  I used a
 module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
 ### CoffeeScript ###
-Switching to coffee-script has made me a javascript __BALLER!__ I knew about coffee-script-- read a small book about it, but never changed my ways.
+Switching to coffee-script has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.
 Watching Brian Mann's screencast convinced me of it's ease of use.  Now I can honestly say that I am a __1000%__ better javascript programmer because of it.
 
-So easy to install from the terminal prompt:
+So easy to install, it's a shame not to:
 ~~~
 $ npm install -g coffee-script
 ~~~
@@ -43,8 +43,7 @@ To begin using coffee-script in this project:
 ~~~
 $ coffee -o assetAMD/js/ -cw assetAMD/js/
 ~~~
-
-Now, all changes to any .coffee file are compiled to javascipt automatically. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org)
+Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org)
 and to help convert your existing javascripts to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
 
 ###Config###
@@ -71,8 +70,8 @@ bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date inform
 
 ### modular applications
 ### book list application
-Drill down on the modular source for the apps/book applications listed below.  Notice how the apps/book/app __requires__ the apps/book/list/controller and how
-the CONTROLLER __requires__ the VIEWS and how the VIEWS __requires__ templates and the templates are ultimately made of __HTML__ snippets, here in
+Drill down on the modular source for the apps/book applications, it's listed below.  Notice how the apps/book/app __requires__ the apps/book/list/controller and how
+the CONTROLLER __requires__ the VIEWS and how the VIEWS __requires__ TEMPLATES and these templates are ultimately made of __HTML__ snippets in {{MUSTACHE}} format.
 * __apps__
     * __book__
         * __list__
@@ -87,9 +86,9 @@ the CONTROLLER __requires__ the VIEWS and how the VIEWS __requires__ templates a
 * [app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)  - app (the main marionette application)
 
 ### Get to know [BOWER](http://twitter.github.com/bower/) and automatically maintain project dependencies. ###
-My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used
+My biggest early challenge with open source software was maintaining the ever increasing dependencies.  If you've never used
 BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.  Grok [NODEJS](http://nodejs.org).
-Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
+Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and __SH__ell with Node pre-installed.
 
 #### Bower and CoffeScript Installation
 From the terminal/BASH $ prompt:
@@ -114,7 +113,7 @@ Bower will be installed globally
 $ bower install
 ~~~
 
-As time passes on, update the project dependencies with ***one*** command:
+As time passes on, update the project dependencies with **ONE** command:
 ~~~
 $ bower update
 ~~~
