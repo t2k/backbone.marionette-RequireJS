@@ -1,5 +1,7 @@
 ### A modular Marionette application using RequireJS/AMD and Coffescript ###
 
+*** See it LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) ***
+
 I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were coming from a C# and .NET server side experience so coming to grips with javascript architecture and configuration was a challenge.
 So I created this repo as a means to try out a few new things for my own learning purposes.
 
@@ -16,7 +18,7 @@ Check out [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-Requi
 After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture.  Brian's excellent tutorials use ruby rails and __Marionette.module__ patter with javascript namespacing.
 My focus here was to use an RequireJS/AMD based application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.
 The AMD approach does not follow the same javascript namespaing pattern made so easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.
-I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leveredges **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
+I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
 ### CoffeeScript ###
 Switching to coffee-script has made me a javascript __baller__ I knew about coffee-script read a small book about it, but never changed my ways.  By watching Brian Mann's screencast I became convinced and I can honestly say that I am a __1000%__ better javascript programmer because of it.
