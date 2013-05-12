@@ -23,9 +23,9 @@ The AMD approach does not follow the same javascript namespaing pattern made so 
 I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
 ### CoffeeScript ###
-Switching to coffee-script has made me a javascript __baller__ I knew about coffee-script read a small book about it, but never changed my ways.  By watching Brian Mann's screencast I became convinced and I can honestly say that I am a __1000%__ better javascript programmer because of it.
+Switching to coffee-script has made me a javascript __BALLER!__ I knew about coffee-script-- read a small book about it, but never changed my ways.  Watching Brian Mann's screencast convinced me of it's ease of use.  Now I can honestly say that I am a __1000%__ better javascript programmer because of it.
 
-So easy to install from the terminal:
+So easy to install from the terminal prompt:
 ~~~
 $ npm install -g coffee-script
 ~~~
@@ -35,10 +35,11 @@ To begin using coffee-script in this project:
 $ coffee -o assetAMD/js/ -cw assetAMD/js/
 ~~~
 
-Now, all changes to any .coffee file are compiled to javascipt automatically. For more info go to the source: [coffeescript.org](http://coffeescript.org)  and to help convert existing Javascripts to Coffee go here [js2coffee.org](http://js2coffee.org)
+Now, all changes to any .coffee file are compiled to javascipt automatically. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org) and to help convert your existing javascripts to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
 
 ###Config###
-The __config__ folder holds global application level configuration for underscore templatesettings, marionette template cache and a custom Marionette.Region.Dialog class for backbone modals that takes care of view cleanup.  I picked this up from **Brian Mann**  This is a huge improvement over what I had been using previously.
+The __config__ folder holds global application level configuration for __underscore templatesettings__, __marionette templatecache__ and a custom __Marionette.Region.Dialog__ class that displays a boostrap modal and also takes care of view/event cleanup.  I picked this up from **Brian Mann**
+These techniques are a huge improvement over what I had been using previously.  Don't think I could have coded this stuff with my own hand crafted javascript.
 
 * [config/_base.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/_base.coffee)
 * [config/marionette/region/dialog.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee)
@@ -47,13 +48,14 @@ The __config__ folder holds global application level configuration for underscor
 
 
 ### index.html ###
-Take a look at the [index.AMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) file and the [js/main.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.coffee) to see the setup for this Marionette/AMD application.
-There is no right or wrong way to organize a Marionette app, but I favor this approach.  It might seem like overkill, however as an application grows in scope, to dozens or more application/modules, with multiple client side and server side developers and designers then a modular architecture such as this will serve the project well in the long run.
+Take a look at [index.AMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html), the Single Page that gets served for this single page application.  One of the benefits of RequireJS/AMD is this simplicity.
+There is no right or wrong way to organize a Marionette app, but I favor the AMD approach for it's ease of loading for a single page application.  Notice there is only one javascript loaded **js/main**.
 
+### main.js ###
+The [js/main.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.coffee) file loaded at the bottom of index.html is the requirejs bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date information on RequireJS and the benefits of AMD script loading.
 ### marionette application start ###
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
-## Rails Asset Pipeline
 ### book list application
 * __apps__
     * __book__
