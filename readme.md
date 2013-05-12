@@ -52,12 +52,9 @@ See [main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/
 ### Get to know [BOWER](http://twitter.github.com/bower/) and automatically maintain project dependencies. ###
 My biggest challenge with open source software is maintaining the ever increasing dependencies as your project grows in scope.  If you've never used [BOWER](http://twitter.github.com/bower/) I highly recommend taking a the time to detour over there and grok it out.
 Grok [NODEJS](http://nodejs.org) also.  Lucky for me I'm using [Cloud9 IDE](https://c9.io) a web based IDE with a built in unix terminal and SHell with Node pre-installed.
-### Project Dependencie ###
-* See [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) to see this project's dependencies
 
 #### Bower and CoffeScript Installation
 From the terminal/BASH $ prompt:
-
 First off, NODE v0.8+ is required for __BOWER__ installation, as I'm writing this, NODE v 6.2.1 is pre istalled in the ***Cloud9 IDE*** but they also pre-install [NVM Node Version Manager](https://github.com/creationix/nvm) so you can update the Cloud9 workspace to NODE v0.8+ as required for __BOWER__
 
 Press [alt-t] to open a terminal with [bash shell](http://linuxcommand.org/learning_the_shell.php) commands.  Pretty amazing, the project has full featured unix environment available in a browser based [Cloud9 IDE](https://c9.io)!
@@ -70,39 +67,12 @@ $ npm install -g coffee-script
 
 Bower will be installed globally
 
-#### Use Bower To Install Project Dependencies
-This simple project has quite a list of dependencies, but don't go away angry, it's very easy using __BOWER__ to install these open source libraries into this project.
-
-__PROJECT DEPENDENCIES__
-1. jquery
-2. bootstrap
-3. requirejs
-4. requirejs-text
-5. r.js
-2. underscore-amd
-3. backbone-amd
-4. backbone.wreqr
-5. backbone.eventbinder
-6. backbone.babysitter
-6. marionette
+### Project Dependencie ###
+* See [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) to see this project's dependencies
 
 ~~~
 $ bower install
 ~~~
-
-To create
-~~~
-$ bower install --save jquery bootstrap requirejs requirejs-text underscore-amd backbone-amd backbone.wreqr backbone.eventbinder marionette
-~~~
-
-__backbone.babysitter and r.js are not registered in bower so, just bower manually install the git version (see bower info)__
-
-~~~
-$ bower install --save git://github.com/marionettejs/backbone.babysitter.git
-$ bower install --save git://github.com/jrburke/r.js.git
-~~~
-
-The __bower install --save__ option creates [component.json](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/component.json) in the project directory.
 
 As time passes on, update the project dependencies with ***one*** command:
 ~~~
@@ -134,7 +104,6 @@ The optimizer 'output' builds the assetsAMD/js/main.optimized.js that gets linke
 
 SEE [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for details.
 
-***Good luck on your open source journey!***
-
-
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph) one click to clone/edit any github repo.  Fantastic!
+
+***Good luck on your open source journey!***
