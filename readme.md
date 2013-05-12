@@ -3,14 +3,12 @@
 
 **See this LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application before digging in...**
 
-This is a simple 100% client-side application utilizing a backbone collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)
-to manipulate the [google books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).
-It is not a _true_ web-app in the sense that we are not responsible for any server side activities like _node/connect/express_ or _mongodb_ or ruby _active-record_.  So the simplicity of the
-google books API is good for this example because it allows us to focus on _Marionette AMD_
+This is a simple 100% client-side application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).  It is _NOT a true WEBAPP__
+because we aren't responsible for dealing with server-side activities like (__NodeJS: connect/express, MongoDB,  Ruby: active-record__ etc. )
+The focus remains centered on _Marionette AMD_ and hopefully borrowing application architecture ideas from the **Rails Asset Pipeline**
 
-I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles were just coming from a C# and .NET server side background
-experience so coming to grips with javascript architecture and configuration was a challenge.  I created this repo as a means to try out
-a few new things for my own learning purpose.  I've updated a few things recently with lessons learned.
+I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server side background
+experience... so coming to grips with modular javascript client application architecture was a challenge.  I've updated a few things recently with lessons learned.
 
 ###assets###
 The **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)
@@ -74,6 +72,11 @@ bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date inform
 * [the main app.coffee](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee)
 
 ### modular applications
+
+### book entities ###
+ A __Backbone.Collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)__
+is used to encapsulate the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).
+
 ### book list application
 Drill down on the modular source for the apps/book applications, it's listed below.  Notice how the apps/book/app __requires__ the apps/book/list/controller and how
 the CONTROLLER __requires__ the VIEWS and how the VIEWS __requires__ TEMPLATES and these templates are ultimately made of __HTML__ snippets in {{MUSTACHE}} format.
