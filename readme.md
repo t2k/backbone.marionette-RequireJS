@@ -75,7 +75,8 @@ bootloader.  See __[requirejs.org](http://requirejs.org)__ for up to date inform
 
 ### book entities ###
  A __Backbone.Collection [entities/book](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee)__
-is used to encapsulate the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).
+is used to encapsulate the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).  Checkout the __search__, __fetchBooks__ and
+__moreBooks__ methods and the msgBus.events setup in the initialize method.  The msgBus pub/sub pattern is used to help create a decoupled modular architecture.
 
 ### book list application
 Drill down on the modular source for the apps/book applications, it's listed below.  Notice how the apps/book/app __requires__ the apps/book/list/controller and how
