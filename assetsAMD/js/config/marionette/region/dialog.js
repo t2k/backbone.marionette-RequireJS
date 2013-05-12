@@ -4,50 +4,52 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   define(["backbone", "marionette"], function(Backbone, Marionette) {
-    return Marionette.Region.Dialog = (function(_super) {
-      __extends(Dialog, _super);
+    return (function() {
+      return Marionette.Region.Dialog = (function(_super) {
+        __extends(Dialog, _super);
 
-      function Dialog() {
-        _.extend(this, Backbone.Events);
-      }
-
-      Dialog.prototype.onShow = function(view) {
-        var options,
-          _this = this;
-
-        this.setupBindings(view);
-        options = this.getDefaultOptions(_.result(view, "dialog"));
-        return this.$el.modal(options, {
-          close: function(e, ui) {
-            return _this.closeDialog();
-          }
-        });
-      };
-
-      Dialog.prototype.getDefaultOptions = function(options) {
-        if (options == null) {
-          options = {};
+        function Dialog() {
+          _.extend(this, Backbone.Events);
         }
-        return _.defaults(options, {
-          show: true,
-          keyboard: true
-        });
-      };
 
-      Dialog.prototype.setupBindings = function(view) {
-        return this.listenTo(view, "dialog:close", this.closeDialog);
-      };
+        Dialog.prototype.onShow = function(view) {
+          var options,
+            _this = this;
 
-      Dialog.prototype.closeDialog = function() {
-        console.log("Marionette.Region.Dialog>> calling in the cleaner!");
-        this.stopListening();
-        this.close();
-        return this.$el.modal("hide");
-      };
+          this.setupBindings(view);
+          options = this.getDefaultOptions(_.result(view, "dialog"));
+          return this.$el.modal(options, {
+            close: function(e, ui) {
+              return _this.closeDialog();
+            }
+          });
+        };
 
-      return Dialog;
+        Dialog.prototype.getDefaultOptions = function(options) {
+          if (options == null) {
+            options = {};
+          }
+          return _.defaults(options, {
+            show: true,
+            keyboard: true
+          });
+        };
 
-    })(Marionette.Region);
+        Dialog.prototype.setupBindings = function(view) {
+          return this.listenTo(view, "dialog:close", this.closeDialog);
+        };
+
+        Dialog.prototype.closeDialog = function() {
+          console.log("Marionette.Region.Dialog>> calling in the cleaner!");
+          this.stopListening();
+          this.close();
+          return this.$el.modal("hide");
+        };
+
+        return Dialog;
+
+      })(Marionette.Region);
+    })();
   });
 
 }).call(this);

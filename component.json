@@ -2,16 +2,16 @@
   "name": "203365",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "~1.9.1",
-    "requirejs": "~2.1.2",
-    "marionette": "~1.0.0",
-    "backbone-amd": "~0.9.10",
+    "jquery": "~2.0.0",
     "underscore-amd": "~1.4.4",
-    "bootstrap": "~2.2.2",
-    "r.js": "git://github.com/jrburke/r.js.git#~2.1.2",
-    "backbone.wreqr": "~0.1.0",
+    "backbone-amd": "~1.0.0",
+    "backbone.wreqr": "~0.2.0",
     "backbone.eventbinder": "~1.0.2",
-    "requirejs-text": "~2.0.3",
-    "backbone.babysitter": "git://github.com/marionettejs/backbone.babysitter.git#~0.0.4"
+    "backbone.babysitter": "~0.0.6",
+    "marionette": "~1.0.2",
+    "bootstrap": "~2.3.1",
+    "requirejs": "~2.1.6",
+    "r.js": "git://github.com/jrburke/r.js.git#~2.1.6",
+    "requirejs-text": "~2.0.6"
   }
 }
