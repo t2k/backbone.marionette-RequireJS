@@ -1,38 +1,28 @@
 ## Marionette Bookstore ##
-### Backbone.Marionette application using RequireJS/AMD and Coffescript ###
+### Backbone.Marionette application using RequireJS/AMD built with Coffescript ###
 
 **See this LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application before digging in...**
 
-This is a simple 100% client-side application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes).  It is _NOT a true WEBAPP__
-because we aren't responsible for dealing with server-side activities like (__NodeJS: connect/express, MongoDB,  Ruby: active-record__ etc. )
-The focus remains centered on _Marionette AMD_ and hopefully borrowing application architecture ideas from the **Rails Asset Pipeline**
+This is a simple 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
+a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead of: (__NodeJS: connect/express, MongoDB,Ruby: active-record__ etc. )
+The simplicity of a SPA allows the focus to remain centered on _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**
 
-I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server side background
-experience... so coming to grips with modular javascript client application architecture was a challenge.  I've updated a few things recently with lessons learned.
+I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server-side background
+experience. so coming to grips with modular javascript client application architecture was a challenge.
 
 ###assets###
-The **assets** folder is the original fork of [David Sulc's repo](https://github.com/davidsulc/backbone.marionette-atinux-books)
-I learned alot from David's Marionette app in terms of using most of marionettes features and it dealt with a more interesting real world back end.
-I learned alot from the namespacing and modular layout but converting the app over to AMD required a different approach in organizing the application.
-Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
+The **assets** folder is the original fork of [David Sulc's repo] https://github.com/davidsulc/backbone.marionette-atinux-books)
+I learned alot from David's Marionette app about marionette's application features and it dealt with a more interesting real world back end. The original app used traditional javascript namespacing and modular layout but converting this app over to RequireJS and a modular design required a different approach to the application architecture.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
 
 ###assetsAMD###
-My source is located under the **assetsAMD** folder.  Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application
-using javascript namespacing, which was based on [Atinux](http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/)
-example app and covers important features, such as modal dialogs.
+I've added source located under the **assetsAMD** folder.  Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux] http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/) example app and covers features, such as external templates, modal dialogs.
 
 ### Updates May 2013 ###
-After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture.
-Brian's excellent tutorials use ruby rails and __Marionette.module__ patter with javascript namespacing.  My focus here was to use an RequireJS/AMD based
-application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant
-folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so
-easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not
-necessarily coupled to the application specific namespaceing patterns.  I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee)
-module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
+After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture. Brian's excellent tutorials use ruby rails and __Marionette.module__ patter with javascript namespacing.  My focus here was to use an RequireJS/AMD based
+application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.  I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
-### CoffeeScript ###
-Switching to coffee-script has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.
-Watching Brian Mann's screencast convinced me of it's ease of use.  Now I can honestly say that I am a __1000%__ better javascript programmer because of it.
+### CoffeeScript! ###
+Switching to coffeescript has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.  After watching Brian Mann's screencast I became convinced of the power and flexibility of coffeescript and it's ease of use.  Now I can honestly say I'm a better _JavaScript_ programmer because of it.
 
 So easy to install, it's a shame not to:
 ~~~
@@ -41,10 +31,9 @@ $ npm install -g coffee-script
 
 To begin using coffee-script in this project:
 ~~~
-$ coffee -o assetAMD/js/ -cw assetAMD/js/
+$ coffee -o assetsAMD/js/ -cw assetsAMD/js/
 ~~~
-Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org)
-and to help convert your existing javascripts to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
+Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org) and to help convert your existing javascript to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
 
 ###config
 The __config__ folder holds global application level configuration for __underscore templatesettings__, __marionette templatecache__ and a custom __Marionette.Region.Dialog__

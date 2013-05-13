@@ -1,9 +1,7 @@
 # APP: Ted Killilea May/13  twitter.com/@t2k_nyc
 define ["backbone", "marionette", "msgbus", "bsModal"], (Backbone,  Marionette, msgBus) ->
     app = new Marionette.Application()
-    #app.defaultSearchTerm = "West Highland Terrier"
 
-    # these regions correspond to #ID in the index.html
     app.addRegions
         content: "#content"
         menu: "#menu"
