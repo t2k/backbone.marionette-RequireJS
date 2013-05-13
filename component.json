@@ -11,7 +11,7 @@
     "marionette": "~1.0.2",
     "bootstrap": "~2.3.1",
     "requirejs": "~2.1.6",
-    "r.js": "git://github.com/jrburke/r.js.git#~2.1.6",
+    "r.js": "git://github.com/jrburke/r.js.git",
     "requirejs-text": "~2.0.6"
   }
 }
