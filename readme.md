@@ -8,17 +8,6 @@ a data source.  It is not a true WebApp since there's no server-side responsibil
 The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**.  I struggled a bit ;-) with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background,
 so coming to grips with modular javascript client application architecture was way more of a challenge than I had expected.  I hope this repo can help others get up to speed faster than I did!
 
-###assets###
-The **assets** folder is the original fork of [David Sulc's repo] https://github.com/davidsulc/backbone.marionette-atinux-books)
-I learned alot from David's Marionette app about marionette's application features and it dealt with a more interesting real world back end. The original app used traditional javascript namespacing and modular layout but converting this app over to RequireJS and a modular design required a different approach to the application architecture.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
-
-###assetsAMD###
-I've added source located under the **assetsAMD** folder.  Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux] http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/) example app and covers features, such as external templates, modal dialogs.
-
-### Updates May 2013 ###
-After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture. Brian's excellent tutorials use ruby rails and __Marionette.module__ patter with javascript namespacing.  My focus here was to use an RequireJS/AMD based
-application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.  I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
-
 ### CoffeeScript! ###
 Switching to coffeescript has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.  After watching Brian Mann's screencast I became convinced of the power and flexibility of coffeescript and it's ease of use.  I'm SO much better a _JavaScript_ programmer because of it.
 
@@ -32,6 +21,17 @@ To begin using coffee-script in this project:
 $ coffee -o assetsAMD/js/ -cw assetsAMD/js/
 ~~~
 Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: [coffeescript.org](http://coffeescript.org) and to help convert your existing javascript to CoffeeScript: __go here [js2coffee.org](http://js2coffee.org)__
+
+###assets###
+The **assets** folder is the original fork of [David Sulc's repo] https://github.com/davidsulc/backbone.marionette-atinux-books)
+I learned alot from David's Marionette app about marionette's application features and it dealt with a more interesting real world back end. The original app used traditional javascript namespacing and modular layout but converting this app over to RequireJS and a modular design required a different approach to the application architecture.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.
+
+###assetsAMD###
+I've added source located under the **assetsAMD** folder.  Refer to the **assets** folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux] http://www.atinux.fr)'s [Backbone books](http://www.atinux.fr/backbone-books/) example app and covers features, such as external templates, modal dialogs.
+
+### Updates May 2013 ###
+After watching the excellent [BackboneRails](http://backbonerails.com) screencasts I have __Mann__'d up by re-structuring this application's architecture. Brian's excellent tutorials use ruby rails and __Marionette.module__ patter with javascript namespacing.  My focus here was to use an RequireJS/AMD based
+application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.  I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
 ###config
 The __config__ folder holds global application level configuration for __underscore templatesettings__, __marionette templatecache__ and a custom __Marionette.Region.Dialog__
@@ -138,6 +138,8 @@ SEE [app.build.js](https://github.com/t2k/backbone.marionette-RequireJS/blob/mas
 The optimizer 'output' builds the assetsAMD/js/main.optimized.js that gets linked to [indexAMD.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html).
 
 SEE [indexAMD.Devel.html](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html) for details.
+
+sample background image: ![Image](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assets/images/bg.jpg?raw=true)
 
 Big shout-out to [Cloud9 IDE](https://c9.io) and Google Chrome Extension [Cloud 9 Button for Github](https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph)
 one click to clone/edit any github repo.  Fantastic!
