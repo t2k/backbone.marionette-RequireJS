@@ -5,8 +5,8 @@
 
 This is a simple 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
 a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead by needing to include libraries such as: __NodeJS: connect/express, MongoDB or Ruby: active-record__.
-The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**.  I struggled a bit ;-) with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background
-experience, so coming to grips with modular javascript client application architecture was more of than I had expected.  I hope this repo can help others get up to speed faster than I did.
+The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**.  I struggled a bit ;-) with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background,
+so coming to grips with modular javascript client application architecture was way more of a challenge than I had expected.  I hope this repo can help others get up to speed faster than I did!
 
 ###assets###
 The **assets** folder is the original fork of [David Sulc's repo] https://github.com/davidsulc/backbone.marionette-atinux-books)
