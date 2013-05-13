@@ -4,9 +4,9 @@
 **See this LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application before digging in...**
 
 This is a simple 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
-a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead by needing to include libraries such as: __NodeJS: connect/express, MongoDB,Ruby: active-record__
-The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline** I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server-side background
-experience. so coming to grips with modular javascript client application architecture was a challenge.
+a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead by needing to include libraries such as: __NodeJS: connect/express, MongoDB or Ruby: active-record__.
+The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**.  I struggled a bit ;-) with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background
+experience, so coming to grips with modular javascript client application architecture was more of than I had expected.  I hope this repo can help others get up to speed faster than I did.
 
 ###assets###
 The **assets** folder is the original fork of [David Sulc's repo] https://github.com/davidsulc/backbone.marionette-atinux-books)
@@ -20,7 +20,7 @@ After watching the excellent [BackboneRails](http://backbonerails.com) screencas
 application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so easy by the **Marionette.module** but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.  I used a [msgBus](https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee) module that leverages **backbone.Wreqr** events, commands and request/response patterns to facilitate inter-application communication.
 
 ### CoffeeScript! ###
-Switching to coffeescript has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.  After watching Brian Mann's screencast I became convinced of the power and flexibility of coffeescript and it's ease of use.  Now I can honestly say I'm a better _JavaScript_ programmer because of it.
+Switching to coffeescript has made me a javascript __BALLER!__ I knew about coffee-script,  read the little book about it, but never changed my ways.  After watching Brian Mann's screencast I became convinced of the power and flexibility of coffeescript and it's ease of use.  I'm SO much better a _JavaScript_ programmer because of it.
 
 So easy to install, it's a shame not to:
 ~~~
