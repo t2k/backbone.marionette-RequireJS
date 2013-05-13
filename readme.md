@@ -4,10 +4,8 @@
 **See this LIVE [Marionette Bookstore](https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.Devel.html) application before digging in...**
 
 This is a simple 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
-a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead of: (__NodeJS: connect/express, MongoDB,Ruby: active-record__ etc. )
-The simplicity of a SPA allows the focus to remain centered on _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**
-
-I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server-side background
+a data source.  It is not a true WebApp since there's no server-side responsibility for setting up endpoints with the additional stack overhead by needing to include libraries such as: __NodeJS: connect/express, MongoDB,Ruby: active-record__
+The simplicity of a SPA allows the focus to remain on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline** I struggled a bit ;-) with Backbone.Marionette and RequireJS, most of my struggles are the consequence of my enterprise C#/VB.NET server-side background
 experience. so coming to grips with modular javascript client application architecture was a challenge.
 
 ###assets###
