@@ -13,10 +13,16 @@
         max_line_length: 1000
     },
 
+
     inlineText: true,
     useStrict: false,
 
     skipPragmas: false,
+    pragmasOnSave: {
+        //Just an example
+        excludeCoffeeScript: true
+    },
+
     skipModuleInsertion: false,
     stubModules: ['text'],
     optimizeAllPluginResources: false,

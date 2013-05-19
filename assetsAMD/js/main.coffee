@@ -1,6 +1,7 @@
 # main.coffee requireJS bootloader file typically included in the index.html
 require.config
-    #baseURL: 'assetsAMD/js',
+    baseURL: 'assetsAMD/js',
+
     paths:
         jquery: "../../components/jquery/jquery" # amd version
         underscore: "../../components/underscore-amd/underscore" # amd version
@@ -12,9 +13,9 @@ require.config
         bsModal: "../../components/bootstrap/docs/assets/js/bootstrap-modal"
         text: "../../components/requirejs-text/text"
 
-    # load the 'non AMD' versions of backbone, underscore and Marionette
     shim:
         bsModal: ["jquery"]
 
-    require ["app", "config/_base", "apps/book/app", "apps/other/app" ], (App) ->
+    # start the main APP but let require also load any pre-app config and teh book and other apps
+    require ["config/_base", "app",  "apps/book/app", "apps/other/app" ], (_config, App) ->
         App.start()

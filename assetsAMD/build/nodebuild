@@ -1,4 +1,0 @@
-#!/bin/bash
-node ../../components/r.js/dist/r.js -o app.build.js
-#echo "finished"
-#echo "output in js/main.optimized.js"
