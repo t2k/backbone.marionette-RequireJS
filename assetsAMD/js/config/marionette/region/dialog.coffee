@@ -1,5 +1,5 @@
 #  ideas from Brian Mann's screencast: extend a custom region type to show and closeout twitter/bootstrap modals
-define ["underscore", "backbone","marionette"], (_, Backbone, Marionette) ->
+define ["backbone","marionette"], (Backbone, Marionette) ->
     class Marionette.Region.Dialog extends Marionette.Region
 
         constructor: ->

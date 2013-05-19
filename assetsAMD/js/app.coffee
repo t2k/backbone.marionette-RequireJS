@@ -1,5 +1,5 @@
 # APP: Ted Killilea May/13  twitter.com/@t2k_nyc
-define ["backbone", "marionette", "msgbus", "underscore", "bsModal"], (Backbone,  Marionette, msgBus, _) ->
+define ["backbone", "marionette", "msgbus", "bsModal"], (Backbone,  Marionette, msgBus) ->
     app = new Marionette.Application()
 
     app.addRegions
