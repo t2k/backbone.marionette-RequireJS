@@ -20,6 +20,7 @@ define ['backbone', 'apps/book/list/templates', 'views/_base', 'msgbus' ], (Back
             totalHeight = @.$("> div").height()
             scrollTop = @.$el.scrollTop() + @.$el.height()
             margin = 200
+            console.log "th", totalHeight, "st", scrollTop, "elheight", @.$el.height()
             if ((scrollTop + margin) >= totalHeight)
                 #console.log "BOOKLIST: >>search"
                 msgBus.events.trigger "search:more"

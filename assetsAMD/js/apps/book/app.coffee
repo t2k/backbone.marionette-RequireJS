@@ -34,6 +34,3 @@ define ["marionette", "apps/book/list/controller", "msgbus", "entities/book"], (
 
         showBookDetail: (book)->
             Controller.showBookDetail(book)
-
-
-

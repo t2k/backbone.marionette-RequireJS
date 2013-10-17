@@ -3,15 +3,14 @@ require.config
     baseURL: 'assetsAMD/js',
 
     paths:
-        jquery: "../../components/jquery/jquery" # amd version
-        underscore: "../../components/underscore-amd/underscore" # amd version
-        backbone: "../../components/backbone-amd/backbone" # amd version
-        "backbone.wreqr": "../../components/backbone.wreqr/lib/amd/backbone.wreqr" # amd version
-        "backbone.eventbinder": "../../components/backbone.eventbinder/lib/amd/backbone.eventbinder" # amd version
-        "backbone.babysitter": "../../components/backbone.babysitter/lib/amd/backbone.babysitter" # amd version
-        marionette: "../../components/marionette/lib/core/amd/backbone.marionette" # amd version
-        bsModal: "../../components/bootstrap/docs/assets/js/bootstrap-modal"
-        text: "../../components/requirejs-text/text"
+        jquery: "../../bower_components/jquery/jquery" # amd version
+        underscore: "../../bower_components/underscore-amd/underscore" # amd version
+        backbone: "../../bower_components/backbone-amd/backbone" # amd version
+        "backbone.wreqr": "../../bower_components/backbone.wreqr/lib/amd/backbone.wreqr" # amd version
+        "backbone.babysitter": "../../bower_components/backbone.babysitter/lib/amd/backbone.babysitter" # amd version
+        marionette: "../../bower_components/marionette/lib/core/amd/backbone.marionette" # amd version
+        bsModal: "../../bower_components/bootstrap/js/modal"
+        text: "../../bower_components/requirejs-text/text"
 
     shim:
         bsModal: ["jquery"]

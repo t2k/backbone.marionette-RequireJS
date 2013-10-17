@@ -1,8 +1,12 @@
 # cloud9 ide stuff
 .c9revisions/
 
-#bower components installed via bower
-components/
+# git stuff
+.git/
 
-# get via NPM
+#bower components installed via bower
+bower_components/
+
+
+# get via NPM if any
 node_modules/
