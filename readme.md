@@ -5,7 +5,7 @@
 
 ![Screenshot][ss]
 
-[ss]: https://github.com/t2k/backbone_marionette-requirejs/raw/master/assetsAMD/doc/MarionetteBooks.png "Screen shot: Marionette Bookstore-AMD"
+[ss]: https://github.com/t2k/backbone_marionette-requirejs/blob/master/assetsAMD/doc/MarionetteBooks.png "Screen shot: Marionette Bookstore-AMD"
 
 This is a 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
 a data source.  It is not a true *WebApp* because there's no server-side responsibility for setting up endpoints-- with the additional stack overhead of including libraries such as: __NodeJS: connect/express, MongoDB or Ruby: active-record__.
