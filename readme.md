@@ -5,7 +5,7 @@
 
 ![Screenshot][ss]
 
-[ss]:  https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/doc/MarionetteBooks.png "Screen shot: Marionette Bookstore-AMD"
+[ss]:  https://github.com/t2k/backbone.marionette-RequireJS/raw/master/assetsAMD/doc/MarionetteBooks.png "Screen shot: Marionette Bookstore-AMD"
 This is a 100% client-side Single Page Application utilizing the [Google Books API](https://developers.google.com/books/docs/v1/using#WorkingVolumes) as
 a data source.  It is not a true *WebApp* because there's no server-side responsibility for setting up endpoints-- with the additional stack overhead of including libraries such as: __NodeJS: connect/express, MongoDB or Ruby: active-record__.
 The simplicity of a SPA allows us to focus on learning _Marionette, AMD_ and application architecture ideas borrowed from the **Rails Asset Pipeline**.  I struggled a bit with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background, so coming to grips with modular javascript client application architecture was way more of a challenge than I had expected.  I hope this repo can help others get up to speed faster than I did!
