@@ -4,7 +4,7 @@ require.config
 
     paths:
         jquery: "../../bower_components/jquery/jquery" # amd version
-        underscore: "../../bower_components/underscore-amd/underscore" # amd version
+        underscore: "../../bower_components/underscore/underscore" # amd version
         backbone: "../../bower_components/backbone-amd/backbone" # amd version
         "backbone.wreqr": "../../bower_components/backbone.wreqr/lib/amd/backbone.wreqr" # amd version
         "backbone.babysitter": "../../bower_components/backbone.babysitter/lib/amd/backbone.babysitter" # amd version

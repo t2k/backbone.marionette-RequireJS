@@ -2,15 +2,20 @@
   "name": "Marionette-Bookstore",
   "version": "0.9.0",
   "dependencies": {
-    "requirejs": "~2.1.8",
-    "r.js": "2.1.8",
-    "requirejs-text": "~2.0.8"
-    "jquery": "~2.0.3",
-    "underscore-amd": "~1.5.2",
-    "backbone-amd": "~1.0.0",
-    "backbone.wreqr": "~0.2.0",
-    "backbone.babysitter": "~0.0.6",
-    "marionette": "~1.1.0",
-    "bootstrap": "~3.0.0",
+    "requirejs": "~2.1.10",
+    "r.js": "~2.1.10",
+    "requirejs-text": "~2.0.10",
+    "jquery": "~2.1.0",
+    "underscore": "~1.6.0",
+    "backbone-amd": "~1.1.0",
+    "backbone.wreqr": "~1.0.0",
+    "backbone.babysitter": "~0.1.0",
+    "marionette": "~1.6.2",
+    "bootstrap": "~3.1.0"
+  },
+  "resolutions": {
+    "backbone.wreqr": "~1.0.0",
+    "backbone.babysitter": "~0.1.0",
+    "underscore": "~1.6.0"
   }
 }
