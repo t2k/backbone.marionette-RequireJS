@@ -7,11 +7,11 @@
     "requirejs-text": "~2.0.10",
     "jquery": "~2.1.0",
     "underscore": "~1.6.0",
-    "backbone-amd": "~1.1.0",
+    "backbone": "~1.1.1",
     "backbone.wreqr": "~1.0.0",
     "backbone.babysitter": "~0.1.0",
     "marionette": "~1.6.2",
-    "bootstrap": "~3.1.0"
+    "bootstrap": "~3.1.1"
   },
   "resolutions": {
     "backbone.wreqr": "~1.0.0",
