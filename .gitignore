@@ -1,6 +1,8 @@
 # cloud9 ide stuff
 .c9revisions/
 
+.c9revisions
+
 # git stuff
 .git/
 
