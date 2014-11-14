@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,21 +21,230 @@
       <div class="inner">
         <h1>Atinux-Books Backbone.Marionette AMD/Requirejs</h1>
         <h2>A reimplementation of http://www.atinux.fr/backbone-books in Backbone.Marionette using REQUIREJS</h2>
-        <a href="https://github.com/t2k/backbone.marionette-RequireJS" class="button"><small>View project on</small>GitHub</a>
+        <a href="https://github.com/t2k/backbone.marionette-RequireJS" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
 
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1>
-<a name="backbonemarionette-application-example" class="anchor" href="#backbonemarionette-application-example"><span class="octicon octicon-link"></span></a>Backbone.Marionette Application Example</h1>
+          <h2>
+<a id="marionette-bookstore" class="anchor" href="#marionette-bookstore" aria-hidden="true"><span class="octicon octicon-link"></span></a>Marionette Bookstore</h2>
 
-<p>This is an example application reimplemented to use Backbone.Marionette and serve as a tutorial.</p>
+<h3>
+<a id="backbonemarionette-application-using-requirejsamd-and-coffescript" class="anchor" href="#backbonemarionette-application-using-requirejsamd-and-coffescript" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backbone.Marionette application using RequireJS/AMD and Coffescript</h3>
 
-<p>The application is based on <a href="http://www.atinux.fr">Atinux</a>'s <a href="http://www.atinux.fr/backbone-books/">Backbone books</a> example app and covers some slightly advanced subjects, such as modal dialogs, sub applications, etc.</p>
+<p><strong>See this LIVE <a href="https://c9.io/t2k/backbone_marionette-requirejs/workspace/indexAMD.html">Marionette Bookstore</a> application before digging in...</strong></p>
 
-<p>Experimental app to test RequireJS AMD loader with BackBone Marionette </p>
+<p><img src="https://github.com/t2k/backbone.marionette-RequireJS/raw/master/assetsAMD/doc/MarionetteBooks.png" alt="Screenshot" title="Screen shot: Marionette Bookstore-AMD"></p>
+
+<p>This is a 100% client-side Single Page Application utilizing the <a href="https://developers.google.com/books/docs/v1/using#WorkingVolumes">Google Books API</a> as
+a data source.  It is not a true <em>WebApp</em> because there's no server-side responsibility for setting up endpoints-- with the additional stack overhead of including libraries such as: <strong>NodeJS: connect/express, MongoDB or Ruby: active-record</strong>.
+The simplicity of a SPA allows us to focus on learning <em>Marionette, AMD</em> and application architecture ideas borrowed from the <strong>Rails Asset Pipeline</strong>.  I struggled a bit with Backbone.Marionette and RequireJS; most of my struggles were consequence of my enterprise C#/VB.NET server-side background, so coming to grips with modular javascript client application architecture was way more of a challenge than I had expected.  I hope this repo can help others get up to speed faster than I did!</p>
+
+<h3>
+<a id="coffeescript" class="anchor" href="#coffeescript" aria-hidden="true"><span class="octicon octicon-link"></span></a>CoffeeScript!</h3>
+
+<p>Switching to coffeescript has made me a javascript <strong>BALLER!</strong> I knew about coffee-script,  read the little book about it, but never changed my ways.  After watching Brian Mann's screencast and seeing it in action, I became convinced of the power and flexibility of coffeescript and it's ease of use.  I'm SO much better a <em>JavaScript</em> programmer because of it.  BTW, you should follow the creator of Coffee-script <a href="https://twitter.com/jashkenas">Jeremy Ashkenas</a></p>
+
+<p>So easy to install, it's a shame not to:</p>
+
+<pre><code>$ npm install -g coffee-script
+</code></pre>
+
+<p>To begin using coffee-script in <strong><em>this</em></strong> project:</p>
+
+<pre><code>$ coffee -o assetsAMD/js/ -cw assetsAMD/js/
+</code></pre>
+
+<p>Now, all changes to any .coffee file is automatically compiled to javascipt. For more coffescript usage info go to the source: <a href="http://coffeescript.org">coffeescript.org</a> and to help convert your existing javascript to CoffeeScript: <strong>go here <a href="http://js2coffee.org">js2coffee.org</a></strong></p>
+
+<h3>
+<a id="assets" class="anchor" href="#assets" aria-hidden="true"><span class="octicon octicon-link"></span></a>assets</h3>
+
+<p>The <strong>assets</strong> folder is the original fork of [David Sulc's repo] <a href="https://github.com/davidsulc/backbone.marionette-atinux-books">https://github.com/davidsulc/backbone.marionette-atinux-books</a>)
+I learned alot from David's Marionette app about marionette's application features and it dealt with a more interesting real world back end. The original app used traditional javascript namespacing and modular layout but converting this app over to RequireJS and a modular design required a different approach to the application architecture.  Modular AMD applications can be a blessing and a curse... at the end of the day AMD forces the developer to pursue a higly decoupled modular architecture.</p>
+
+<h3>
+<a id="assetsamd" class="anchor" href="#assetsamd" aria-hidden="true"><span class="octicon octicon-link"></span></a>assetsAMD</h3>
+
+<p>I've added source located under the <strong>assetsAMD</strong> folder.  Refer to the <strong>assets</strong> folder to see the orig. repo of Backbone.Marionette application using javascript namespacing, which was based on [Atinux] <a href="http://www.atinux.fr)'s">http://www.atinux.fr)'s</a> <a href="http://www.atinux.fr/backbone-books/">Backbone books</a> example app and covers features, such as external templates, modal dialogs.</p>
+
+<h3>
+<a id="updates-may-oct-2013" class="anchor" href="#updates-may-oct-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates May-Oct 2013</h3>
+
+<p>After watching the excellent <a href="http://backbonerails.com">BackboneRails</a> screencasts I have <strong>Mann</strong>'d up by re-structuring this application's architecture. Brian's excellent tutorials use ruby rails and <strong>Marionette.module</strong> patter with javascript namespacing.  My focus here was to use an RequireJS/AMD based application architecture.  I've tried to follow the Rails Asset Pipeline approach from Brian's screencast which entails more or less following a consistant folder structure when building out your application/module architecture.  The AMD approach does not follow the same javascript namespaing pattern made so easy by the <strong>Marionette.module</strong> but the AMD approach does offer what I feel is a more modular building block approach with true modules that are not necessarily coupled to the application specific namespaceing patterns.  I used a <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/msgbus.coffee">msgBus</a> module that leverages <strong>backbone.Wreqr</strong> events, commands and request/response patterns to facilitate inter-application communication.</p>
+
+<p>I've also updated the project recently to use <strong><em>as of Oct 16, 2013</em></strong> the latest versions of backbone/marionette and bootstrap 3.</p>
+
+<h3>
+<a id="config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>config</h3>
+
+<p>The <strong>config</strong> folder holds global application level configuration for <strong>underscore templatesettings</strong>, <strong>marionette templatecache</strong> and a custom <strong>Marionette.Region.Dialog</strong>
+class that displays a boostrap modal and also takes care of view/event cleanup.  I picked this up from <strong>Brian Mann</strong>  These techniques are a huge improvement over what I had been using previously.  Don't think I could have coded this stuff with my own hand crafted javascript.</p>
+
+<ul>
+<li><a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/_base.coffee">config/_base.coffee</a></li>
+<li><a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/region/dialog.coffee">config/marionette/region/dialog.coffee</a></li>
+<li><a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/marionette/templatecache.coffee">config/marionette/templatecache.coffee</a></li>
+<li><a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/config/underscore/templatesettings.coffee">config/underscore/templatesettings.coffee</a></li>
+</ul>
+
+<h3>
+<a id="indexhtml" class="anchor" href="#indexhtml" aria-hidden="true"><span class="octicon octicon-link"></span></a>index.html</h3>
+
+<p>Take a look at <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html">indexAMD.Devel.html</a> or <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html">indexAMDel.html</a>, the Single Page that gets served for
+this single page application.  One of the benefits of RequireJS/AMD is this simplicity.  There is no right or wrong way to organize a Marionette app, but I favor the AMD approach for it's ease of loading of a single page application.  Notice there is only one javascript loaded <strong>js/main</strong> or <strong>js/main.optimized</strong></p>
+
+<h3>
+<a id="mainjs" class="anchor" href="#mainjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>main.js</h3>
+
+<p>The <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/main.coffee">js/main.coffee</a> file loaded at the bottom of index.html is the requirejs bootloader.  See <strong><a href="http://requirejs.org">requirejs.org</a></strong> for up to date information on RequireJS and the benefits of AMD script loading.</p>
+
+<h3>
+<a id="marionette-application-start" class="anchor" href="#marionette-application-start" aria-hidden="true"><span class="octicon octicon-link"></span></a>marionette application start</h3>
+
+<ul>
+<li><a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee">the main app.coffee</a></li>
+</ul>
+
+<h3>
+<a id="modular-applications---rails-asset-pipeline-like" class="anchor" href="#modular-applications---rails-asset-pipeline-like" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modular Applications - Rails Asset Pipeline <em>like</em>
+</h3>
+
+<h3>
+<a id="book-entities" class="anchor" href="#book-entities" aria-hidden="true"><span class="octicon octicon-link"></span></a>book entities</h3>
+
+<p>A <strong>Backbone.Collection <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/entities/book.coffee">entities/book</a></strong>
+is used to encapsulate the <a href="https://developers.google.com/books/docs/v1/using#WorkingVolumes">Google Books API</a>.  Checkout the <strong>search</strong>, <strong>fetchBooks</strong> and
+<strong>moreBooks</strong> methods and the msgBus.events setup in the initialize method.  The msgBus pub/sub pattern is used to help create a decoupled modular architecture.</p>
+
+<h3>
+<a id="book-list-application" class="anchor" href="#book-list-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>book list application</h3>
+
+<p>Drill down on the modular source for the apps/book application listed below.  Notice how the apps/book/app <em>requires</em> the apps/book/list/controller module.
+The CONTROLLER <em>requires</em> the VIEWS module and the VIEWS module <em>requires</em> the TEMPLATES module and the <strong>templates</strong> are ultimately made of <strong>HTML</strong> snippets in {{MUSTACHE}} format.</p>
+
+<ul>
+<li>
+<strong>apps</strong>
+
+<ul>
+<li>
+<strong>book</strong>
+
+<ul>
+<li>
+<strong>list</strong>
+
+<ul>
+<li>
+<a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/controller.coffee">controller.coffee</a> - the book list controller</li>
+<li>
+<a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates.coffee">templates.coffee</a> - the book list templates</li>
+<li>
+<a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/views.coffee">views.coffee</a> - the book list views</li>
+<li>
+<strong>templates</strong> (template files &lt;3 mustache format)
+
+<ul>
+<li> <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/layout.htm">layout.htm</a>
+</li>
+<li> <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/book.htm">book.htm</a>
+</li>
+<li> <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/list/templates/booklist.htm">booklist.htm</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li> <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/apps/book/app.coffee">app.coffee</a> - apps/book/app  the book application</li>
+</ul>
+</li>
+<li>
+<a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assetsAMD/js/app.coffee">app.coffee</a>  - app (the main marionette application)</li>
+</ul>
+
+<h3>
+<a id="get-to-know-bower-and-automatically-maintain-project-dependencies" class="anchor" href="#get-to-know-bower-and-automatically-maintain-project-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get to know <a href="http://twitter.github.com/bower/">BOWER</a> and automatically maintain project dependencies.</h3>
+
+<p>My biggest early challenge with open source software was maintaining the ever increasing dependencies.  If you've never used
+BOWER](<a href="http://twitter.github.com/bower/">http://twitter.github.com/bower/</a>) I highly recommend taking a the time to detour over there and grok it out.  Grok <a href="http://nodejs.org">NODEJS</a>.
+Lucky for me I'm using <a href="https://c9.io">Cloud9 IDE</a> a web based IDE with a built in unix terminal and __SH__ell with Node pre-installed.</p>
+
+<h4>
+<a id="bower-and-coffescript-installation" class="anchor" href="#bower-and-coffescript-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower and CoffeScript Installation</h4>
+
+<p>From the terminal/BASH $ prompt:
+First off, NODE v0.8+ is required for <strong>BOWER</strong> installation, as I'm writing this, NODE v 6.2.1 is pre istalled in the <strong><em>Cloud9 IDE</em></strong> but they also pre-install
+<a href="https://github.com/creationix/nvm">NVM Node Version Manager</a> so you can update the Cloud9 workspace to NODE v0.8+ as required for <strong>BOWER</strong></p>
+
+<p>Press [alt-t] to open a terminal with <a href="http://linuxcommand.org/learning_the_shell.php">bash shell</a> commands.  Pretty amazing, the project has a full featured unix environment available in a browser based <a href="https://c9.io">Cloud9 IDE</a>!</p>
+
+<p><em>**Install BOWER and Coffee-script **</em></p>
+
+<pre><code>$ npm install -g bower
+$ npm install -g coffee-script
+</code></pre>
+
+<p>Bower will be installed globally</p>
+
+<h3>
+<a id="project-dependencies" class="anchor" href="#project-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Dependencies</h3>
+
+<ul>
+<li>See <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/bower.json">bower.json</a> to see this project's open source dependencies.</li>
+</ul>
+
+<pre><code>$ bower install
+</code></pre>
+
+<p>As time passes on, update the project dependencies with <strong>ONE</strong> command:</p>
+
+<pre><code>$ bower update
+</code></pre>
+
+<p>Even <strong>I</strong> can handle that!</p>
+
+<h2>
+<a id="the-m-in-amd---benefit-and-a-curse" class="anchor" href="#the-m-in-amd---benefit-and-a-curse" aria-hidden="true"><span class="octicon octicon-link"></span></a>The M in AMD-- Benefit and a Curse</h2>
+
+<p>Modular design in javascript is the key to building scaleable and maintainable web applications.  However, each module can create multiple http get
+requests when our page loads.  Remove the <strong>curse</strong> with R.js optimizer.</p>
+
+<h3>
+<a id="rjs-build-optimizer" class="anchor" href="#rjs-build-optimizer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a href="https://github.com/jrburke/r.js.git">R.js</a> build Optimizer</h3>
+
+<p>Using <a href="https://github.com/jrburke/r.js.git">R.js</a> optimizer to compress/minimize/uglify your main.js file.  Eliminate or dramatically reduce
+server requests upon you first page load.</p>
+
+<h4>
+<a id="optimize-javascript-loading-with-rjs" class="anchor" href="#optimize-javascript-loading-with-rjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>optimize javascript loading with R.js</h4>
+
+<p>Here's how I did it for this project in <strong>Cloud9IDE</strong></p>
+
+<p><strong>Build the main.optimized.js verions of main.js</strong></p>
+
+<p>Run the <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/buildoptimized.sh">buildoptimized.sh</a> file at the console prompt $</p>
+
+<pre><code>./buildoptimized.sh
+</code></pre>
+
+<p><strong><em>This previous step can/should be scrpted into a grunt/build process</em></strong></p>
+
+<p>The optimizer 'output' builds the assetsAMD/js/main.optimized.js that gets linked to <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.html">indexAMD.html</a>.</p>
+
+<p>SEE <a href="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/indexAMD.Devel.html">indexAMD.Devel.html</a> for details.</p>
+
+<p>sample background image: <img src="https://github.com/t2k/backbone.marionette-RequireJS/blob/master/assets/images/bg.jpg?raw=true" alt="Image"></p>
+
+<p>Big shout-out to <a href="https://c9.io">Cloud9 IDE</a> and Google Chrome Extension <a href="https://chrome.google.com/webstore/detail/gkddhhofgajgmgfebhaiihlahjmjkmph">Cloud 9 Button for Github</a>
+one click to clone/edit any github repo.  Fantastic!</p>
+
+<p><strong>Good luck on your open source journey!</strong> and please feel free to drop me a line if you want any help with this project.</p>
         </section>
 
         <aside id="sidebar">
